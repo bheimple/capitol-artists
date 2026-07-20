@@ -2,6 +2,7 @@ import Link from "next/link";
 import { artists } from "@/data/artists";
 import ArtistCard from "@/components/ArtistCard";
 import BookingProcess from "@/components/BookingProcess";
+import FAQ from "@/components/FAQ";
 import { CapitolIcon } from "@/components/Navbar";
 
 export default function Home() {
@@ -197,6 +198,9 @@ export default function Home() {
             </div>
           </div>
         </div>
+      {/* FAQ Section */}
+      <FAQ />
+
       </section>
 
       {/* Contact Section */}
