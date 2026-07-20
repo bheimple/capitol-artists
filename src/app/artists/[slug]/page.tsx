@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Image from "next/image";
 import Link from "next/link";
 import { artists, getArtistBySlug } from "@/data/artists";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -66,11 +67,13 @@ export default async function ArtistPage({
       {/* Hero with artist image */}
       <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <Image
             src={artist.image}
             alt={artist.name}
-            className="w-full h-full object-cover"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background" />
           <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70" />
@@ -313,8 +316,7 @@ export default async function ArtistPage({
               {otherArtists.map((a) => (
                 <Link key={a.slug} href={`/artists/${a.slug}`} className="group block">
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:-translate-y-1">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={a.image} alt={a.name} className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image src={a.image} alt={a.name} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
                       <span className="inline-block text-[10px] font-semibold tracking-[0.15em] uppercase text-accent mb-1">{a.genre}</span>

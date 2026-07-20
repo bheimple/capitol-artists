@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { artists } from "@/data/artists";
 import ArtistCard from "@/components/ArtistCard";
@@ -16,11 +17,13 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background image */}
       <div className="absolute inset-0 z-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/hero-bg.png"
+        <Image
+          src="/images/hero-bg.webp"
           alt=""
-          className="w-full h-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
         />
         {/* Dark gradient overlays for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background" />
@@ -191,11 +194,12 @@ export default function Home() {
             <div className="relative flex justify-center md:justify-end">
               <div className="relative max-w-[320px] w-full">
                 <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-surface border border-border relative">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src="/images/mike-heimple.jpg"
                     alt="Mike Heimple, Founder and Booking Agent"
-                    className="absolute inset-0 w-full h-full object-cover"
+                    fill
+                    sizes="320px"
+                    className="object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
                 </div>

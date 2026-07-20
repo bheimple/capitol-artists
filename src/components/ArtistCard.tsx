@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import type { Artist } from "@/data/artists";
 
 export default function ArtistCard({ artist }: { artist: Artist }) {
@@ -8,11 +9,12 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
     <Link href={`/artists/${artist.slug}`} className="group block">
       <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:shadow-2xl group-hover:shadow-accent/10 group-hover:-translate-y-1">
         {/* Artist image */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={artist.image}
           alt={artist.name}
-          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+          fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
         {/* Gradient overlay - deepens on hover */}

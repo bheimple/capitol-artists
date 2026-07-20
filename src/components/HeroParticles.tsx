@@ -38,17 +38,18 @@ export default function HeroParticles() {
       return {
         x: Math.random() * canvas.width,
         y: canvas.height + 10,
-        size: 1 + Math.random() * 3,
-        speedY: 0.3 + Math.random() * 0.8,
-        speedX: (Math.random() - 0.5) * 0.4,
+        size: 1 + Math.random() * 2,
+        speedY: 0.2 + Math.random() * 0.5,
+        speedX: (Math.random() - 0.5) * 0.3,
         opacity: 0,
         life: 0,
         maxLife,
       };
     };
 
-    // Initialize particles
-    for (let i = 0; i < 40; i++) {
+    // Reduced particle count for performance
+    const PARTICLE_COUNT = 18;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
       const p = createParticle();
       p.y = Math.random() * canvas.height;
       p.life = Math.random() * p.maxLife;
@@ -63,7 +64,6 @@ export default function HeroParticles() {
         p.y -= p.speedY;
         p.x += p.speedX;
 
-        // Fade in then out
         if (p.life < 60) {
           p.opacity = p.life / 60;
         } else if (p.life > p.maxLife - 60) {
@@ -72,30 +72,20 @@ export default function HeroParticles() {
           p.opacity = 1;
         }
 
-        // Subtle size pulse
-        const pulse = 1 + Math.sin(p.life * 0.05) * 0.3;
-        const drawSize = p.size * pulse;
-
-        // Draw glow
-        const gradient = ctx.createRadialGradient(
-          p.x, p.y, 0,
-          p.x, p.y, drawSize * 4
-        );
-        gradient.addColorStop(0, `rgba(212, 175, 55, ${p.opacity * 0.8})`);
-        gradient.addColorStop(0.5, `rgba(212, 175, 55, ${p.opacity * 0.2})`);
-        gradient.addColorStop(1, "rgba(212, 175, 55, 0)");
-        ctx.fillStyle = gradient;
+        // Simple solid circle instead of expensive radial gradient
+        ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity * 0.6})`;
         ctx.beginPath();
-        ctx.arc(p.x, p.y, drawSize * 4, 0, Math.PI * 2);
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
 
-        // Draw core
-        ctx.fillStyle = `rgba(255, 220, 120, ${p.opacity})`;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, drawSize, 0, Math.PI * 2);
-        ctx.fill();
+        // Subtle glow only on larger particles, using shadowBlur
+        if (p.size > 1.5) {
+          ctx.shadowBlur = 8;
+          ctx.shadowColor = `rgba(212, 175, 55, ${p.opacity * 0.4})`;
+          ctx.fill();
+          ctx.shadowBlur = 0;
+        }
 
-        // Recycle
         if (p.life >= p.maxLife || p.y < -20) {
           particles[i] = createParticle();
         }
