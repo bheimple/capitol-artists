@@ -79,10 +79,10 @@ export default function Navbar() {
             <CapitolIcon size={26} />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-xl font-bold tracking-tight text-foreground">
+            <span className={`text-xl font-bold tracking-tight transition-colors ${scrolled || mobileOpen ? "text-foreground" : "text-white"}`}>
               CAPITOL
             </span>
-            <span className="text-[13px] font-medium tracking-[0.25em] text-accent mt-0.5">
+            <span className={`text-[13px] font-medium tracking-[0.25em] mt-0.5 transition-colors ${scrolled || mobileOpen ? "text-accent" : "text-accent-light"}`}>
               ARTISTS
             </span>
           </div>
@@ -94,14 +94,14 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
+              className={`px-4 py-2 text-sm font-medium transition-colors ${scrolled || mobileOpen ? "text-muted hover:text-foreground" : "text-white/80 hover:text-white"}`}
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/#contact"
-            className="ml-2 px-5 py-2.5 rounded-full bg-accent text-background text-sm font-semibold hover:bg-accent-hover transition-all hover:scale-[1.02]"
+            className={`ml-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-[1.02] ${scrolled || mobileOpen ? "bg-accent text-background hover:bg-accent-hover" : "bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-md"}`}
           >
             Book a Concert
           </Link>
@@ -109,7 +109,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 text-foreground relative z-50"
+          className={`md:hidden p-2 relative z-50 transition-colors ${scrolled || mobileOpen ? "text-foreground" : "text-white"}`}
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
