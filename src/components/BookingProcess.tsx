@@ -10,7 +10,7 @@ export default function BookingProcess() {
       number: "02",
       title: "Secure the Date",
       description:
-        "We handle contracts, travel logistics, and staging requirements with full transparency — no surprises, just clear terms.",
+        "We handle contracts, travel logistics, and staging requirements with full transparency, no surprises, just clear terms.",
     },
     {
       number: "03",

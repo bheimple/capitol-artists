@@ -16,7 +16,7 @@ const faqs = [
   {
     question: "How far in advance should we plan?",
     answer:
-      "We recommend reaching out 3–6 months in advance for the best selection of dates, especially for weekend concerts. However, don't hesitate to call even if your event is sooner — we'll do our best to make it work.",
+      "We recommend reaching out 3 to 6 months in advance for the best selection of dates, especially for weekend concerts. However, don't hesitate to call even if your event is sooner, we'll do our best to make it work.",
   },
   {
     question: "Do the artists travel to our location?",
@@ -31,7 +31,7 @@ const faqs = [
   {
     question: "What's the difference between Southern Gospel and Bluegrass Gospel?",
     answer:
-      "Southern Gospel features tight four-part vocal harmonies rooted in quartet tradition, while Bluegrass Gospel blends acoustic string instruments like banjo, fiddle, and mandolin with gospel lyrics. Both traditions are deeply rooted in faith and church music heritage — and we represent artists in both styles.",
+      "Southern Gospel features tight four-part vocal harmonies rooted in quartet tradition, while Bluegrass Gospel blends acoustic string instruments like banjo, fiddle, and mandolin with gospel lyrics. Both traditions are deeply rooted in faith and church music heritage, and we represent artists in both styles.",
   },
 ];
 

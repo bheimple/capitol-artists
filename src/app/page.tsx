@@ -68,7 +68,7 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Stats bar — cleaner, with dividers */}
+          {/* Stats bar, cleaner with dividers */}
           <div className="mt-20 flex items-center justify-center gap-0 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
             <div className="text-center px-8">
               <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">35+</div>
@@ -99,7 +99,6 @@ export default function Home() {
       {/* Roster Section */}
       <section id="roster" className="py-24 md:py-32 relative scroll-mt-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          {/* Section header */}
           <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
             <div>
               <div className="flex items-center gap-3 mb-3">
@@ -119,7 +118,6 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Artist grid */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6 stagger">
             {artists.map((artist) => (
               <ArtistCard key={artist.slug} artist={artist} />
@@ -155,7 +153,7 @@ export default function Home() {
                 <p>
                   Our ministry mission is building relationships with pastors,
                   conference organizers, and music association leaders across the
-                  country — spreading the Gospel through these wonderful
+                  country, spreading the Gospel through these wonderful
                   traveling music ministries, and building up the body of Christ.
                 </p>
               </div>
@@ -174,34 +172,27 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Decorative panel */}
+            {/* Mike's photo */}
             <div className="relative">
-              <div className="aspect-square rounded-2xl bg-surface border border-border overflow-hidden relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-accent/5" />
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center space-y-4">
-                    <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto text-accent">
-                      <CapitolIcon size={48} />
-                    </div>
-                    <div className="space-y-1">
-                      <div className="text-4xl font-serif font-black text-gradient-gold">35+</div>
-                      <div className="text-xs text-muted tracking-[0.2em] uppercase">
-                        Years of Service
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                {/* Corner accents */}
-                <div className="absolute top-4 left-4 w-12 h-12 border-l-2 border-t-2 border-accent/20 rounded-tl-xl" />
-                <div className="absolute bottom-4 right-4 w-12 h-12 border-r-2 border-b-2 border-accent/20 rounded-br-xl" />
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-surface border border-border relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/mike-heimple.jpg"
+                  alt="Mike Heimple, Founder and Booking Agent"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
               </div>
+              {/* Corner accents */}
+              <div className="absolute -top-3 -left-3 w-12 h-12 border-l-2 border-t-2 border-accent/30 rounded-tl-xl" />
+              <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r-2 border-b-2 border-accent/30 rounded-br-xl" />
             </div>
           </div>
         </div>
+      </section>
+
       {/* FAQ Section */}
       <FAQ />
-
-      </section>
 
       {/* Contact Section */}
       <section id="contact" className="py-24 md:py-32 relative scroll-mt-20 border-t border-border">
