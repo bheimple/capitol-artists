@@ -56,6 +56,16 @@ export const metadata: Metadata = {
     description:
       "Connecting churches with top talent in Southern Gospel and Bluegrass Gospel music for over 35 years.",
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+    apple: [
+      { url: '/icon-192.png', sizes: '192x192', type: 'image/png' },
+    ],
+  },
   robots: {
     index: true,
     follow: true,
