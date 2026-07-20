@@ -20,6 +20,10 @@ export function CapitolIcon({ className = "", size = 24 }: { className?: string;
       xmlns="http://www.w3.org/2000/svg"
       className={className}
     >
+      {/* Cross on top */}
+      <rect x="22" y="2" width="4" height="14" rx="0.5" fill="currentColor" />
+      <rect x="16.5" y="5" width="15" height="4" rx="0.5" fill="currentColor" />
+
       {/* Steps/Base */}
       <rect x="6" y="42" width="36" height="3" rx="0.5" fill="currentColor" />
       <rect x="8" y="38" width="32" height="3" rx="0.5" fill="currentColor" />
@@ -30,14 +34,9 @@ export function CapitolIcon({ className = "", size = 24 }: { className?: string;
       <rect x="27" y="26" width="3" height="11" fill="currentColor" />
       <rect x="33" y="26" width="3" height="11" fill="currentColor" />
 
-      {/* Column base/pediment */}
+      {/* Pediment (triangular roof) */}
       <rect x="10" y="23" width="28" height="3" rx="0.5" fill="currentColor" />
-      <path d="M10 23 L24 14 L38 23 Z" fill="currentColor" />
-
-      {/* Dome */}
-      <path d="M18 14 C18 9, 30 9, 30 14 L30 14 L18 14 Z" fill="currentColor" />
-      <rect x="22.5" y="7" width="3" height="4" rx="0.5" fill="currentColor" />
-      <circle cx="24" cy="6" r="2" fill="currentColor" />
+      <path d="M10 23 L24 16 L38 23 Z" fill="currentColor" />
     </svg>
   );
 }
