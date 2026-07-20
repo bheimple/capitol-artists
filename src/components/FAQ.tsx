@@ -6,7 +6,7 @@ const faqs = [
   {
     question: "How do I book an artist for our church or event?",
     answer:
-      "Simply reach out through our contact form or call Mike Heimple at 719-260-1151. We'll discuss your event date, venue, budget, and which artists you're interested in. From there, we handle all the coordination to make it happen.",
+      "Simply reach out through our contact form or call Mike Heimple at 719-260-1151. We'll discuss your event date, venue, and which artists you're interested in. From there, we handle all the coordination to make it happen.",
   },
   {
     question: "What types of events do you book?",
@@ -21,12 +21,12 @@ const faqs = [
   {
     question: "Do the artists travel to our location?",
     answer:
-      "Yes. All of our artists travel regionally and nationally. Travel distance and associated costs are factored into the booking, and we'll be upfront about what's involved in bringing an artist to your area.",
+      "Yes. All of our artists travel by bus, primarily regionally, though some artists like Daryl Mosley travel more extensively. Travel distance is factored into the booking, and we'll be upfront about what's involved in bringing an artist to your area.",
   },
   {
     question: "Can we book multiple artists for one event?",
     answer:
-      "Absolutely. Multi-artist concerts and all-day gospel events are a great way to draw a larger crowd. We can help you put together a lineup that flows well and fits your schedule and budget.",
+      "Absolutely. Multi-artist concerts and all-day gospel events are a great way to draw a larger crowd. We can help you put together a lineup that flows well and fits your schedule.",
   },
   {
     question: "What's the difference between Southern Gospel and Bluegrass Gospel?",
@@ -41,12 +41,12 @@ const faqs = [
   {
     question: "What do we need to provide on our end?",
     answer:
-      "You'll need a venue with adequate seating, a stage or performance area, and a sound system capable of supporting live vocal and instrumental performance. Some artists travel with their own sound engineer. We'll provide a detailed tech rider and any specific requirements once the booking is confirmed, so there are no surprises.",
+      "You'll need a venue with adequate seating, a stage or performance area, and a sound system capable of supporting live vocal and instrumental performance. We'll provide a detailed tech rider and any specific requirements once the booking is confirmed, so there are no surprises.",
   },
   {
-    question: "How does pricing work?",
+    question: "How does the love offering work?",
     answer:
-      "Pricing varies by artist, travel distance, date, and event type. Once we know your budget and what you're looking for, we'll give you clear pricing with no hidden fees. We're upfront about all costs, including travel and lodging when applicable, before you commit to anything.",
+      "Our artists are booked on a love offering basis. We ask the church or host to take up a love offering during the concert to support the ministry, plus provide a meal for the group. This model keeps things accessible for churches of all sizes while sustaining the artists and their travel costs. If you have questions about what's typical for your area or event size, just give us a call.",
   },
   {
     question: "Can the artist tailor their program to our service or theme?",
@@ -59,7 +59,7 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section className="py-24 md:py-32 border-t border-border">
+    <section id="faq" className="py-24 md:py-32 border-t border-border scroll-mt-20">
       <div className="max-w-3xl mx-auto px-6 lg:px-8">
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
