@@ -75,8 +75,8 @@ export default async function ArtistPage({
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/65 to-background" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70" />
+          <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/20 to-background/55" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/35 via-transparent to-background/35" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-20">
@@ -96,7 +96,7 @@ export default async function ArtistPage({
             </span>
           </div>
 
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4">
+          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 [text-shadow:0_2px_20px_rgba(245,241,232,0.8)]">
             {artist.name}
           </h1>
 
@@ -317,10 +317,10 @@ export default async function ArtistPage({
                 <Link key={a.slug} href={`/artists/${a.slug}`} className="group block">
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:-translate-y-1">
                     <Image src={a.image} alt={a.name} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                      <span className="inline-block text-[10px] font-semibold tracking-[0.15em] uppercase text-accent mb-1">{a.genre}</span>
-                      <h3 className="text-base font-serif font-bold leading-tight">{a.name}</h3>
+                      <span className="inline-block text-[10px] font-semibold tracking-[0.15em] uppercase text-accent-light mb-1">{a.genre}</span>
+                      <h3 className="text-base font-serif font-bold leading-tight text-white">{a.name}</h3>
                     </div>
                     <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-accent/0 group-hover:ring-accent/25 transition-all duration-500" />
                   </div>

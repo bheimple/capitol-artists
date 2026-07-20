@@ -25,9 +25,9 @@ export default function Home() {
           sizes="100vw"
           className="object-cover"
         />
-        {/* Dark gradient overlays for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-b from-background/85 via-background/70 to-background" />
-        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-transparent to-background/60" />
+        {/* Lighter overlay - photo stays visible, text stays readable */}
+        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/25 to-background/60" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/40 via-transparent to-background/40" />
       </div>
 
       {/* Gold particle animation */}
@@ -50,7 +50,7 @@ export default function Home() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
+        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight animate-fade-in-up [text-shadow:0_2px_20px_rgba(245,241,232,0.8)]" style={{ animationDelay: "0.1s", opacity: 0 }}>
           Where Faith Meets
           <br />
           <span className="text-gradient-gold">the Stage</span>
@@ -201,7 +201,7 @@ export default function Home() {
                     sizes="320px"
                     className="object-cover"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
+                  
                 </div>
                 {/* Corner accents */}
                 <div className="absolute -top-3 -left-3 w-10 h-10 border-l-2 border-t-2 border-accent/30 rounded-tl-xl" />
