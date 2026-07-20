@@ -20,8 +20,13 @@ const playfair = Playfair_Display({
   weight: ["600", "700", "800", "900"],
 });
 
+const siteUrl = "https://www.capitol-artists.com";
+
 export const metadata: Metadata = {
-  title: "Capitol Artists | Gospel Concert Booking Agency",
+  title: {
+    default: "Capitol Artists | Gospel Concert Booking Agency",
+    template: "%s | Capitol Artists",
+  },
   description:
     "For over 35 years, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music. Book your next concert with us.",
   keywords: [
@@ -31,14 +36,46 @@ export const metadata: Metadata = {
     "gospel music",
     "Capitol Artists",
     "Mike Heimple",
+    "gospel concert",
+    "church concert",
+    "booking agency",
   ],
+  authors: [{ name: "Capitol Artists" }],
+  creator: "Capitol Artists",
   openGraph: {
     title: "Capitol Artists | Gospel Concert Booking Agency",
     description:
       "For over 35 years, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music.",
     type: "website",
-    url: "https://www.capitol-artists.com",
+    url: siteUrl,
+    siteName: "Capitol Artists",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: "Capitol Artists | Gospel Concert Booking Agency",
+    description:
+      "Connecting churches with top talent in Southern Gospel and Bluegrass Gospel music for over 35 years.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Capitol Artists",
+  description:
+    "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music for over 35 years.",
+  url: siteUrl,
+  founder: {
+    "@type": "Person",
+    name: "Mike Heimple",
+  },
+  telephone: "719-260-1151",
+  email: "info@capitol-artists.com",
+  areaServed: "United States",
 };
 
 export default function RootLayout({
@@ -48,6 +85,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} antialiased grain`}
       >

@@ -32,6 +32,11 @@ export const artists: Artist[] = [
     basedIn: "Goldsboro, North Carolina",
     founded: "2001",
     highlights: ["Four-part harmonies", "Founded 2001", "Regional touring ministry"],
+    social: {
+      facebook: "https://www.facebook.com/adorationqt",
+      instagram: "https://instagram.com/adoration_qt",
+      youtube: "https://www.youtube.com/user/adorationqt",
+    },
   },
   {
     slug: "adams-voice",
@@ -48,6 +53,10 @@ export const artists: Artist[] = [
     basedIn: "Nashville, Tennessee",
     founded: "1997",
     highlights: ["Family ministry", "9 studio albums", "Touring since 1997"],
+    social: {
+      facebook: "https://www.facebook.com/adamsvoicemusic",
+      youtube: "https://www.youtube.com/channel/UCBNC3TFXqRZ3Yij5nKKbnoA",
+    },
   },
   {
     slug: "common-bond-quartet",
@@ -64,6 +73,10 @@ export const artists: Artist[] = [
     basedIn: "Ashland, Kentucky",
     founded: "2009",
     highlights: ["Tight harmonies", "Personal testimonies", "National touring"],
+    social: {
+      facebook: "https://www.facebook.com/commonbondquartet",
+      youtube: "https://www.youtube.com/channel/UCvRSRch7Yb5fPA9RQM5O79g",
+    },
   },
   {
     slug: "daryl-mosley",
@@ -81,6 +94,10 @@ export const artists: Artist[] = [
     basedIn: "Waverly, Tennessee",
     founded: "1986",
     highlights: ["4-time Songwriter of the Year", "20+ #1 songs", "Grand Ole Opry veteran"],
+    social: {
+      facebook: "https://www.facebook.com/darylmosleymusic",
+      youtube: "https://www.youtube.com/channel/UCO4WSbqDaYUzKH4uBc4AZDw",
+    },
   },
   {
     slug: "gloryway-music",
@@ -97,6 +114,10 @@ export const artists: Artist[] = [
     basedIn: "Mansfield, Ohio",
     founded: "2002",
     highlights: ["Blues-influenced vocals", "High-energy stage presence", "National touring"],
+    social: {
+      facebook: "https://www.facebook.com/1532800730328266",
+      youtube: "https://www.youtube.com/channel/UC1oHzOJHVNlfwx20M-dqsbQ",
+    },
   },
   {
     slug: "sacred-harmony",
@@ -113,6 +134,10 @@ export const artists: Artist[] = [
     basedIn: "Elizabethton, Tennessee",
     founded: "2000",
     highlights: ["Diamond Award Winners", "Singing News Top 40 hits", "Deaf Child Hope partners"],
+    social: {
+      facebook: "https://www.facebook.com/sacredharmonymusicministry",
+      youtube: "https://www.youtube.com/user/sacredharmony11",
+    },
   },
   {
     slug: "southern-plainsmen",
@@ -129,6 +154,9 @@ export const artists: Artist[] = [
     basedIn: "Hornbeck, Louisiana",
     founded: "1978",
     highlights: ["Louisiana's Ambassadors of Goodwill", "Traditional four-part harmony", "Touring since 1978"],
+    social: {
+      facebook: "https://www.facebook.com/pages/The-Southern-Plainsmen-Quartet/1341085952691733",
+    },
   },
   {
     slug: "westward-road",
@@ -145,6 +173,11 @@ export const artists: Artist[] = [
     basedIn: "Pendleton, Indiana",
     founded: "Family ministry",
     highlights: ["Dove Award consideration", "Modern worship blend", "Family trio"],
+    social: {
+      facebook: "https://www.facebook.com/westwardroadmusic",
+      instagram: "https://www.instagram.com/westwardroadmusic",
+      youtube: "https://www.youtube.com/@westwardroadmusic",
+    },
   },
 ];
 

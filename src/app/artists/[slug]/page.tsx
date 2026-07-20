@@ -12,12 +12,19 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
     const artist = getArtistBySlug(resolvedParams.slug);
     if (!artist) return { title: "Artist Not Found" };
     return {
-      title: `${artist.name} | Capitol Artists`,
+      title: artist.name,
       description: artist.shortBio,
+      keywords: [artist.name, artist.genre, "gospel music", "concert booking", "Capitol Artists", ...(artist.highlights || [])],
       openGraph: {
         title: `${artist.name} | Capitol Artists`,
         description: artist.shortBio,
-        type: "website",
+        type: "profile",
+        url: `https://www.capitol-artists.com/artists/${artist.slug}`,
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `${artist.name} | Capitol Artists`,
+        description: artist.shortBio,
       },
     };
   });
@@ -37,8 +44,25 @@ export default async function ArtistPage({
 
   const otherArtists = artists.filter((a) => a.slug !== artist.slug).slice(0, 4);
 
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    name: artist.name,
+    genre: artist.genre,
+    description: artist.shortBio,
+    url: `https://www.capitol-artists.com/artists/${artist.slug}`,
+    ...(artist.basedIn && { location: artist.basedIn }),
+    ...(artist.founded && { foundingDate: artist.founded }),
+    ...(artist.website && { sameAs: [artist.website, ...(artist.social ? Object.values(artist.social).filter(Boolean) : [])] }),
+  };
+
   return (
     <div className="relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       {/* Hero with artist image */}
       <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden pt-20">
         <div className="absolute inset-0">
