@@ -73,7 +73,7 @@ export default function HeroParticles() {
         }
 
         // Simple solid circle instead of expensive radial gradient
-        ctx.fillStyle = `rgba(212, 175, 55, ${p.opacity * 0.6})`;
+        ctx.fillStyle = `rgba(107, 142, 90, ${p.opacity * 0.6})`;
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
         ctx.fill();
@@ -81,7 +81,7 @@ export default function HeroParticles() {
         // Subtle glow only on larger particles, using shadowBlur
         if (p.size > 1.5) {
           ctx.shadowBlur = 8;
-          ctx.shadowColor = `rgba(212, 175, 55, ${p.opacity * 0.4})`;
+          ctx.shadowColor = `rgba(107, 142, 90, ${p.opacity * 0.4})`;
           ctx.fill();
           ctx.shadowBlur = 0;
         }
