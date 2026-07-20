@@ -74,7 +74,7 @@ const structuredData = {
     name: "Mike Heimple",
   },
   telephone: "719-260-1151",
-  email: "info@capitol-artists.com",
+  email: "mike@capitol-artists.com",
   areaServed: "United States",
 };
 
