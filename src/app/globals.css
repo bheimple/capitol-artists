@@ -196,3 +196,27 @@ html {
 .animate-blob {
   animation: blob 18s ease-in-out infinite;
 }
+
+/* Ken Burns slow zoom and pan for hero background */
+@keyframes ken-burns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  50% {
+    transform: scale(1.15) translate(-2%, 1%);
+  }
+  100% {
+    transform: scale(1.05) translate(1%, -1%);
+  }
+}
+.animate-ken-burns {
+  animation: ken-burns 25s ease-in-out infinite;
+}
+
+/* Light sage gradient text for dark hero backgrounds */
+.text-gradient-sage-light {
+  background: linear-gradient(135deg, #8fc97a 0%, #6ba058 50%, #4a7c42 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

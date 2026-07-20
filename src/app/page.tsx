@@ -14,39 +14,47 @@ export default function Home() {
     <div className="relative">
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated sage aurora background */}
-        <div className="absolute inset-0 z-0">
-          <div className="absolute top-[-10%] left-[15%] w-[500px] h-[500px] rounded-full bg-accent/12 blur-[100px] animate-blob" />
-          <div className="absolute top-[20%] right-[10%] w-[400px] h-[400px] rounded-full bg-accent-light/10 blur-[80px] animate-blob" style={{ animationDelay: "3s" }} />
-          <div className="absolute bottom-[-5%] left-[30%] w-[600px] h-[600px] rounded-full bg-accent/8 blur-[120px] animate-blob" style={{ animationDelay: "6s" }} />
-          <div className="absolute top-[40%] left-[5%] w-[350px] h-[350px] rounded-full bg-accent-dark/8 blur-[90px] animate-blob" style={{ animationDelay: "9s" }} />
+        {/* Background image with Ken Burns effect */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <div className="absolute inset-0 animate-ken-burns">
+          <Image
+            src="/images/hero-bg.webp"
+            alt=""
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover"
+          />
         </div>
+        {/* Dark gradient for overall depth */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+      </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-32">
         {/* Capitol icon */}
         <div className="flex justify-center mb-8 animate-fade-in-up">
-          <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+          <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-accent-light backdrop-blur-md">
             <CapitolIcon size={36} />
           </div>
         </div>
 
         {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-surface/60 mb-8 animate-fade-in-up" style={{ animationDelay: "0.05s", opacity: 0 }}>
-          <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
-          <span className="text-xs font-medium tracking-[0.15em] text-muted uppercase">
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-white/15 bg-white/10 backdrop-blur-md mb-8 animate-fade-in-up" style={{ animationDelay: "0.05s", opacity: 0 }}>
+          <span className="w-1.5 h-1.5 rounded-full bg-accent-light animate-pulse" />
+          <span className="text-xs font-medium tracking-[0.15em] text-white/80 uppercase">
             35+ Years of Gospel Concert Booking
           </span>
         </div>
 
         {/* Headline */}
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
+        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-white animate-fade-in-up [text-shadow:0_2px_30px_rgba(0,0,0,0.5)]" style={{ animationDelay: "0.1s", opacity: 0 }}>
           Where Faith Meets
           <br />
-          <span className="text-gradient-gold">the Stage</span>
+          <span className="text-gradient-sage-light">the Stage</span>
         </h1>
 
         {/* Subhead */}
-        <p className="mt-8 text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.2s", opacity: 0 }}>
+        <p className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up [text-shadow:0_1px_15px_rgba(0,0,0,0.5)]" style={{ animationDelay: "0.2s", opacity: 0 }}>
           Capitol Artists connects churches and organizations with the finest
           talent in Southern Gospel and Bluegrass Gospel music. Let us bring
           the concert to you.
@@ -56,13 +64,13 @@ export default function Home() {
         <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: "0.3s", opacity: 0 }}>
           <Link
             href="#roster"
-            className="px-8 py-4 rounded-full bg-accent text-white font-semibold text-base hover:bg-accent-hover transition-all hover:shadow-xl hover:shadow-accent/20 hover:scale-[1.02]"
+            className="px-8 py-4 rounded-full bg-accent text-white font-semibold text-base hover:bg-accent-hover transition-all hover:shadow-xl hover:shadow-accent/30 hover:scale-[1.02]"
           >
             Explore the Roster
           </Link>
           <Link
             href="#contact"
-            className="px-8 py-4 rounded-full border border-border bg-surface/60 text-foreground font-semibold text-base hover:bg-surface hover:border-accent/30 transition-all hover:scale-[1.02]"
+            className="px-8 py-4 rounded-full border border-white/20 bg-white/10 backdrop-blur-md text-white font-semibold text-base hover:bg-white/15 hover:border-white/30 transition-all hover:scale-[1.02]"
           >
             Book a Concert
           </Link>
@@ -71,27 +79,27 @@ export default function Home() {
         {/* Stats bar with dividers */}
         <div className="mt-20 flex items-center justify-center gap-0 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
           <div className="text-center px-8">
-            <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">35+</div>
-            <div className="text-xs text-muted mt-1 tracking-wide">Years Booking</div>
+            <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">35+</div>
+            <div className="text-xs text-white/60 mt-1 tracking-wide">Years Booking</div>
           </div>
-          <div className="w-px h-12 bg-border" />
+          <div className="w-px h-12 bg-white/15" />
           <div className="text-center px-8">
-            <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">{artists.length}</div>
-            <div className="text-xs text-muted mt-1 tracking-wide">Touring Artists</div>
+            <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">{artists.length}</div>
+            <div className="text-xs text-white/60 mt-1 tracking-wide">Touring Artists</div>
           </div>
-          <div className="w-px h-12 bg-border" />
+          <div className="w-px h-12 bg-white/15" />
           <div className="text-center px-8">
-            <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">100s</div>
-            <div className="text-xs text-muted mt-1 tracking-wide">Concerts Booked</div>
+            <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">100s</div>
+            <div className="text-xs text-white/60 mt-1 tracking-wide">Concerts Booked</div>
           </div>
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10">
-        <div className="flex flex-col items-center gap-2 text-muted animate-pulse-soft">
+        <div className="flex flex-col items-center gap-2 text-white/50 animate-pulse-soft">
           <span className="text-[10px] tracking-[0.2em] uppercase">Scroll</span>
-          <div className="w-px h-8 bg-gradient-to-b from-accent to-transparent" />
+          <div className="w-px h-8 bg-gradient-to-b from-accent-light to-transparent" />
         </div>
       </div>
     </section>
