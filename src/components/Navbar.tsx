@@ -7,7 +7,7 @@ const navLinks = [
   { href: "/", label: "Home" },
   { href: "/#roster", label: "Roster" },
   { href: "/#about", label: "About" },
-  { href: "/#contact", label: "Book a Concert" },
+  { href: "/#faq", label: "FAQ" },
 ];
 
 export function CapitolIcon({ className = "", size = 24 }: { className?: string; size?: number }) {
