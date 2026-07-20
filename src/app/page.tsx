@@ -241,67 +241,6 @@ export default function Home() {
 
         <ScrollReveal direction="up" delay={200}>
           <ContactForm />
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
-                  placeholder="John"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
-                  placeholder="Doe"
-                />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-5">
-              <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
-                  placeholder="(719) 260-1151"
-                />
-              </div>
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
-                Message
-              </label>
-              <textarea
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all resize-none"
-                placeholder="Tell us about your event, venue, and which artists you're interested in..."
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full py-4 rounded-full bg-accent text-background font-semibold text-base hover:bg-accent-hover transition-all hover:shadow-xl hover:shadow-accent/20"
-            >
-              Submit Inquiry
-            </button>
-          
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={400}>
