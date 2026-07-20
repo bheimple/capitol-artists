@@ -27,7 +27,9 @@ export default function Home() {
           />
         </div>
         {/* Dark gradient for overall depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
+        {/* Radial dark pool centered behind text */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_45%,rgba(0,0,0,0.55),transparent)]" />
       </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-32">
@@ -47,14 +49,14 @@ export default function Home() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-white animate-fade-in-up [text-shadow:0_2px_30px_rgba(0,0,0,0.5)]" style={{ animationDelay: "0.1s", opacity: 0 }}>
+        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-white animate-fade-in-up [text-shadow:0_2px_20px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]" style={{ animationDelay: "0.1s", opacity: 0 }}>
           Where Faith Meets
           <br />
           <span className="text-gradient-sage-light">the Stage</span>
         </h1>
 
         {/* Subhead */}
-        <p className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up [text-shadow:0_1px_15px_rgba(0,0,0,0.5)]" style={{ animationDelay: "0.2s", opacity: 0 }}>
+        <p className="mt-8 text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed animate-fade-in-up [text-shadow:0_1px_12px_rgba(0,0,0,0.9),0_2px_24px_rgba(0,0,0,0.5)]" style={{ animationDelay: "0.2s", opacity: 0 }}>
           Capitol Artists connects churches and organizations with the finest
           talent in Southern Gospel and Bluegrass Gospel music. Let us bring
           the concert to you.
