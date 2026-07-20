@@ -24,14 +24,13 @@ export default function Home() {
             sizes="100vw"
             className="object-cover animate-ken-burns origin-center"
           />
-          {/* Strong dark overlay */}
-          <div className="absolute inset-0 bg-black/65" />
+          {/* Strong dark overlay so text is always readable */}
+          <div className="absolute inset-0 bg-black/55" />
+          {/* Extra darkening in the center where text lives */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,rgba(0,0,0,0.35),transparent)]" />
         </div>
 
-      <div className="relative z-10 max-w-4xl mx-auto px-6 py-32">
-        {/* Semi-transparent dark panel behind text for guaranteed readability */}
-        <div className="absolute inset-0 -mx-12 -my-8 rounded-3xl bg-black/35 backdrop-blur-md" />
-        <div className="relative">
+      <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-32">
         {/* Capitol icon */}
         <div className="flex justify-center mb-8 animate-fade-in-up">
           <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-accent-light backdrop-blur-md">
@@ -93,7 +92,6 @@ export default function Home() {
             <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">100s</div>
             <div className="text-xs text-white/60 mt-1 tracking-wide">Concerts Booked</div>
           </div>
-        </div>
         </div>
       </div>
 
