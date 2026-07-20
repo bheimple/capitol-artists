@@ -15,22 +15,20 @@ export default function Home() {
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Background image with Ken Burns effect */}
-      <div className="absolute inset-0 z-0 overflow-hidden">
-        <div className="absolute inset-0 animate-ken-burns">
+        <div className="absolute inset-0 z-0 overflow-hidden">
           <Image
             src="/images/hero-bg.webp"
             alt=""
             fill
             priority
             sizes="100vw"
-            className="object-cover"
+            className="object-cover animate-ken-burns origin-center"
           />
+          {/* Strong dark overlay so text is always readable */}
+          <div className="absolute inset-0 bg-black/55" />
+          {/* Extra darkening in the center where text lives */}
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_60%_at_50%_50%,rgba(0,0,0,0.35),transparent)]" />
         </div>
-        {/* Dark gradient for overall depth */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-black/60" />
-        {/* Radial dark pool centered behind text */}
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_50%_45%,rgba(0,0,0,0.55),transparent)]" />
-      </div>
 
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-32">
         {/* Capitol icon */}
