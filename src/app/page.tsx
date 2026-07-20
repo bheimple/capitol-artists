@@ -177,20 +177,22 @@ export default function Home() {
             </div>
           </div>
 
-          {/* Mike's photo */}
-          <div className="relative">
-            <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-surface border border-border relative">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/images/mike-heimple.jpg"
-                alt="Mike Heimple, Founder and Booking Agent"
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/40 to-transparent" />
+          {/* Mike's photo - constrained to avoid blurriness */}
+          <div className="relative flex justify-center md:justify-end">
+            <div className="relative max-w-[320px] w-full">
+              <div className="aspect-[4/5] rounded-2xl overflow-hidden bg-surface border border-border relative">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/images/mike-heimple.jpg"
+                  alt="Mike Heimple, Founder and Booking Agent"
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-background/30 to-transparent" />
+              </div>
+              {/* Corner accents */}
+              <div className="absolute -top-3 -left-3 w-10 h-10 border-l-2 border-t-2 border-accent/30 rounded-tl-xl" />
+              <div className="absolute -bottom-3 -right-3 w-10 h-10 border-r-2 border-b-2 border-accent/30 rounded-br-xl" />
             </div>
-            {/* Corner accents */}
-            <div className="absolute -top-3 -left-3 w-12 h-12 border-l-2 border-t-2 border-accent/30 rounded-tl-xl" />
-            <div className="absolute -bottom-3 -right-3 w-12 h-12 border-r-2 border-b-2 border-accent/30 rounded-br-xl" />
           </div>
         </div>
       </div>
