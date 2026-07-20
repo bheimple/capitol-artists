@@ -13,7 +13,7 @@ export default function CalendarPage() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `radial-gradient(circle at 20% 30%, rgba(107, 142, 90, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(107, 142, 90, 0.1) 0%, transparent 50%)`,
+            backgroundImage: `radial-gradient(circle at 20% 30%, rgba(74, 124, 66, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(74, 124, 66, 0.1) 0%, transparent 50%)`,
           }}
         />
       </div>
