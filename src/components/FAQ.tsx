@@ -33,6 +33,26 @@ const faqs = [
     answer:
       "Southern Gospel features tight four-part vocal harmonies rooted in quartet tradition, while Bluegrass Gospel blends acoustic string instruments like banjo, fiddle, and mandolin with gospel lyrics. Both traditions are deeply rooted in faith and church music heritage, and we represent artists in both styles.",
   },
+  {
+    question: "What does a typical concert look like?",
+    answer:
+      "Most concerts run 60 to 90 minutes, though this is flexible. The artist typically leads a program of gospel music with testimony and ministry woven throughout. For multi-artist events, each group performs their own set. We'll work with you on timing, stage setup, and sound requirements ahead of time.",
+  },
+  {
+    question: "What do we need to provide on our end?",
+    answer:
+      "You'll need a venue with adequate seating, a stage or performance area, and a sound system capable of supporting live vocal and instrumental performance. Some artists travel with their own sound engineer. We'll provide a detailed tech rider and any specific requirements once the booking is confirmed, so there are no surprises.",
+  },
+  {
+    question: "How does pricing work?",
+    answer:
+      "Pricing varies by artist, travel distance, date, and event type. Once we know your budget and what you're looking for, we'll give you clear pricing with no hidden fees. We're upfront about all costs, including travel and lodging when applicable, before you commit to anything.",
+  },
+  {
+    question: "Can the artist tailor their program to our service or theme?",
+    answer:
+      "Yes. Many of our artists can customize their setlist, message, or program length to align with your service theme, sermon series, or special occasion. Just let us know what you're envisioning and we'll coordinate with the artist to make it happen.",
+  },
 ];
 
 export default function FAQ() {
