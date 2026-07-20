@@ -5,15 +5,19 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
   return (
     <Link href={`/artists/${artist.slug}`} className="group block">
       <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-300 group-hover:border-accent/40 group-hover:shadow-2xl group-hover:shadow-accent/5">
-        {/* Placeholder gradient with initials */}
-        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-surface via-background to-surface">
-          <span className="text-5xl font-serif font-bold text-border/40 select-none">
-            {artist.name.charAt(0)}
-          </span>
-        </div>
+        {/* Artist image */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={artist.image}
+          alt={artist.name}
+          className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+        />
 
-        {/* Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-90" />
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-transparent opacity-95" />
+
+        {/* Subtle top gradient for text legibility */}
+        <div className="absolute top-0 left-0 right-0 h-20 bg-gradient-to-b from-background/50 to-transparent" />
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5 z-10">

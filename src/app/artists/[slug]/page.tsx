@@ -34,13 +34,19 @@ export default async function ArtistPage({
 
   return (
     <div className="relative">
-      {/* Hero with artist name */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden hero-gradient pt-20">
-        {/* Large faded initial */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
-          <span className="text-[16rem] md:text-[22rem] font-serif font-black text-foreground/[0.03] leading-none select-none">
-            {artist.name.charAt(0)}
-          </span>
+      {/* Hero with artist image and name */}
+      <section className="relative min-h-[70vh] flex items-center justify-center overflow-hidden pt-20">
+        {/* Artist image as background */}
+        <div className="absolute inset-0">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={artist.image}
+            alt={artist.name}
+            className="w-full h-full object-cover"
+          />
+          {/* Dark gradient overlay for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/60 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-r from-background/70 via-transparent to-background/70" />
         </div>
 
         <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-20">
@@ -54,7 +60,7 @@ export default async function ArtistPage({
             Back to Roster
           </Link>
 
-          <div className="inline-block px-3 py-1.5 rounded-full border border-accent/30 bg-accent/5 mb-6">
+          <div className="inline-block px-3 py-1.5 rounded-full border border-accent/30 bg-accent/5 backdrop-blur-sm mb-6">
             <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
               {artist.genre}
             </span>
@@ -72,7 +78,7 @@ export default async function ArtistPage({
           {(artist.basedIn || artist.founded) && (
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
               {artist.basedIn && (
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/50 border border-border text-sm text-muted">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/50 border border-border backdrop-blur-sm text-sm text-muted">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" strokeLinecap="round" strokeLinejoin="round" />
                     <circle cx="12" cy="10" r="3" />
@@ -81,7 +87,7 @@ export default async function ArtistPage({
                 </div>
               )}
               {artist.founded && (
-                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/50 border border-border text-sm text-muted">
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surface/50 border border-border backdrop-blur-sm text-sm text-muted">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
                     <line x1="16" y1="2" x2="16" y2="6" />
@@ -105,7 +111,7 @@ export default async function ArtistPage({
             </a>
             <Link
               href="/#contact"
-              className="px-6 py-3 rounded-full border border-border bg-surface/50 text-foreground font-semibold text-sm hover:bg-surface hover:border-accent/30 transition-all"
+              className="px-6 py-3 rounded-full border border-border bg-surface/50 backdrop-blur-sm text-foreground font-semibold text-sm hover:bg-surface hover:border-accent/30 transition-all"
             >
               Book This Artist
             </Link>
@@ -189,12 +195,13 @@ export default async function ArtistPage({
                 className="group block"
               >
                 <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-300 group-hover:border-accent/40">
-                  <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-surface via-background to-surface">
-                    <span className="text-5xl font-serif font-bold text-border/40 select-none">
-                      {a.name.charAt(0)}
-                    </span>
-                  </div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent opacity-90" />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src={a.image}
+                    alt={a.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent opacity-95" />
                   <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
                     <span className="inline-block text-[10px] font-semibold tracking-[0.15em] uppercase text-accent mb-1">
                       {a.genre}
