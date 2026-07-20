@@ -82,7 +82,7 @@ export default function Navbar() {
             <span className={`text-xl font-bold tracking-tight transition-colors ${scrolled || mobileOpen ? "text-foreground" : "text-white"}`}>
               CAPITOL
             </span>
-            <span className={`text-[13px] font-medium tracking-[0.25em] mt-0.5 transition-colors ${scrolled || mobileOpen ? "text-accent" : "text-accent-light"}`}>
+            <span className={`text-[13px] font-medium tracking-[0.25em] mt-0.5 transition-colors ${scrolled || mobileOpen ? "text-accent" : "text-white"}`}>
               ARTISTS
             </span>
           </div>
@@ -94,7 +94,7 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${scrolled || mobileOpen ? "text-muted hover:text-foreground" : "text-white/80 hover:text-white"}`}
+              className={`px-4 py-2 text-sm font-medium transition-colors ${scrolled || mobileOpen ? "text-muted hover:text-foreground" : "text-white hover:text-white"}`}
             >
               {link.label}
             </Link>
