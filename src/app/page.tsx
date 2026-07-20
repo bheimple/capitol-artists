@@ -2,49 +2,56 @@ import Link from "next/link";
 import { artists } from "@/data/artists";
 import ArtistCard from "@/components/ArtistCard";
 import BookingProcess from "@/components/BookingProcess";
+import { CapitolIcon } from "@/components/Navbar";
 
 export default function Home() {
   return (
     <div className="relative">
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden hero-gradient">
-        {/* Background pattern */}
-        <div className="absolute inset-0 opacity-20">
-          <div
-            className="absolute inset-0"
-            style={{
-              backgroundImage: `radial-gradient(circle at 20% 30%, rgba(212, 175, 55, 0.15) 0%, transparent 50%), radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.1) 0%, transparent 50%)`,
-            }}
-          />
-        </div>
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Subtle radial gradient background */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "radial-gradient(ellipse at 50% 20%, rgba(212, 175, 55, 0.08) 0%, transparent 60%)",
+          }}
+        />
 
-        {/* Large faded text in background */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
-          <span className="text-[20rem] md:text-[28rem] font-serif font-black text-foreground/[0.02] leading-none select-none">
-            CA
-          </span>
-        </div>
+        {/* Faint horizontal line accent */}
+        <div className="absolute top-1/2 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/10 to-transparent" />
 
-        <div className="relative z-10 max-w-5xl mx-auto px-6 text-center py-32">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-surface/50 backdrop-blur-sm mb-8 animate-fade-in-up">
+        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-32">
+          {/* Capitol icon */}
+          <div className="flex justify-center mb-8 animate-fade-in-up">
+            <div className="w-16 h-16 rounded-2xl bg-accent/10 border border-accent/20 flex items-center justify-center text-accent">
+              <CapitolIcon size={36} />
+            </div>
+          </div>
+
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-border bg-surface/50 backdrop-blur-sm mb-8 animate-fade-in-up" style={{ animationDelay: "0.05s", opacity: 0 }}>
             <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
             <span className="text-xs font-medium tracking-[0.15em] text-muted uppercase">
               35+ Years of Gospel Concert Booking
             </span>
           </div>
 
+          {/* Headline */}
           <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight animate-fade-in-up" style={{ animationDelay: "0.1s", opacity: 0 }}>
             Where Faith Meets
             <br />
             <span className="text-gradient-gold">the Stage</span>
           </h1>
 
+          {/* Subhead */}
           <p className="mt-8 text-lg md:text-xl text-muted max-w-2xl mx-auto leading-relaxed animate-fade-in-up" style={{ animationDelay: "0.2s", opacity: 0 }}>
             Capitol Artists connects churches and organizations with the finest
             talent in Southern Gospel and Bluegrass Gospel music. Let us bring
             the concert to you.
           </p>
 
+          {/* CTAs */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up" style={{ animationDelay: "0.3s", opacity: 0 }}>
             <Link
               href="#roster"
@@ -60,17 +67,19 @@ export default function Home() {
             </Link>
           </div>
 
-          {/* Stats bar */}
-          <div className="mt-20 grid grid-cols-3 gap-4 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
-            <div className="text-center">
+          {/* Stats bar — cleaner, with dividers */}
+          <div className="mt-20 flex items-center justify-center gap-0 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
+            <div className="text-center px-8">
               <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">35+</div>
               <div className="text-xs text-muted mt-1 tracking-wide">Years Booking</div>
             </div>
-            <div className="text-center border-x border-border">
+            <div className="w-px h-12 bg-border" />
+            <div className="text-center px-8">
               <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">{artists.length}</div>
               <div className="text-xs text-muted mt-1 tracking-wide">Touring Artists</div>
             </div>
-            <div className="text-center">
+            <div className="w-px h-12 bg-border" />
+            <div className="text-center px-8">
               <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-gold">100s</div>
               <div className="text-xs text-muted mt-1 tracking-wide">Concerts Booked</div>
             </div>
@@ -170,21 +179,8 @@ export default function Home() {
                 <div className="absolute inset-0 bg-gradient-to-br from-accent/10 via-transparent to-accent/5" />
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center space-y-4">
-                    <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto">
-                      <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
-                        <path
-                          d="M12 2L4 7v6c0 4.5 3.4 8.6 8 9.7 4.6-1.1 8-5.2 8-9.7V7l-8-5z"
-                          fill="#d4af37"
-                          fillOpacity="0.3"
-                        />
-                        <path
-                          d="M9 11l2 2 4-4"
-                          stroke="#d4af37"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
+                    <div className="w-20 h-20 rounded-full bg-accent/10 flex items-center justify-center mx-auto text-accent">
+                      <CapitolIcon size={48} />
                     </div>
                     <div className="space-y-1">
                       <div className="text-4xl font-serif font-black text-gradient-gold">35+</div>
@@ -203,130 +199,95 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Contact / CTA Section */}
+      {/* Contact Section */}
       <section id="contact" className="py-24 md:py-32 relative scroll-mt-20 border-t border-border">
         <div className="max-w-3xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="flex items-center justify-center gap-3 mb-3">
               <span className="w-8 h-px bg-accent" />
               <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
-                Book a Concert
+                Get in Touch
               </span>
-              <span className="w-8 h-px bg-accent" />
             </div>
             <h2 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mb-4">
-              Let&apos;s Plan Your Next Concert
+              Book a Concert
             </h2>
-            <p className="text-muted max-w-xl mx-auto leading-relaxed">
-              Interested in booking one or more of our fine artists? We&apos;d love
-              to answer any questions you may have. Fill out the form below or
-              reach out directly.
+            <p className="text-muted max-w-xl mx-auto">
+              Let us know if one or more of these fine artists are of interest to
+              you. We would love to answer any questions you may have.
             </p>
           </div>
 
-          {/* Contact form */}
-          <form className="bg-surface border border-border rounded-2xl p-6 md:p-10 space-y-5">
+          <form className="space-y-5">
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide">
+                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
                   First Name
                 </label>
                 <input
                   type="text"
-                  name="firstName"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
                   placeholder="John"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide">
+                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
                   Last Name
                 </label>
                 <input
                   type="text"
-                  name="lastName"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
                   placeholder="Doe"
                 />
               </div>
             </div>
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide">
+                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
                   Email
                 </label>
                 <input
                   type="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all"
-                  placeholder="john@church.org"
+                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
+                  placeholder="john@example.com"
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-muted mb-2 tracking-wide">
+                <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
                   Phone
                 </label>
                 <input
                   type="tel"
-                  name="phone"
-                  className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all"
+                  className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all"
                   placeholder="(719) 260-1151"
                 />
               </div>
             </div>
             <div>
-              <label className="block text-xs font-medium text-muted mb-2 tracking-wide">
-                Artist(s) of Interest
-              </label>
-              <select
-                name="artist"
-                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all"
-              >
-                <option value="">Select an artist (optional)</option>
-                {artists.map((a) => (
-                  <option key={a.slug} value={a.name}>
-                    {a.name}
-                  </option>
-                ))}
-                <option value="multiple">Multiple Artists</option>
-                <option value="not-sure">Not Sure Yet</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-muted mb-2 tracking-wide">
+              <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
                 Message
               </label>
               <textarea
-                name="message"
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted/50 focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/30 transition-all resize-none"
-                placeholder="Tell us about your event, date preferences, venue, etc."
+                rows={5}
+                className="w-full px-4 py-3 rounded-lg bg-surface border border-border text-foreground placeholder:text-border focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20 transition-all resize-none"
+                placeholder="Tell us about your event, venue, and which artists you're interested in..."
               />
             </div>
             <button
               type="submit"
-              className="w-full py-4 rounded-lg bg-accent text-background font-semibold hover:bg-accent-hover transition-all hover:shadow-xl hover:shadow-accent/10"
+              className="w-full py-4 rounded-full bg-accent text-background font-semibold text-base hover:bg-accent-hover transition-all"
             >
               Submit Inquiry
             </button>
-            <p className="text-[11px] text-muted/60 text-center leading-relaxed">
-              By providing your phone number, you agree to receive text messages
-              from Capitol Artists. You may reply STOP at any time to opt-out.
-              Message and data rates may apply. Message frequency varies.
-            </p>
           </form>
 
-          {/* Direct contact */}
-          <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm">
-            <span className="text-muted">Prefer to talk directly?</span>
-            <a
-              href="tel:719-260-1151"
-              className="text-accent hover:text-accent-hover transition-colors font-medium"
-            >
-              📞 719-260-1151
+          <div className="mt-10 pt-10 border-t border-border flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted">
+            <div className="flex items-center gap-3">
+              <CapitolIcon size={20} className="text-accent" />
+              <span>Capitol Artists</span>
+            </div>
+            <a href="tel:719-260-1151" className="text-accent hover:text-accent-hover transition-colors">
+              719-260-1151
             </a>
           </div>
         </div>

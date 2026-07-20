@@ -10,6 +10,38 @@ const navLinks = [
   { href: "/#contact", label: "Book a Concert" },
 ];
 
+export function CapitolIcon({ className = "", size = 24 }: { className?: string; size?: number }) {
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* Steps/Base */}
+      <rect x="6" y="42" width="36" height="3" rx="0.5" fill="currentColor" />
+      <rect x="8" y="38" width="32" height="3" rx="0.5" fill="currentColor" />
+
+      {/* Columns */}
+      <rect x="12" y="26" width="3" height="11" fill="currentColor" />
+      <rect x="18" y="26" width="3" height="11" fill="currentColor" />
+      <rect x="27" y="26" width="3" height="11" fill="currentColor" />
+      <rect x="33" y="26" width="3" height="11" fill="currentColor" />
+
+      {/* Column base/pediment */}
+      <rect x="10" y="23" width="28" height="3" rx="0.5" fill="currentColor" />
+      <path d="M10 23 L24 14 L38 23 Z" fill="currentColor" />
+
+      {/* Dome */}
+      <path d="M18 14 C18 9, 30 9, 30 14 L30 14 L18 14 Z" fill="currentColor" />
+      <rect x="22.5" y="7" width="3" height="4" rx="0.5" fill="currentColor" />
+      <circle cx="24" cy="6" r="2" fill="currentColor" />
+    </svg>
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -31,34 +63,14 @@ export default function Navbar() {
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group">
-          <div className="relative">
-            <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center transition-transform group-hover:scale-105">
-              <svg
-                width="22"
-                height="22"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M12 2L4 7v6c0 4.5 3.4 8.6 8 9.7 4.6-1.1 8-5.2 8-9.7V7l-8-5z"
-                  fill="#0a0a0b"
-                />
-                <path
-                  d="M9 11l2 2 4-4"
-                  stroke="#d4af37"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </div>
+          <div className="w-11 h-11 rounded-lg bg-accent flex items-center justify-center text-background transition-transform group-hover:scale-105">
+            <CapitolIcon size={26} />
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-lg font-bold tracking-tight text-foreground">
+            <span className="text-xl font-bold tracking-tight text-foreground">
               CAPITOL
             </span>
-            <span className="text-xs font-medium tracking-[0.2em] text-accent">
+            <span className="text-[13px] font-medium tracking-[0.25em] text-accent mt-0.5">
               ARTISTS
             </span>
           </div>

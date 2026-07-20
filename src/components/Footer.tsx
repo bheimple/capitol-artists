@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CapitolIcon } from "@/components/Navbar";
 
 export default function Footer() {
   return (
@@ -8,24 +9,12 @@ export default function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-accent flex items-center justify-center">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M12 2L4 7v6c0 4.5 3.4 8.6 8 9.7 4.6-1.1 8-5.2 8-9.7V7l-8-5z"
-                    fill="#0a0a0b"
-                  />
-                  <path
-                    d="M9 11l2 2 4-4"
-                    stroke="#d4af37"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
+              <div className="w-11 h-11 rounded-lg bg-accent flex items-center justify-center text-background">
+                <CapitolIcon size={26} />
               </div>
               <div className="flex flex-col leading-none">
-                <span className="text-lg font-bold tracking-tight">CAPITOL</span>
-                <span className="text-xs font-medium tracking-[0.2em] text-accent">
+                <span className="text-xl font-bold tracking-tight">CAPITOL</span>
+                <span className="text-[13px] font-medium tracking-[0.25em] text-accent mt-0.5">
                   ARTISTS
                 </span>
               </div>
