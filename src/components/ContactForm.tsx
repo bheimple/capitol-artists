@@ -1,13 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const submittingRef = useRef(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
+
+    // Guard against double submission (fast double-clicks)
+    if (submittingRef.current) return;
+    submittingRef.current = true;
+
     setStatus("submitting");
     setErrorMessage("");
 
@@ -36,6 +42,8 @@ export default function ContactForm() {
     } catch (err) {
       setStatus("error");
       setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please call 719-260-1151.");
+    } finally {
+      submittingRef.current = false;
     }
   }
 
