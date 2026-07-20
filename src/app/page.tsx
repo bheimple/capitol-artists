@@ -5,6 +5,7 @@ import BookingProcess from "@/components/BookingProcess";
 import FAQ from "@/components/FAQ";
 import HeroParticles from "@/components/HeroParticles";
 import ScrollReveal from "@/components/ScrollReveal";
+import Testimonials from "@/components/Testimonials";
 import { CapitolIcon } from "@/components/Navbar";
 
 export default function Home() {
@@ -206,6 +207,9 @@ export default function Home() {
         </div>
       </div>
     </section>
+
+    {/* Testimonials Section */}
+    <Testimonials />
 
     {/* FAQ Section */}
     <FAQ />
