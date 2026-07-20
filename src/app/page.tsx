@@ -5,6 +5,7 @@ import BookingProcess from "@/components/BookingProcess";
 import FAQ from "@/components/FAQ";
 import HeroParticles from "@/components/HeroParticles";
 import ScrollReveal from "@/components/ScrollReveal";
+import ContactForm from "@/components/ContactForm";
 import Testimonials from "@/components/Testimonials";
 import { CapitolIcon } from "@/components/Navbar";
 
@@ -235,7 +236,7 @@ export default function Home() {
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={200}>
-          <form className="space-y-5">
+          <ContactForm />
             <div className="grid sm:grid-cols-2 gap-5">
               <div>
                 <label className="block text-xs font-medium text-muted mb-2 tracking-wide uppercase">
@@ -296,7 +297,7 @@ export default function Home() {
             >
               Submit Inquiry
             </button>
-          </form>
+          
         </ScrollReveal>
 
         <ScrollReveal direction="up" delay={400}>
