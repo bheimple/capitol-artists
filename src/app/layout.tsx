@@ -20,6 +20,12 @@ const playfair = Playfair_Display({
   weight: ["600", "700", "800", "900"],
 });
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 const siteUrl = "https://www.capitol-artists.com";
 
 export const metadata: Metadata = {

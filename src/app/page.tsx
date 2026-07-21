@@ -47,7 +47,7 @@ export default function Home() {
         </div>
 
         {/* Headline */}
-        <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-white animate-fade-in-up [text-shadow:0_2px_20px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]" style={{ animationDelay: "0.1s", opacity: 0 }}>
+        <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-[1.05] tracking-tight text-white animate-fade-in-up [text-shadow:0_2px_20px_rgba(0,0,0,0.8),0_4px_40px_rgba(0,0,0,0.6)]" style={{ animationDelay: "0.1s", opacity: 0 }}>
           Where Faith Meets
           <br />
           <span className="text-gradient-sage-light">the Stage</span>
@@ -78,17 +78,17 @@ export default function Home() {
 
         {/* Stats bar with dividers */}
         <div className="mt-20 flex items-center justify-center gap-0 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: "0.4s", opacity: 0 }}>
-          <div className="text-center px-8">
+          <div className="text-center px-4 sm:px-8">
             <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">35+</div>
             <div className="text-xs text-white/60 mt-1 tracking-wide">Years Booking</div>
           </div>
           <div className="w-px h-12 bg-white/15" />
-          <div className="text-center px-8">
+          <div className="text-center px-4 sm:px-8">
             <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">{artists.length}</div>
             <div className="text-xs text-white/60 mt-1 tracking-wide">Touring Artists</div>
           </div>
           <div className="w-px h-12 bg-white/15" />
-          <div className="text-center px-8">
+          <div className="text-center px-4 sm:px-8">
             <div className="text-3xl md:text-4xl font-serif font-bold text-gradient-sage-light">100s</div>
             <div className="text-xs text-white/60 mt-1 tracking-wide">Concerts Booked</div>
           </div>
