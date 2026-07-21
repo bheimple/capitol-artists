@@ -33,7 +33,7 @@ export default function Home() {
       <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-32">
         {/* Capitol icon */}
         <div className="flex justify-center mb-8 animate-fade-in-up">
-          <div className="w-16 h-16 rounded-2xl bg-white/10 border border-white/20 flex items-center justify-center text-accent-light backdrop-blur-md">
+          <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center text-white shadow-lg shadow-accent/30">
             <CapitolIcon size={36} />
           </div>
         </div>
