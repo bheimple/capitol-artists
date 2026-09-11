@@ -12,10 +12,10 @@ import { CapitolIcon } from "@/components/BrandLogo";
 export default function Home() {
   return (
     <div className="relative">
-      {/* Fill the hero edge to edge, preserving the bus at the bottom when the sky crops. */}
-      <section aria-labelledby="hero-heading" className="flex flex-col pt-20 md:h-svh md:min-h-[480px] bg-[#f9f6ef]">
+      {/* Limit the sky crop so the cross and logo remain visible on wide, short screens. */}
+      <section aria-labelledby="hero-heading" className="flex flex-col pt-20 md:min-h-[min(100svh,calc(50vw+10rem))] bg-[#f9f6ef]">
         <h1 id="hero-heading" className="sr-only">Capitol Artists: Exceptional Gospel groups and artists for any occasion. Established 1992.</h1>
-        <div className="relative w-full aspect-[2/1] md:aspect-auto md:flex-1 md:min-h-0">
+        <div className="relative w-full aspect-[2/1] md:aspect-auto md:flex-1 md:min-h-[44vw] md:max-h-[50vw]">
         <Image
           src="/brand/hero-small-logo.webp"
           alt="A Capitol Artists tour bus on a mountain highway at sunset beneath the navy and gold Capitol Artists wordmark, crowned by a Capitol dome and cross. Exceptional Gospel groups and artists for any occasion. Established 1992."
