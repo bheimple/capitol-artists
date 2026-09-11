@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CapitolIcon } from "@/components/Navbar";
+import BrandLogo, { CapitolIcon } from "@/components/BrandLogo";
 
 export default function Footer() {
   return (
@@ -12,23 +12,13 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Brand - wider */}
           <div className="md:col-span-5 space-y-5">
-            <div className="flex items-center gap-3">
-              <div className="w-11 h-11 rounded-lg bg-accent flex items-center justify-center text-background">
-                <CapitolIcon size={26} />
-              </div>
-              <div className="flex flex-col leading-none">
-                <span className="text-xl font-bold tracking-tight">CAPITOL</span>
-                <span className="text-[13px] font-medium tracking-[0.25em] text-accent mt-0.5">
-                  ARTISTS
-                </span>
-              </div>
-            </div>
+            <Link href="/" aria-label="Capitol Artists home"><BrandLogo /></Link>
             <p className="text-sm text-muted max-w-sm leading-relaxed">
               Connecting churches and organizations with top talent in Southern
-              Gospel and Bluegrass Gospel music for over 35 years.
+              Gospel and Bluegrass Gospel music since 1992.
             </p>
             <div className="flex items-center gap-3 pt-2">
-              <span className="text-xs text-muted tracking-wide">EST. 1990</span>
+              <span className="text-xs text-muted tracking-wide">EST. 1992</span>
               <span className="w-8 h-px bg-border" />
               <span className="text-xs text-muted tracking-wide">SOUTHERN GOSPEL &amp; BLUEGRASS GOSPEL</span>
             </div>

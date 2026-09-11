@@ -29,12 +29,13 @@ export const viewport = {
 const siteUrl = "https://www.capitol-artists.com";
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
     default: "Capitol Artists | Gospel Concert Booking Agency",
     template: "%s | Capitol Artists",
   },
   description:
-    "For over 35 years, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music. Book your next concert with us.",
+    "Since 1992, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music. Book your next concert with us.",
   keywords: [
     "Southern Gospel",
     "Bluegrass Gospel",
@@ -51,26 +52,27 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Capitol Artists | Gospel Concert Booking Agency",
     description:
-      "For over 35 years, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music.",
+      "Since 1992, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music.",
     type: "website",
     url: siteUrl,
     siteName: "Capitol Artists",
+    images: [{ url: "/brand/hero-cross.webp", width: 1774, height: 887, alt: "Capitol Artists: Gospel concert booking since 1992" }],
   },
   twitter: {
     card: "summary_large_image",
+    images: ["/brand/hero-cross.webp"],
     title: "Capitol Artists | Gospel Concert Booking Agency",
     description:
-      "Connecting churches with top talent in Southern Gospel and Bluegrass Gospel music for over 35 years.",
+      "Connecting churches with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
   },
   icons: {
     icon: [
-      { url: '/favicon.ico?v=2', sizes: '32x32', type: 'image/x-icon' },
-      { url: '/icon.svg?v=2', type: 'image/svg+xml' },
-      { url: '/icon-192.png?v=2', sizes: '192x192', type: 'image/png' },
-      { url: '/icon-512.png?v=2', sizes: '512x512', type: 'image/png' },
+      { url: '/favicon.ico?v=3', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/icon-192.png?v=3', sizes: '192x192', type: 'image/png' },
+      { url: '/icon-512.png?v=3', sizes: '512x512', type: 'image/png' },
     ],
     apple: [
-      { url: '/apple-icon.png?v=2', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-icon.png?v=3', sizes: '180x180', type: 'image/png' },
     ],
   },
   robots: {
@@ -83,8 +85,10 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Capitol Artists",
+  logo: `${siteUrl}/brand/capitol-cross.png`,
+  foundingDate: "1992",
   description:
-    "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music for over 35 years.",
+    "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
   url: siteUrl,
   founder: {
     "@type": "Person",

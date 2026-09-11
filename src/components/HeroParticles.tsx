@@ -13,7 +13,7 @@ export default function HeroParticles() {
     if (!ctx) return;
 
     let animationId: number;
-    let particles: Particle[] = [];
+    const particles: Particle[] = [];
 
     type Particle = {
       x: number;

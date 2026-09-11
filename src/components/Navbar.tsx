@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import BrandLogo from "@/components/BrandLogo";
 
 const navLinks = [
   { href: "/", label: "Home" },
@@ -11,46 +12,8 @@ const navLinks = [
   { href: "/#faq", label: "FAQ" },
 ];
 
-export function CapitolIcon({ className = "", size = 24 }: { className?: string; size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 48 48"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      className={className}
-    >
-      {/* Cross on top */}
-      <rect x="22" y="2" width="4" height="14" rx="0.5" fill="currentColor" />
-      <rect x="16.5" y="5" width="15" height="4" rx="0.5" fill="currentColor" />
-
-      {/* Steps/Base */}
-      <rect x="6" y="42" width="36" height="3" rx="0.5" fill="currentColor" />
-      <rect x="8" y="38" width="32" height="3" rx="0.5" fill="currentColor" />
-
-      {/* Columns */}
-      <rect x="12" y="26" width="3" height="11" fill="currentColor" />
-      <rect x="18" y="26" width="3" height="11" fill="currentColor" />
-      <rect x="27" y="26" width="3" height="11" fill="currentColor" />
-      <rect x="33" y="26" width="3" height="11" fill="currentColor" />
-
-      {/* Pediment (triangular roof) */}
-      <rect x="10" y="23" width="28" height="3" rx="0.5" fill="currentColor" />
-      <path d="M10 23 L24 16 L38 23 Z" fill="currentColor" />
-    </svg>
-  );
-}
-
 export default function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -66,26 +29,12 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled || mobileOpen
-          ? "bg-background border-b border-border"
-          : "bg-transparent"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border"
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
         <Link href="/" className="flex items-center gap-3 group" onClick={() => setMobileOpen(false)}>
-          <div className="w-11 h-11 rounded-lg bg-accent flex items-center justify-center text-background transition-transform group-hover:scale-105">
-            <CapitolIcon size={26} />
-          </div>
-          <div className="flex flex-col leading-none">
-            <span className={`text-xl font-bold tracking-tight transition-colors ${scrolled || mobileOpen ? "text-foreground" : "text-white"}`}>
-              CAPITOL
-            </span>
-            <span className={`text-[13px] font-medium tracking-[0.25em] mt-0.5 transition-colors ${scrolled || mobileOpen ? "text-accent" : "text-white"}`}>
-              ARTISTS
-            </span>
-          </div>
+          <BrandLogo />
         </Link>
 
         {/* Desktop nav */}
@@ -94,14 +43,14 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className={`px-4 py-2 text-sm font-medium transition-colors ${scrolled || mobileOpen ? "text-muted hover:text-foreground" : "text-white hover:text-white"}`}
+              className="px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/#contact"
-            className={`ml-2 px-5 py-2.5 rounded-full text-sm font-semibold transition-all hover:scale-[1.02] ${scrolled || mobileOpen ? "bg-accent text-background hover:bg-accent-hover" : "bg-white/15 text-white border border-white/25 hover:bg-white/25 backdrop-blur-md"}`}
+            className="ml-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#062653] text-white hover:bg-[#123d70] transition-colors"
           >
             Book a Concert
           </Link>
@@ -109,7 +58,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className={`md:hidden p-2 relative z-50 transition-colors ${scrolled || mobileOpen ? "text-foreground" : "text-white"}`}
+          className="md:hidden p-2 relative z-50 text-[#062653]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}

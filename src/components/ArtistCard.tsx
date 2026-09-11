@@ -25,7 +25,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
 
         {/* Content */}
         <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-          <span className="inline-block text-[10px] font-semibold tracking-[0.15em] uppercase text-accent-light mb-2">
+          <span className="inline-block max-w-full rounded-md bg-[#062653] px-2 py-1 text-[11px] font-semibold leading-relaxed tracking-[0.06em] uppercase text-white mb-2">
             {artist.genre}
           </span>
           <h3 className="text-lg font-serif font-bold text-white leading-tight mb-1">
@@ -34,7 +34,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
           <p className="text-xs text-white/70 leading-relaxed line-clamp-2 mb-3 max-h-0 group-hover:max-h-20 opacity-70 group-hover:opacity-100 overflow-hidden transition-all duration-500">
             {artist.shortBio}
           </p>
-          <span className="inline-flex items-center gap-1 text-xs font-medium text-accent-light opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
+          <span className="inline-flex items-center gap-1 text-xs font-medium text-white opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300">
             View Artist
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
