@@ -6,6 +6,8 @@ export type Artist = {
   fullBio: string[];
   website: string;
   image: string;
+  imageWidth: number;
+  imageHeight: number;
   imageFit?: "contain";
   highlights?: string[];
   basedIn?: string;
@@ -30,6 +32,8 @@ export const artists: Artist[] = [
     ],
     website: "https://adorationquartet.com",
     image: "/images/artists/adoration-quartet.webp",
+    imageWidth: 1200,
+    imageHeight: 1200,
     basedIn: "Goldsboro, North Carolina",
     founded: "2001",
     highlights: ["Four-part harmonies", "Founded 2001", "Regional touring ministry"],
@@ -51,6 +55,8 @@ export const artists: Artist[] = [
     ],
     website: "https://adamsvoice.net",
     image: "/images/artists/adams-voice.webp",
+    imageWidth: 1200,
+    imageHeight: 674,
     basedIn: "Nashville, Tennessee",
     founded: "1997",
     highlights: ["Family ministry", "9 studio albums", "Touring since 1997"],
@@ -71,6 +77,8 @@ export const artists: Artist[] = [
     ],
     website: "https://commonbondquartet.com",
     image: "/images/artists/common-bond-quartet.webp",
+    imageWidth: 1200,
+    imageHeight: 1200,
     basedIn: "Ashland, Kentucky",
     founded: "2009",
     highlights: ["Tight harmonies", "Personal testimonies", "National touring"],
@@ -92,6 +100,8 @@ export const artists: Artist[] = [
     ],
     website: "https://darylmosley.com",
     image: "/images/artists/daryl-mosley.webp",
+    imageWidth: 1200,
+    imageHeight: 892,
     basedIn: "Waverly, Tennessee",
     founded: "1986",
     highlights: ["4-time Songwriter of the Year", "20+ #1 songs", "Grand Ole Opry veteran"],
@@ -112,6 +122,8 @@ export const artists: Artist[] = [
     ],
     website: "https://glorywaymusic.com",
     image: "/images/artists/gloryway-music.webp",
+    imageWidth: 1200,
+    imageHeight: 800,
     basedIn: "Mansfield, Ohio",
     founded: "2002",
     highlights: ["Blues-influenced vocals", "High-energy stage presence", "National touring"],
@@ -132,6 +144,8 @@ export const artists: Artist[] = [
     ],
     website: "https://sacredharmony1.com",
     image: "/images/artists/sacred-harmony-2026.jpg",
+    imageWidth: 528,
+    imageHeight: 682,
     imageFit: "contain",
     basedIn: "Elizabethton, Tennessee",
     founded: "2000",
@@ -153,6 +167,8 @@ export const artists: Artist[] = [
     ],
     website: "https://southernplainsmen.com",
     image: "/images/artists/southern-plainsmen-2026.jpg",
+    imageWidth: 494,
+    imageHeight: 377,
     imageFit: "contain",
     basedIn: "Hornbeck, Louisiana",
     founded: "1978",
@@ -173,6 +189,8 @@ export const artists: Artist[] = [
     ],
     website: "https://westwardroad.com",
     image: "/images/artists/westward-road.webp",
+    imageWidth: 1200,
+    imageHeight: 800,
     basedIn: "Pendleton, Indiana",
     founded: "Family ministry",
     highlights: ["Dove Award consideration", "Modern worship blend", "Family trio"],
