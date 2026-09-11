@@ -13,18 +13,19 @@ export default function Home() {
   return (
     <div className="relative">
       {/* The supplied artwork is the hero; keep every part visible on all screens. */}
-      <section aria-labelledby="hero-heading" className="pt-20 bg-[#f9f6ef]">
+      <section aria-labelledby="hero-heading" className="flex flex-col pt-20 md:h-svh md:min-h-[480px] bg-[#f9f6ef]">
         <h1 id="hero-heading" className="sr-only">Capitol Artists: Exceptional Gospel groups and artists for any occasion. Established 1992.</h1>
+        <div className="relative w-full aspect-[2/1] md:aspect-auto md:flex-1 md:min-h-0">
         <Image
           src="/brand/hero-small-logo.webp"
           alt="A Capitol Artists tour bus on a mountain highway at sunset beneath the navy and gold Capitol Artists wordmark, crowned by a Capitol dome and cross. Exceptional Gospel groups and artists for any occasion. Established 1992."
-          width={1774}
-          height={887}
+          fill
           sizes="100vw"
           preload
-          className="block w-full h-auto"
+          className="object-contain"
         />
-        <div className="border-y border-[#d8c9a6] px-6 py-6 md:py-7">
+        </div>
+        <div className="shrink-0 border-y border-[#d8c9a6] px-6 py-5">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
             <p className="max-w-md text-center md:text-left text-sm md:text-base text-[#062653] leading-relaxed">
               Bringing Southern Gospel and Bluegrass Gospel music to your church, community, and next special occasion.

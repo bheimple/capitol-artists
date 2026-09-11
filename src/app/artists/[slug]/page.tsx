@@ -64,26 +64,24 @@ export default async function ArtistPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 
-      {/* Hero with artist image */}
-      <section className="relative min-h-[75vh] flex items-center justify-center overflow-hidden pt-20">
-        <div className="absolute inset-0">
+      {/* Keep the complete photo separate from the text for clear, readable introductions. */}
+      <section className="pt-28 pb-12 md:pt-32 md:pb-16 bg-[#f9f6ef] text-[#062653]">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="relative aspect-[4/3] lg:aspect-square rounded-2xl overflow-hidden bg-[#eae3d2] border border-[#d8c9a6]">
           <Image
             src={artist.image}
             alt={artist.name}
-            style={{ objectFit: artist.imageFit }}
             fill
             priority
-            sizes="100vw"
-            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-contain"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/45 via-background/20 to-background/55" />
-          <div className="absolute inset-0 bg-gradient-to-r from-background/35 via-transparent to-background/35" />
         </div>
 
-        <div className="relative z-10 max-w-4xl mx-auto px-6 text-center py-20">
+        <div className="min-w-0">
           <Link
             href="/#roster"
-            className="inline-flex items-center gap-2 text-xs font-medium tracking-[0.15em] text-muted hover:text-accent transition-colors uppercase mb-8"
+            className="flex w-fit items-center gap-2 text-xs font-semibold tracking-[0.1em] text-[#062653] hover:underline uppercase mb-6"
           >
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
@@ -97,16 +95,16 @@ export default async function ArtistPage({
             </span>
           </div>
 
-          <h1 className="font-serif text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 [text-shadow:0_2px_20px_rgba(245,241,232,0.8)]">
+          <h1 className="font-serif text-4xl sm:text-5xl xl:text-6xl font-bold leading-tight tracking-tight mb-4 text-[#062653]">
             {artist.name}
           </h1>
 
-          <p className="text-lg text-muted max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg text-[#303e4d] leading-relaxed">
             {artist.shortBio}
           </p>
 
           {/* Quick facts bar */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             {artist.founded && (
               <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-surface/50 border border-border backdrop-blur-sm text-sm">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-accent">
@@ -132,12 +130,12 @@ export default async function ArtistPage({
           </div>
 
           {/* CTAs */}
-          <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
+          <div className="mt-6 flex flex-wrap items-center gap-3">
             <a
               href={artist.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="px-6 py-3 rounded-full bg-accent text-background font-semibold text-sm hover:bg-accent-hover transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/20"
+              className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm hover:bg-[#123d70] transition-colors"
             >
               Visit Website
             </a>
@@ -151,7 +149,7 @@ export default async function ArtistPage({
 
           {/* Social links */}
           {artist.social && (artist.social.facebook || artist.social.youtube || artist.social.instagram) && (
-            <div className="mt-6 flex items-center justify-center gap-3">
+            <div className="mt-6 flex items-center gap-3">
               {artist.social.facebook && (
                 <a href={artist.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all" aria-label="Facebook">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
@@ -169,6 +167,7 @@ export default async function ArtistPage({
               )}
             </div>
           )}
+        </div>
         </div>
       </section>
 
