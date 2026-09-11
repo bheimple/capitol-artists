@@ -56,11 +56,11 @@ export const metadata: Metadata = {
     type: "website",
     url: siteUrl,
     siteName: "Capitol Artists",
-    images: [{ url: "/brand/hero-cross-v2.webp", width: 1774, height: 887, alt: "Capitol Artists: Gospel concert booking since 1992" }],
+    images: [{ url: "/brand/hero-small-logo.webp", width: 1774, height: 887, alt: "Capitol Artists: Gospel concert booking since 1992" }],
   },
   twitter: {
     card: "summary_large_image",
-    images: ["/brand/hero-cross-v2.webp"],
+    images: ["/brand/hero-small-logo.webp"],
     title: "Capitol Artists | Gospel Concert Booking Agency",
     description:
       "Connecting churches with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
