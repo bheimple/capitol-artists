@@ -12,7 +12,7 @@ import { CapitolIcon } from "@/components/BrandLogo";
 export default function Home() {
   return (
     <div className="relative">
-      {/* The supplied artwork is the hero; keep every part visible on all screens. */}
+      {/* Fill the hero edge to edge, preserving the bus at the bottom when the sky crops. */}
       <section aria-labelledby="hero-heading" className="flex flex-col pt-20 md:h-svh md:min-h-[480px] bg-[#f9f6ef]">
         <h1 id="hero-heading" className="sr-only">Capitol Artists: Exceptional Gospel groups and artists for any occasion. Established 1992.</h1>
         <div className="relative w-full aspect-[2/1] md:aspect-auto md:flex-1 md:min-h-0">
@@ -22,7 +22,7 @@ export default function Home() {
           fill
           sizes="100vw"
           preload
-          className="object-contain"
+          className="object-cover object-bottom"
         />
         </div>
         <div className="shrink-0 border-y border-[#d8c9a6] px-6 py-5">
