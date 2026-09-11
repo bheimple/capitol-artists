@@ -6,6 +6,7 @@ export type Artist = {
   fullBio: string[];
   website: string;
   image: string;
+  imageFit?: "contain";
   highlights?: string[];
   basedIn?: string;
   founded?: string;
@@ -130,7 +131,8 @@ export const artists: Artist[] = [
       "They are SGMScoops Diamond Award Winners (Horizon Trio) with numerous hits in the Singing News Radio Top 40, including \"Grave Clothes,\" \"My Surrender,\" \"Worship My Way Home,\" and their 2026 radio release \"In His Eyes.\" They are also proud mission partners with Deaf Child Hope, a ministry supporting deaf children around the world.",
     ],
     website: "https://sacredharmony1.com",
-    image: "/images/artists/sacred-harmony.webp",
+    image: "/images/artists/sacred-harmony-2026.jpg",
+    imageFit: "contain",
     basedIn: "Elizabethton, Tennessee",
     founded: "2000",
     highlights: ["Diamond Award Winners", "Singing News Top 40 hits", "Deaf Child Hope partners"],
@@ -150,7 +152,8 @@ export const artists: Artist[] = [
       "In 1998, they were officially appointed \"Louisiana's Ambassadors of Goodwill\" by Governor Mike Foster. In 2012, the group members were honored by being commissioned as Kentucky Colonels. They have been recognized by the Southern Texas Gospel Music Association for their ministry contributions.",
     ],
     website: "https://southernplainsmen.com",
-    image: "/images/artists/southern-plainsmen.webp",
+    image: "/images/artists/southern-plainsmen-2026.jpg",
+    imageFit: "contain",
     basedIn: "Hornbeck, Louisiana",
     founded: "1978",
     highlights: ["Louisiana's Ambassadors of Goodwill", "Traditional four-part harmony", "Touring since 1978"],

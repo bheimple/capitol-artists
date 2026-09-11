@@ -12,6 +12,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
         <Image
           src={artist.image}
           alt={artist.name}
+          style={{ objectFit: artist.imageFit, objectPosition: artist.imageFit ? "top" : undefined }}
           fill
           sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           className="object-cover transition-transform duration-700 group-hover:scale-110"

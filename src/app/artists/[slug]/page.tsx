@@ -70,6 +70,7 @@ export default async function ArtistPage({
           <Image
             src={artist.image}
             alt={artist.name}
+            style={{ objectFit: artist.imageFit }}
             fill
             priority
             sizes="100vw"
@@ -316,7 +317,7 @@ export default async function ArtistPage({
               {otherArtists.map((a) => (
                 <Link key={a.slug} href={`/artists/${a.slug}`} className="group block">
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:-translate-y-1">
-                    <Image src={a.image} alt={a.name} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image src={a.image} alt={a.name} style={{ objectFit: a.imageFit, objectPosition: a.imageFit ? "top" : undefined }} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
                       <span className="inline-block max-w-full rounded-md bg-[#062653] px-2 py-1 text-[11px] font-semibold leading-relaxed tracking-[0.06em] uppercase text-white mb-2">{a.genre}</span>
