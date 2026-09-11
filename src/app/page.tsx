@@ -16,7 +16,7 @@ export default function Home() {
       <section aria-labelledby="hero-heading" className="pt-20 bg-[#f9f6ef]">
         <h1 id="hero-heading" className="sr-only">Capitol Artists: Exceptional Gospel groups and artists for any occasion. Established 1992.</h1>
         <Image
-          src="/brand/hero-cross.webp"
+          src="/brand/hero-cross-v2.webp"
           alt="A Capitol Artists tour bus on a mountain highway at sunset beneath the navy and gold Capitol Artists wordmark, crowned by a Capitol dome and cross. Exceptional Gospel groups and artists for any occasion. Established 1992."
           width={1774}
           height={887}
