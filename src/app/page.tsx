@@ -128,9 +128,9 @@ export default function Home() {
           <ScrollReveal direction="left" delay={200}>
             <div className="relative flex justify-center md:justify-end">
               <div className="relative max-w-[480px] w-full">
-                <div className="aspect-[3/2] rounded-2xl overflow-hidden bg-surface border border-border relative">
+                <div className="aspect-[5/4] rounded-2xl overflow-hidden bg-surface border border-border relative">
                   <Image
-                    src="/images/mike-heimple-family.jpg"
+                    src="/images/mike-heimple-family-v2.jpg"
                     alt="Mike Heimple, Founder and Booking Agent"
                     fill
                     sizes="(max-width: 768px) 100vw, 480px"
