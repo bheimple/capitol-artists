@@ -8,6 +8,7 @@ import ScrollReveal from "@/components/ScrollReveal";
 import ContactForm from "@/components/ContactForm";
 import Testimonials from "@/components/Testimonials";
 import { CapitolIcon } from "@/components/BrandLogo";
+import Psalm150 from "@/components/Psalm150";
 
 export default function Home() {
   return (
@@ -24,9 +25,7 @@ export default function Home() {
           preload
           className="object-cover object-bottom"
         />
-        <p className="absolute right-3 top-3 z-10 rounded-sm bg-[#f9f6ef]/85 px-3 py-1 font-serif text-sm font-semibold italic text-[#062653] sm:right-6 sm:top-5 sm:text-base lg:right-8 lg:top-6 lg:text-xl">
-          Psalm 150
-        </p>
+        <Psalm150 />
         </div>
         <div className="shrink-0 border-y border-[#d8c9a6] px-6 py-5">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
