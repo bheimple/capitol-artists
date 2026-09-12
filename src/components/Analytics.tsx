@@ -20,7 +20,7 @@ export default function Analytics() {
     <Script
       id="capitol-artists-ga4"
       src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       onReady={initializeAnalytics}
     />
   );

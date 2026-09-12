@@ -88,13 +88,6 @@ html {
   z-index: 9999;
 }
 
-/* Avoid a viewport-sized SVG filter on small screens. */
-@media (max-width: 767px) {
-  .grain::before {
-    display: none;
-  }
-}
-
 /* Ambient gradient glow for section backgrounds */
 .section-glow {
   position: relative;

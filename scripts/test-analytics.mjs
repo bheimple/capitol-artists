@@ -68,7 +68,7 @@ const active = harness();
 const script = active.render();
 assert.equal(Object.prototype.toString.call(active.window.dataLayer[0]), "[object Arguments]", "the queue uses Google's documented arguments objects");
 assert.equal(script.type, "Script");
-assert.equal(script.props.strategy, "afterInteractive");
+assert.equal(script.props.strategy, "lazyOnload");
 assert.equal(script.props.src, `https://www.googletagmanager.com/gtag/js?id=${measurementId}`);
 script.props.onReady();
 active.render(); // StrictMode/remount repeats do not duplicate this route.
@@ -102,6 +102,30 @@ assert.equal(active.calls().filter(args => args[1] === "page_view").length, 3, "
 assert.equal(active.calls().filter(args => args[0] === "config").length, 1, "route changes do not reconfigure GA");
 assert.ok(!JSON.stringify(active.calls()).includes("private"), "neither location nor referrer leaks query/hash content");
 
+const deferred = harness();
+const initialScript = deferred.render();
+assert.equal(deferred.calls().filter(args => args[1] === "page_view").length, 1, "initial page view queues before the deferred tag is ready");
+deferred.navigate("https://capitol-artists.com/church-concert-booking?email=private@example.invalid#inquiry");
+const nextRouteScript = deferred.render();
+deferred.analytics.trackInquirySuccess("church_booking");
+const queuedCalls = deferred.calls();
+assert.deepEqual(queuedCalls.filter(args => args[0] === "event"), [
+  ["event", "page_view", { page_location: "https://capitol-artists.com/", page_referrer: "https://example.invalid/church" }],
+  ["event", "page_view", { page_location: "https://capitol-artists.com/church-concert-booking", page_referrer: "https://capitol-artists.com/" }],
+  ["event", "generate_lead", { inquiry_type: "church_booking", page_location: "https://capitol-artists.com/church-concert-booking", page_referrer: "https://capitol-artists.com/" }],
+], "route changes and a confirmed early inquiry queue in order with sanitized page context before onReady");
+assert.equal(queuedCalls.filter(args => args[0] === "js").length, 1);
+assert.equal(queuedCalls.filter(args => args[0] === "config").length, 1);
+assert.equal(queuedCalls.find(args => args[0] === "config")[2].send_page_view, false);
+const originalQueue = deferred.window.dataLayer;
+initialScript.props.onReady();
+nextRouteScript.props.onReady();
+deferred.render();
+deferred.render();
+assert.equal(deferred.window.dataLayer, originalQueue, "onReady must preserve the preexisting Google command queue");
+assert.deepEqual(deferred.calls(), queuedCalls, "tag readiness and repeated renders neither discard early events nor duplicate config, page views, or leads");
+assert.ok(!JSON.stringify(deferred.calls()).includes("private"), "early queued commands redact queries and hashes too");
+
 const www = harness({ url: "https://www.capitol-artists.com/" });
 assert.ok(www.render());
 assert.equal(www.calls().filter(args => args[1] === "page_view").length, 1);
@@ -113,4 +137,4 @@ assert.doesNotThrow(() => blocked.analytics.initializeAnalytics());
 assert.doesNotThrow(() => blocked.analytics.trackPageView());
 assert.doesNotThrow(() => blocked.analytics.trackInquirySuccess("artist_representation"));
 
-console.log("PASS: actual GA4 helper/component — config validation, production host/SSR gating, deferred Script, config once, route page views once, query/hash redaction, distinct lead type, and blocked-tag isolation. No network requests.");
+console.log("PASS: actual GA4 helper/component — config validation, production host/SSR gating, lazyOnload Script, early page/route/lead queue preserved on readiness, config once, route page views once, query/hash redaction, distinct lead type, and blocked-tag isolation. No network requests.");
