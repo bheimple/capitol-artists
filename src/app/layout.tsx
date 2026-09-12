@@ -82,20 +82,32 @@ export const metadata: Metadata = {
 
 const structuredData = {
   "@context": "https://schema.org",
-  "@type": "Organization",
-  name: "Capitol Artists",
-  logo: `${SITE_URL}/brand/capitol-cross.png`,
-  foundingDate: "1992",
-  description:
-    "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
-  url: `${SITE_URL}/`,
-  founder: {
-    "@type": "Person",
-    name: "Mike Heimple",
-  },
-  telephone: "719-260-1151",
-  email: "mike@capitol-artists.com",
-  areaServed: "United States",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: "Capitol Artists",
+      logo: `${SITE_URL}/brand/capitol-cross.png`,
+      foundingDate: "1992",
+      description:
+        "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
+      url: `${SITE_URL}/`,
+      founder: {
+        "@type": "Person",
+        name: "Mike Heimple",
+      },
+      telephone: "719-260-1151",
+      email: "mike@capitol-artists.com",
+      areaServed: "United States",
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: `${SITE_URL}/`,
+      name: "Capitol Artists",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -108,7 +120,7 @@ export default function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
         />
       </head>
       <body

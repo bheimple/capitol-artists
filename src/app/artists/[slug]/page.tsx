@@ -1,8 +1,10 @@
+import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { artists, getArtistBySlug } from "@/data/artists";
 import { SITE_URL } from "@/lib/site";
+import { getArtistPageDetails } from "@/lib/artist-seo";
 import ScrollReveal from "@/components/ScrollReveal";
 
 export const dynamicParams = false;
@@ -11,29 +13,40 @@ export function generateStaticParams() {
   return artists.map((artist) => ({ slug: artist.slug }));
 }
 
-export function generateMetadata({ params }: { params: Promise<{ slug: string }> }) {
-  return params.then((resolvedParams) => {
-    const artist = getArtistBySlug(resolvedParams.slug);
-    if (!artist) return { title: "Artist Not Found" };
-    const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
-    return {
-      title: artist.name,
-      description: artist.shortBio,
-      alternates: { canonical: artistUrl },
-      keywords: [artist.name, artist.genre, "gospel music", "concert booking", "Capitol Artists", ...(artist.highlights || [])],
-      openGraph: {
-        title: `${artist.name} | Capitol Artists`,
-        description: artist.shortBio,
-        type: "profile",
-        url: artistUrl,
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: `${artist.name} | Capitol Artists`,
-        description: artist.shortBio,
-      },
-    };
-  });
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const artist = getArtistBySlug(slug);
+  if (!artist) notFound();
+
+  const { title, description } = getArtistPageDetails(artist);
+  const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
+  const socialImage = {
+    url: `${artistUrl}/opengraph-image`,
+    width: 1200,
+    height: 630,
+    alt: `${artist.name} — church concert booking with Capitol Artists`,
+  };
+
+  return {
+    title,
+    description,
+    alternates: { canonical: artistUrl },
+    keywords: [artist.name, artist.genre, "gospel music", "church concert booking", "Capitol Artists"],
+    openGraph: {
+      title: `${title} | Capitol Artists`,
+      description,
+      type: "website",
+      url: artistUrl,
+      siteName: "Capitol Artists",
+      images: [socialImage],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${title} | Capitol Artists`,
+      description,
+      images: [socialImage],
+    },
+  };
 }
 
 export default async function ArtistPage({
@@ -48,36 +61,87 @@ export default async function ArtistPage({
     notFound();
   }
 
-  const otherArtists = artists.filter((a) => a.slug !== artist.slug).slice(0, 4);
+  const { title, description, relatedArtists } = getArtistPageDetails(artist);
   const photoWidth = Math.min(1024, Math.round(640 * artist.imageWidth / artist.imageHeight));
+  const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
+  const artistId = `${artistUrl}#artist`;
+  const pageId = `${artistUrl}#webpage`;
+  const imageId = `${artistUrl}#primaryimage`;
+  const breadcrumbId = `${artistUrl}#breadcrumb`;
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    name: artist.name,
-    genre: artist.genre,
-    description: artist.shortBio,
-    url: `${SITE_URL}/artists/${artist.slug}`,
-    ...(artist.basedIn && { location: artist.basedIn }),
-    ...(artist.founded && /^\d{4}$/.test(artist.founded) && { foundingDate: artist.founded }),
-    ...(artist.website && { sameAs: [artist.website, ...(artist.social ? Object.values(artist.social).filter(Boolean) : [])] }),
+    "@graph": [
+      {
+        "@type": "MusicGroup",
+        "@id": artistId,
+        name: artist.name,
+        genre: artist.genre,
+        description,
+        url: artistUrl,
+        mainEntityOfPage: { "@id": pageId },
+        image: {
+          "@type": "ImageObject",
+          "@id": imageId,
+          url: `${SITE_URL}${artist.image}`,
+          contentUrl: `${SITE_URL}${artist.image}`,
+          caption: artist.name,
+          width: artist.imageWidth,
+          height: artist.imageHeight,
+        },
+        ...(artist.basedIn && { location: artist.basedIn }),
+        ...(artist.founded && /^\d{4}$/.test(artist.founded) && { foundingDate: artist.founded }),
+        sameAs: [artist.website, ...Object.values(artist.social ?? {})].filter(Boolean),
+      },
+      {
+        "@type": "WebPage",
+        "@id": pageId,
+        url: artistUrl,
+        name: `${title} | Capitol Artists`,
+        description,
+        inLanguage: "en-US",
+        isPartOf: { "@id": `${SITE_URL}/#website` },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        mainEntity: { "@id": artistId },
+        primaryImageOfPage: { "@id": imageId },
+        breadcrumb: { "@id": breadcrumbId },
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": breadcrumbId,
+        itemListElement: [
+          { "@type": "ListItem", position: 1, name: "Home", item: `${SITE_URL}/` },
+          { "@type": "ListItem", position: 2, name: "Artist Roster", item: `${SITE_URL}/#roster` },
+          { "@type": "ListItem", position: 3, name: artist.name, item: artistUrl },
+        ],
+      },
+    ],
   };
 
   return (
     <div className="relative">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
       />
 
       <section aria-labelledby="artist-heading" className="bg-[#062653] text-white pt-28 md:pt-32 pb-10 md:pb-16">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <Link href="/#roster" className="inline-flex items-center gap-2 py-2 text-sm text-white/85 hover:text-white hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-              <path d="M19 12H5M12 19l-7-7 7-7" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            Back to Roster
-          </Link>
+          <nav aria-label="Breadcrumb" className="py-2 text-xs sm:text-sm text-white/85">
+            <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
+              <li>
+                <Link href="/" className="hover:text-white hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Home</Link>
+              </li>
+              <li className="flex items-center gap-2">
+                <span aria-hidden="true">›</span>
+                <Link href="/#roster" className="hover:text-white hover:underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Artist Roster</Link>
+              </li>
+              <li className="flex items-center gap-2">
+                <span aria-hidden="true">›</span>
+                <span aria-current="page" className="text-white">{artist.name}</span>
+              </li>
+            </ol>
+          </nav>
           <div className="max-w-4xl mx-auto text-center pt-7 md:pt-8">
             <h1 id="artist-heading" className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-white [text-wrap:balance]">
               {artist.name}
@@ -241,6 +305,12 @@ export default async function ArtistPage({
                     Book a Concert
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </Link>
+                  <Link
+                    href="/church-concert-booking"
+                    className="mt-4 block text-center text-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                  >
+                    Read the church concert planning guide
+                  </Link>
                 </div>
               </div>
             </ScrollReveal>
@@ -276,10 +346,10 @@ export default async function ArtistPage({
 
           <ScrollReveal direction="up" delay={150}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
-              {otherArtists.map((a) => (
+              {relatedArtists.map((a) => (
                 <Link key={a.slug} href={`/artists/${a.slug}`} className="group block">
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:-translate-y-1">
-                    <Image src={a.image} alt={a.name} style={{ objectFit: a.imageFit, objectPosition: a.imageFit ? "top" : undefined }} fill sizes="(max-width: 768px) 50vw, 25vw" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image src={a.image} alt={a.name} style={{ objectFit: a.imageFit, objectPosition: a.imageFit ? "top" : undefined }} fill sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc(25vw - 1.875rem - 2px), calc(50vw - 2rem - 2px)" className="object-cover transition-transform duration-700 group-hover:scale-110" />
                     <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
                       <h3 className="text-base font-serif font-bold leading-tight text-white md:mb-2">{a.name}</h3>

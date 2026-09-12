@@ -8,13 +8,13 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
   return (
     <Link href={`/artists/${artist.slug}`} className="group block">
       <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:shadow-2xl group-hover:shadow-accent/10 group-hover:-translate-y-1">
-        {/* Artist image */}
+        {/* Sizes follow the roster's 2/3/4 columns, container padding, gaps, and card borders. */}
         <Image
           src={artist.image}
           alt={artist.name}
           style={{ objectFit: artist.imageFit, objectPosition: artist.imageFit ? "top" : undefined }}
           fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc((100vw - 6rem) / 3 - 2px), calc(50vw - 2rem - 2px)"
           className="object-cover transition-transform duration-700 group-hover:scale-110"
         />
 
