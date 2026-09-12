@@ -77,7 +77,7 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
         `Church / organization: ${value("organization")}`,
         `Event city / state: ${value("eventLocation")}`,
         `Preferred dates / flexibility: ${value("preferredDates") || "Not specified"}`,
-        `Artist interest: ${artist?.name || "Help us choose"}`,
+        `Artist interest: ${artist?.name || "Help us find a fit"}`,
         "",
         "Additional details:",
         value("message") || "None provided",
@@ -132,14 +132,14 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
       {status === "success" ? (
         <div ref={feedbackRef} tabIndex={-1} className="rounded-xl border border-[#8e948f] bg-[#f9f6ef] p-6 text-[#062653] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">
           <h3 className="mb-3 font-serif text-2xl font-bold">Inquiry received</h3>
-          <p className="leading-relaxed">Your concert inquiry has been received. Thank you for considering Capitol Artists for your church or event.</p>
+          <p className="leading-relaxed">We received your concert inquiry. Mike will follow up to discuss ministries and dates that fit your church.</p>
           <button type="button" onClick={() => setStatus("idle")} className="mt-6 rounded-full border border-[#062653] px-5 py-3 text-sm font-semibold hover:bg-[#062653]/5 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">
             Submit Another Inquiry
           </button>
         </div>
       ) : (
         <form onSubmit={handleSubmit} aria-busy={status === "submitting"} aria-describedby="contact-required" className="space-y-6">
-          <p id="contact-required" className="text-sm leading-relaxed text-[#475248]">All fields are required unless marked optional. You can leave the date and artist open if you would like help choosing.</p>
+          <p id="contact-required" className="text-sm leading-relaxed text-[#475248]">Fields marked optional can stay open. Share any artist or date preferences; Mike will check touring routes and availability with your church’s location in mind.</p>
 
           <fieldset disabled={status === "submitting"} className="grid min-w-0 gap-5 sm:grid-cols-2">
             <legend className="sr-only">Church concert inquiry details</legend>
@@ -170,12 +170,12 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
             <div>
               <label htmlFor="contact-dates" className={labelClass}>Preferred dates <span className="font-normal">(optional)</span></label>
               <input id="contact-dates" name="preferredDates" type="text" placeholder="For example, this fall or flexible" aria-describedby="contact-dates-help" className={fieldClass} />
-              <p id="contact-dates-help" className="mt-2 text-sm leading-relaxed text-[#475248]">A date, season or flexible window is fine.</p>
+              <p id="contact-dates-help" className="mt-2 text-sm leading-relaxed text-[#475248]">Share a date, season, or flexible window for Mike to consider.</p>
             </div>
             <div>
               <label htmlFor="contact-artist" className={labelClass}>Artist interest <span className="font-normal">(optional)</span></label>
               <select id="contact-artist" name="artistInterest" value={selectedArtist} onChange={(event) => setSelectedArtist(event.target.value)} className={fieldClass}>
-                <option value="">Help us choose</option>
+                <option value="">Help us find a fit</option>
                 {artistOptions.map((artist) => <option key={artist.slug} value={artist.slug}>{artist.name}</option>)}
               </select>
             </div>
@@ -197,7 +197,7 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
 
           <p className="text-sm leading-relaxed text-[#475248]">Your details are emailed to Mike so he can respond to your concert inquiry.</p>
 
-          <button type="submit" disabled={status === "submitting"} className="w-full rounded-full bg-[#062653] px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-[#123d70] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653] disabled:cursor-wait disabled:bg-[#334a65]">
+          <button type="submit" disabled={status === "submitting"} className="cta-gold w-full">
             {status === "submitting" ? "Sending inquiry…" : "Send Concert Inquiry"}
           </button>
         </form>

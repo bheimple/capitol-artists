@@ -147,7 +147,7 @@ assert.equal(successful.states[0], "success");
 assert.deepEqual(successful.leads(), [["event", "generate_lead", {
   inquiry_type: "church_booking", page_location: "https://capitol-artists.com/church-concert-booking", page_referrer: "https://example.invalid/prior",
 }]], "one confirmed inquiry emits one lead with no form values or raw query/hash");
-assert.ok(JSON.stringify(successful.render()).includes("Your concert inquiry has been received."));
+assert.ok(JSON.stringify(successful.render()).includes("We received your concert inquiry."));
 assert.equal(successful.timers[0].cleared, true);
 
 const minimal = harness(accepted);
@@ -159,7 +159,7 @@ await find(minimalTree, "form").props.onSubmit(event({ ...fixture, phone: "", pr
 assert.equal(minimal.states[0], "success");
 assert.equal(minimal.leads().length, 1);
 const minimalMessage = JSON.parse(minimal.requests[0].options.body).message;
-for (const detail of ["Phone: Not provided", "Preferred dates / flexibility: Not specified", "Artist interest: Help us choose", "None provided"]) assert.ok(minimalMessage.includes(detail));
+for (const detail of ["Phone: Not provided", "Preferred dates / flexibility: Not specified", "Artist interest: Help us find a fit", "None provided"]) assert.ok(minimalMessage.includes(detail));
 
 for (const response of [
   async () => ({ ok: true, json: async () => ({ success: false }) }),
@@ -211,7 +211,7 @@ const blockedAnalytics = harness(accepted, "", true);
 await find(blockedAnalytics.render(), "form").props.onSubmit(event());
 assert.equal(blockedAnalytics.states[0], "success", "an analytics exception cannot turn a confirmed inquiry into an error");
 assert.equal(blockedAnalytics.requests.length, 1);
-assert.ok(JSON.stringify(blockedAnalytics.render()).includes("Your concert inquiry has been received."));
+assert.ok(JSON.stringify(blockedAnalytics.render()).includes("We received your concert inquiry."));
 
 const preselected = harness(accepted, `artist=${artistOptions[0].slug}`);
 assert.equal(find(preselected.render(), "select").props.value, artistOptions[0].slug);
@@ -228,7 +228,7 @@ assert.equal(find(preselected.render(), "select").props.value, artistOptions[2].
 const unknown = harness(accepted, "artist=unknown-artist");
 assert.equal(find(unknown.render(), "select").props.value, "");
 await find(unknown.render(), "form").props.onSubmit(event({ ...fixture, artistInterest: "unknown-artist" }));
-assert.ok(JSON.parse(unknown.requests[0].options.body).message.includes("Artist interest: Help us choose"));
+assert.ok(JSON.parse(unknown.requests[0].options.body).message.includes("Artist interest: Help us find a fit"));
 
 const limited = harness(accepted, `artist=${artistOptions[0].slug}`, false, [artistOptions[1]]);
 const limitedSelect = find(limited.render(), "select");
@@ -236,6 +236,6 @@ assert.equal(limitedSelect.props.value, "", "prefill only accepts artists suppli
 assert.ok(find(limitedSelect, node => node.type === "option" && node.props.value === artistOptions[1].slug));
 assert.equal(find(limitedSelect, node => node.type === "option" && node.props.value === artistOptions[0].slug), null);
 await find(limited.render(), "form").props.onSubmit(event());
-assert.ok(JSON.parse(limited.requests[0].options.body).message.includes("Artist interest: Help us choose"), "submission lookup uses the supplied options");
+assert.ok(JSON.parse(limited.requests[0].options.body).message.includes("Artist interest: Help us find a fit"), "submission lookup uses the supplied options");
 
 console.log("PASS: actual church inquiry handler and query effect — FormSubmit routing, details, optional fields, confirmed-success analytics only, blocked analytics, duplicate guard, errors, timeout, whitespace, minimal artist props, artist preselection and manual-selection persistence. All requests mocked.");

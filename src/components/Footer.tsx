@@ -14,8 +14,8 @@ export default function Footer() {
           <div className="md:col-span-5 space-y-5">
             <Link href="/" aria-label="Capitol Artists home"><BrandLogo /></Link>
             <p className="text-sm text-muted max-w-sm leading-relaxed">
-              Connecting churches and organizations with top talent in Southern
-              Gospel and Bluegrass Gospel music since 1992.
+              Connecting churches with Southern Gospel and Bluegrass Gospel
+              ministries since 1992.
             </p>
             <div className="flex items-center gap-3 pt-2">
               <span className="text-xs text-muted tracking-wide">EST. 1992</span>
@@ -69,7 +69,7 @@ export default function Footer() {
               <li>
                 <Link href="/#contact" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
-                  <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Book a Concert</span>
+                  <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Ask About a Concert</span>
                 </Link>
               </li>
             </ul>

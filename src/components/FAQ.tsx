@@ -4,54 +4,54 @@ import { useState } from "react";
 
 const faqs = [
   {
-    question: "How do I book an artist for our church or event?",
+    question: "How do we begin planning a Gospel concert?",
     answer:
-      "Simply reach out through our contact form or call Mike Heimple at 719-260-1151. We'll discuss your event date, venue, and which artists you're interested in. From there, we handle all the coordination to make it happen.",
+      "Send Mike Heimple a note through the contact form or call 719-260-1151. Tell him about your church, your location, and any groups or dates you have in mind. He will check touring routes and availability, then talk with you about the options.",
   },
   {
-    question: "What types of events do you book?",
+    question: "Can our small church host a group?",
     answer:
-      "We book artists for church services, revivals, gospel concerts, multi-day events, conferences, camp meetings, fairs, and private functions. If you're looking for live Southern Gospel or Bluegrass Gospel music, we can help.",
+      "We would love to hear from your church. These ministries travel to share the Gospel and glorify God. Tell Mike about your congregation and location so he can look for a group and date that fit.",
   },
   {
-    question: "How far in advance should we plan?",
+    question: "Can we ask for a particular group or date?",
     answer:
-      "We recommend reaching out 3 to 6 months in advance for the best selection of dates, especially for weekend concerts. However, don't hesitate to call even if your event is sooner, we'll do our best to make it work.",
+      "Yes. Share your favorite group, preferred date, or a season that works for your church. Mike uses those preferences as he checks the artists' routes and availability. He will follow up with options for you to discuss together.",
   },
   {
-    question: "Do the artists travel to our location?",
+    question: "Do the artists travel to our church?",
     answer:
-      "Yes. All of our artists travel by bus, primarily regionally, though some artists like Daryl Mosley travel more extensively. Travel distance is factored into the booking, and we'll be upfront about what's involved in bringing an artist to your area.",
+      "The groups travel by bus from church to church. Mike checks your church's location against their touring routes and available dates to find a visit that works for the church and the ministry.",
   },
   {
-    question: "Can we book multiple artists for one event?",
+    question: "How far ahead should we get in touch?",
     answer:
-      "Absolutely. Multi-artist concerts and all-day gospel events are a great way to draw a larger crowd. We can help you put together a lineup that flows well and fits your schedule.",
+      "Reach out when you begin thinking about hosting a group. Share the dates or seasons you have in mind and how much flexibility you have. That helps Mike look for a place on an artist's touring route.",
   },
   {
     question: "What's the difference between Southern Gospel and Bluegrass Gospel?",
     answer:
-      "Southern Gospel features tight four-part vocal harmonies rooted in quartet tradition, while Bluegrass Gospel blends acoustic string instruments like banjo, fiddle, and mandolin with gospel lyrics. Both traditions are deeply rooted in faith and church music heritage, and we represent artists in both styles.",
+      "Southern Gospel often centers on vocal harmonies, while Bluegrass Gospel features acoustic string instruments such as banjo, fiddle, and mandolin. Artists in both styles share the Gospel through song. Explore the roster and tell Mike about the music your church enjoys.",
   },
   {
     question: "What does a typical concert look like?",
     answer:
-      "Most concerts run 60 to 90 minutes, though this is flexible. The artist typically leads a program of gospel music with testimony and ministry woven throughout. For multi-artist events, each group performs their own set. We'll work with you on timing, stage setup, and sound requirements ahead of time.",
+      "Your congregation and guests gather to hear Gospel music, encourage one another, and worship God. Talk with Mike about whether you have a church service or a concert in mind, then discuss the program and timing with the visiting ministry.",
   },
   {
     question: "What do we need to provide on our end?",
     answer:
-      "You'll need a venue with adequate seating, a stage or performance area, and a sound system capable of supporting live vocal and instrumental performance. We'll provide a detailed tech rider and any specific requirements once the booking is confirmed, so there are no surprises.",
+      "Host churches generally receive a love offering and provide a meal for the group. As you plan the visit, discuss the gathering space, arrival time, sound needs, and a place to park the bus with Mike and the ministry.",
   },
   {
     question: "How does the love offering work?",
     answer:
-      "Our artists are booked on a love offering basis. We ask the church or host to take up a love offering during the concert to support the ministry, plus provide a meal for the group. This model keeps things accessible for churches of all sizes while sustaining the artists and their travel costs. If you have questions about what's typical for your area or event size, just give us a call.",
+      "Host churches generally receive a love offering during the concert and provide a meal for the group. The offering supports the visiting ministry as the group travels to share the Gospel. Mike can talk through the arrangements with your church.",
   },
   {
     question: "Can the artist tailor their program to our service or theme?",
     answer:
-      "Yes. Many of our artists can customize their setlist, message, or program length to align with your service theme, sermon series, or special occasion. Just let us know what you're envisioning and we'll coordinate with the artist to make it happen.",
+      "Share your service plans or theme with Mike. He can discuss them with the group as you work out the visit together.",
   },
 ];
 

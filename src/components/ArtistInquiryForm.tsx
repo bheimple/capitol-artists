@@ -156,7 +156,7 @@ export default function ArtistInquiryForm() {
             </div>
           </fieldset>
 
-          <p className="text-sm leading-relaxed text-[#475248]">Submitting an introduction is a request for consideration and does not guarantee representation or bookings.</p>
+          <p className="text-sm leading-relaxed text-[#475248]">Your introduction starts a conversation with Mike. You will discuss the fit, travel area, and representation arrangements together.</p>
 
           {status === "error" && (
             <div ref={feedbackRef} role="alert" tabIndex={-1} className="rounded-lg border border-[#9b3131] bg-[#fff4f0] p-4 text-[#742222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#742222]">
@@ -165,7 +165,7 @@ export default function ArtistInquiryForm() {
             </div>
           )}
 
-          <button type="submit" disabled={status === "submitting"} className="w-full rounded-full bg-[#062653] px-6 py-4 text-base font-semibold text-white transition-colors hover:bg-[#123d70] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653] disabled:cursor-wait disabled:bg-[#334a65]">
+          <button type="submit" disabled={status === "submitting"} className="cta-gold w-full">
             {status === "submitting" ? "Sending introduction…" : "Send Artist Introduction"}
           </button>
         </form>

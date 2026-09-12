@@ -53,7 +53,7 @@ export default function Navbar() {
             href="/#contact"
             className="ml-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#062653] text-white hover:bg-[#123d70] transition-colors"
           >
-            Book a Concert
+            Ask About a Concert
           </Link>
         </div>
 
@@ -100,7 +100,7 @@ export default function Navbar() {
             }`}
             style={{ transitionDelay: mobileOpen ? "400ms" : "0ms" }}
           >
-            Book a Concert
+            Ask About a Concert
           </Link>
 
           {/* Contact info at bottom of mobile menu */}

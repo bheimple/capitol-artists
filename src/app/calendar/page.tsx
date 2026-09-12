@@ -4,12 +4,12 @@ import { SITE_URL } from "@/lib/site";
 
 export const metadata: Metadata = {
   title: "Concert Calendar",
-  description: "Our concert calendar is in development. Explore the artist roster or contact Capitol Artists about booking a Gospel concert.",
+  description: "Our concert calendar is in development. Ask Mike about booking a Gospel ministry for your church, including travel routes and possible dates.",
   alternates: { canonical: `${SITE_URL}/calendar` },
   robots: { index: false, follow: true },
   openGraph: {
     title: "Concert Calendar | Capitol Artists",
-    description: "Our concert calendar is in development. Explore the artist roster or contact Capitol Artists about booking a Gospel concert.",
+    description: "Our concert calendar is in development. Ask Mike about booking a Gospel ministry for your church, including travel routes and possible dates.",
     type: "website",
     url: `${SITE_URL}/calendar`,
     siteName: "Capitol Artists",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Concert Calendar | Capitol Artists",
-    description: "Our concert calendar is in development. Explore the artist roster or contact Capitol Artists about booking a Gospel concert.",
+    description: "Our concert calendar is in development. Ask Mike about booking a Gospel ministry for your church, including travel routes and possible dates.",
     images: ["/brand/hero-small-logo.webp"],
   },
 };
@@ -69,9 +69,9 @@ export default function CalendarPage() {
         </h1>
 
         <p className="text-lg text-muted max-w-xl mx-auto leading-relaxed mb-10">
-          We are building a live concert calendar so you can see where our
-          artists are performing next. Check back soon for upcoming dates,
-          venues, and ticket information.
+          Our concert calendar is in development. In the meantime, we&apos;d love
+          to hear from your church. Share your location and any dates you have
+          in mind, and Mike can check travel routes and availability.
         </p>
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -85,7 +85,7 @@ export default function CalendarPage() {
             href="/#contact"
             className="px-8 py-4 rounded-full border border-border bg-surface/50 backdrop-blur-sm text-foreground font-semibold text-base hover:bg-surface hover:border-accent/30 transition-all"
           >
-            Book a Concert
+            Ask About a Concert
           </Link>
         </div>
 

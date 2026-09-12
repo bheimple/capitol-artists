@@ -6,9 +6,9 @@ import Link from "next/link";
 const steps = [
   {
     number: "01",
-    title: "Select Your Artist",
+    title: "Tell Mike About Your Church",
     description:
-      "Browse our roster, explore schedules, and find the artist whose sound and ministry align with your event's vision.",
+      "Share your church's location and the gathering you have in mind. Mention a favorite group or date, or ask Mike to help you find a fit.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M9 18V5l12-2v13" strokeLinecap="round" strokeLinejoin="round" />
@@ -19,9 +19,9 @@ const steps = [
   },
   {
     number: "02",
-    title: "Secure the Date",
+    title: "Find a Ministry and Date That Fit",
     description:
-      "We handle contracts, travel logistics, and staging requirements with full transparency, no surprises, just clear terms.",
+      "Mike checks the artists' touring routes and availability, then talks with you about the ministries and dates that could work for your church.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
@@ -34,9 +34,9 @@ const steps = [
   },
   {
     number: "03",
-    title: "Promote Your Concert",
+    title: "Welcome the Group",
     description:
-      "Receive promotional toolkits including posters, social media templates, and video promos to help fill your venue.",
+      "Invite your congregation and neighbors to worship together. Host churches generally receive a love offering for the ministry and provide a meal for the group.",
     icon: (
       <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
         <path d="M3 11l18-5v12L3 14v-3z" strokeLinecap="round" strokeLinejoin="round" />
@@ -59,11 +59,11 @@ export default function BookingProcess() {
             <span className="w-8 h-px bg-accent" />
           </div>
           <h2 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            A Seamless Booking Process
+            Welcome Gospel Music to Your Church
           </h2>
           <p className="text-muted max-w-xl mx-auto">
-            We make it simple to bring world-class Gospel music to your church
-            or venue.
+            Our artists travel by bus to share the Gospel in song. Mike helps
+            churches connect with these ministries so we can glorify God together.
           </p>
           <Link href="/church-concert-booking" className="mt-5 inline-block text-sm font-semibold text-[#062653] underline underline-offset-4">Read the Church Concert Planning Guide</Link>
         </ScrollReveal>

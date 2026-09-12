@@ -5,7 +5,7 @@ import { artists } from "@/data/artists";
 import { SITE_URL } from "@/lib/site";
 
 const title = "Southern Gospel Concert Booking for Churches";
-const description = "Plan a Southern Gospel or Bluegrass Gospel concert for your church. Explore Capitol Artists' roster and discuss artists, dates, and arrangements with Mike Heimple.";
+const description = "Host Southern Gospel ministry with a love offering and a meal. Talk with Mike at Capitol Artists about your church, touring artists, and available dates.";
 
 export const metadata: Metadata = {
   title,
@@ -28,31 +28,32 @@ export const metadata: Metadata = {
 };
 
 const planningSteps = [
-  { number: "01", title: "Find the music that fits", body: "Browse the artist roster and think about your congregation, the occasion, and the kind of program you have in mind. You can ask about a particular group or let Mike know you would like help choosing." },
-  { number: "02", title: "Share your church's plans", body: "Send your church name and location, any preferred dates, and the artist you are interested in. If the date is flexible or you are still working out the details, say so in your inquiry." },
-  { number: "03", title: "Talk through the arrangements", body: "Discuss availability, the program, expenses, travel, and your venue with Mike. Agree on the details before announcing a confirmed concert to your congregation." },
+  { number: "01", title: "Tell Mike about your church", body: "Share your location, the occasion, and any dates or season you have in mind. If a particular artist's music speaks to your congregation, let Mike know." },
+  { number: "02", title: "Find a ministry and date that fit", body: "These groups travel by bus, so Mike checks their tour routes and availability alongside your church's plans. He can discuss the artist you asked about or suggest another ministry that could fit." },
+  { number: "03", title: "Welcome the group", body: "Once you and the artist have agreed on a date, talk through the love offering, a meal, and the needs of the service or concert. Then invite your congregation and community to join you." },
 ];
 
 const planningDetails = [
   { title: "The service or concert", body: "Describe the occasion, expected audience, and where music will fit in the program. Ask about timing and whether the artist's format suits your plans." },
   { title: "The room and sound", body: "Share your seating and performance space, available sound equipment, and who will run it. Ask what the artist needs and who will provide each item." },
-  { title: "Travel and expenses", body: "Discuss your location, the artist's travel, and the financial arrangements for your event. Ask whether meals, lodging, or an offering need to be planned, and confirm responsibilities together." },
-  { title: "Getting the word out", body: "Once the date is confirmed, agree on the artist name, location, start time, and any admission or offering information before sharing invitations. Ask which approved photos and promotional materials you can use." },
+  { title: "A love offering and a meal", body: "Our groups generally ask the church to receive a love offering and provide a meal. The offering supports their Gospel ministry and travel. Talk with Mike about what works for your church and the group." },
+  { title: "Getting the word out", body: "After Mike and the artist confirm the date, share the concert time, church location, and love offering details with your congregation. Ask which artist photos and materials you can use to invite your community." },
 ];
 
 const questions = [
-  { question: "Can you help us choose a Gospel group?", answer: "Start with the artist roster to get a sense of each ministry and musical style. If you are unsure, choose ‘Help us choose’ in the form and tell Mike about your congregation and the occasion." },
-  { question: "Do we need a firm date before contacting you?", answer: "You can send an inquiry while you are still planning. Share a preferred date, a few options, or a general season. Availability needs to be discussed before a date is confirmed." },
-  { question: "How much does it cost to host a concert?", answer: "Ask Mike about the arrangements for the artist and event you have in mind. Your first conversation is the place to discuss expenses, travel, and any offering arrangements so your church can plan with clear expectations." },
-  { question: "What happens after we inquire?", answer: "Your inquiry gives Mike the church, location, timing, and artist details needed to discuss the next steps with you. Sending the form does not reserve an artist or confirm a concert date." },
+  { question: "Can we ask about a particular Gospel group?", answer: "Yes. We would love to know whose music you enjoy. Mike will check whether that group's route and available dates fit your location, and he can suggest other ministries to consider too." },
+  { question: "Do we need a firm date before contacting you?", answer: "A preferred date, a few options, or a general season are all helpful. A flexible window can give Mike more opportunities to connect your church with a group traveling in your area." },
+  { question: "What does our church provide?", answer: "A love offering and a meal are the usual hosting arrangements. The offering helps sustain the group's ministry and travel, and a meal is a way to welcome them. Mike will discuss the arrangements and the needs of your space with you and the artist." },
+  { question: "Do the groups come to our area?", answer: "Each ministry has its own travel area and tour schedule. Share your city and state with Mike, even if you are still exploring the idea. He can look into what may be possible for your church." },
+  { question: "What happens after we inquire?", answer: "Mike will follow up to discuss your church and explore artists and dates that could work. You and the group will agree on the details with Mike before the concert is confirmed." },
 ];
 
 export default function ChurchConcertBookingPage() {
   return (
     <div className="pt-20">
-      <section className="border-b border-border">
+      <section className="landing-hero border-b border-[#062653] bg-[#062653] text-[#f5f1e8]">
         <div className="mx-auto max-w-7xl px-6 pb-14 pt-8 sm:pb-20 lg:px-8 lg:pt-10">
-          <nav aria-label="Breadcrumb" className="mb-12 text-sm text-muted sm:mb-16">
+          <nav aria-label="Breadcrumb" className="mb-10 text-sm text-[#e2d9c8] sm:mb-12">
             <ol className="flex items-center gap-3">
               <li><Link href="/" className="underline-offset-4 hover:underline">Home</Link></li>
               <li aria-hidden="true">/</li>
@@ -61,28 +62,26 @@ export default function ChurchConcertBookingPage() {
           </nav>
           <div className="grid items-center gap-12 lg:grid-cols-[1.5fr_1fr] lg:gap-20">
             <div>
-              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-[color:var(--accent-dark)]">For churches &amp; concert hosts</p>
-              <h1 className="max-w-3xl font-serif text-[clamp(2.5rem,5.2vw,4.5rem)] font-bold leading-[1.08] tracking-tight text-[#062653]">Bring Southern Gospel music to your church.</h1>
-              <p className="mt-7 max-w-xl text-lg leading-relaxed text-muted">Plan a concert or musical ministry event with Capitol Artists. Explore Southern Gospel and Bluegrass Gospel artists, then talk with Mike Heimple about your congregation, your date, and the details.</p>
-              <div className="mt-9 flex flex-wrap items-center gap-x-7 gap-y-5">
-                <a href="#contact" className="inline-flex min-h-12 items-center justify-center rounded-full bg-[#062653] px-7 py-3.5 text-sm font-semibold text-white transition-colors hover:bg-[#123d70] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">Ask About a Concert</a>
-                <Link href="/#roster" className="text-sm font-semibold text-[#062653] underline decoration-[#a7770c] underline-offset-4">Explore the Artists</Link>
+              <h1 className="max-w-3xl font-serif text-[clamp(2.5rem,5.2vw,4.5rem)] font-bold leading-[1.08] tracking-tight">Bring <span className="text-[#e8bd68]">Southern Gospel</span> music to your church.</h1>
+              <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#e2d9c8]">Welcome a traveling Gospel ministry to encourage your congregation and share the hope of Christ. Tell Mike where your church is and what you have in mind, and explore the artists and dates that could fit.</p>
+              <div className="mt-9 flex flex-wrap items-center gap-4">
+                <a href="#contact" className="cta-gold">Ask About a Concert <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
+                <Link href="/#roster" className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#b5c4d8] px-6 py-3 text-sm font-semibold text-[#f5f1e8] transition-colors hover:bg-[#123d70] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Meet the Ministries</Link>
               </div>
             </div>
-            <aside className="border-t-2 border-[#a7770c] bg-[#062653] px-7 py-9 text-white sm:p-10">
-              <p className="mb-5 text-xs font-semibold uppercase tracking-[0.16em] text-[#e5c98b]">A conversation with Mike</p>
-              <h2 className="font-serif text-3xl font-semibold leading-tight">You don’t need every detail figured out.</h2>
-              <p className="mt-5 leading-relaxed text-[#e7e9ed]">Start with your church, your location, and what you have in mind. Mike can discuss the artist and booking questions with you.</p>
-              <a href="tel:719-260-1151" className="mt-7 inline-block text-xl font-semibold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">719-260-1151</a>
-              <p className="mt-3 text-sm text-[#e7e9ed]">Mike Heimple · Founder &amp; Booking Agent</p>
-              <Link href="/#about" className="mt-6 inline-block text-sm text-white underline underline-offset-4">Get to Know Mike</Link>
+            <aside className="bg-[#efe0bd] px-7 py-9 text-[#062653] sm:p-10">
+              <h2 className="font-serif text-3xl font-semibold leading-tight sm:text-4xl">A love offering<br />and a meal.</h2>
+              <p className="mt-5 leading-relaxed">That is what our groups generally ask of a host church. Your offering helps support their ministry on the road, and a meal gives your church a way to welcome them.</p>
+              <p className="mt-4 leading-relaxed">Mike will talk through what works for your church and the group.</p>
+              <a href="tel:719-260-1151" className="mt-7 inline-block text-xl font-semibold underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">Call Mike: 719-260-1151</a>
+              <Link href="/#about" className="mt-5 block text-sm font-semibold underline underline-offset-4">Get to Know Mike</Link>
             </aside>
           </div>
         </div>
       </section>
 
       <section aria-labelledby="planning-heading" className="mx-auto max-w-7xl px-6 py-14 sm:py-20 lg:px-8">
-        <h2 id="planning-heading" className="font-serif text-3xl font-semibold text-[#062653] sm:text-4xl">Start with the music. Plan the details together.</h2>
+        <h2 id="planning-heading" className="font-serif text-3xl font-semibold text-[#062653] sm:text-4xl">Plan a visit with Mike.</h2>
         <div className="mt-10 grid gap-8 md:grid-cols-3 md:gap-10">
           {planningSteps.map(({ number, title: stepTitle, body }) => (
             <div key={number} className="border-t border-border pt-6">
@@ -97,9 +96,8 @@ export default function ChurchConcertBookingPage() {
       <section aria-labelledby="details-heading" className="border-y border-border bg-surface/50">
         <div className="mx-auto grid max-w-7xl gap-9 px-6 py-14 sm:py-20 lg:grid-cols-[0.85fr_1.4fr] lg:gap-20 lg:px-8">
           <div>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--accent-dark)]">A host’s planning checklist</p>
             <h2 id="details-heading" className="font-serif text-3xl font-semibold leading-tight text-[#062653] sm:text-4xl">What to talk through before the concert.</h2>
-            <p className="mt-5 leading-relaxed text-muted">Use these topics to prepare for your conversation. The arrangements for your church and chosen artist should be confirmed directly with Mike.</p>
+            <p className="mt-5 leading-relaxed text-muted">Mike will help your church and the artist talk through the plans so everyone knows how to prepare for the visit.</p>
           </div>
           <div className="grid gap-x-8 gap-y-9 sm:grid-cols-2">
             {planningDetails.map(({ title: detailTitle, body }) => (
@@ -113,12 +111,11 @@ export default function ChurchConcertBookingPage() {
       </section>
 
       <section id="contact" aria-labelledby="booking-heading" className="mx-auto grid max-w-7xl scroll-mt-24 gap-10 px-6 py-14 sm:py-20 lg:grid-cols-[0.85fr_1.4fr] lg:gap-20 lg:px-8">
-        <div>
-          <p className="mb-4 text-xs font-semibold uppercase tracking-[0.16em] text-[color:var(--accent-dark)]">Tell us what you have in mind</p>
-          <h2 id="booking-heading" className="font-serif text-4xl font-semibold leading-tight text-[#062653]">Let’s plan a concert.</h2>
-          <p className="mt-5 max-w-sm leading-relaxed text-muted">Share a little about your church and the music you are looking for. You can leave the date open and ask for help choosing an artist.</p>
-          <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#062653] underline underline-offset-4">719-260-1151</a>.</p>
-          <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#062653] underline underline-offset-4">Introduce your ministry here.</Link></p>
+        <div className="self-start bg-[#062653] p-7 text-[#f5f1e8] sm:p-9">
+          <h2 id="booking-heading" className="font-serif text-4xl font-semibold leading-tight">Tell us about<br className="hidden lg:block" /> your church.</h2>
+          <p className="mt-5 max-w-sm leading-relaxed text-[#e2d9c8]">A church location and a little about your plans are a good place to start. Mike will help you explore which ministries may be traveling your way.</p>
+          <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#e8bd68] underline underline-offset-4">719-260-1151</a>.</p>
+          <p className="mt-8 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#e8bd68] underline underline-offset-4">Introduce your ministry here.</Link></p>
         </div>
         <ContactForm artistOptions={artists.map(({ slug, name }) => ({ slug, name }))} />
       </section>

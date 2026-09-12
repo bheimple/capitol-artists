@@ -154,7 +154,7 @@ export default async function ArtistPage({
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
               <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#e7bd69] px-7 py-3.5 text-sm font-bold text-[#062653] hover:bg-[#f0cd87] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-                Book This Artist
+                Ask About This Artist
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </Link>
               <a href={artist.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 py-3 text-sm font-medium text-white underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
@@ -303,7 +303,7 @@ export default async function ArtistPage({
                     href={`/?artist=${artist.slug}#contact`}
                     className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-accent text-background font-semibold text-sm hover:bg-accent-hover transition-all"
                   >
-                    Book a Concert
+                    Ask About This Artist
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
                   </Link>
                   <Link
@@ -370,18 +370,20 @@ export default async function ArtistPage({
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <ScrollReveal direction="up">
             <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
-              Interested in Booking {artist.name}?
+              Interested in Hosting {artist.name}?
             </h2>
             <p className="text-muted mb-8 max-w-xl mx-auto">
-              Let&apos;s talk about bringing {artist.name} to your church or event.
-              We handle the details so you can focus on the ministry.
+              We&apos;d love to hear about your church, its location, and any dates
+              you have in mind. Mike can check travel routes and availability
+              and help you find a good fit. Churches usually welcome the ministry
+              with a love offering and a meal.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href={`/?artist=${artist.slug}#contact`}
                 className="px-8 py-4 rounded-full bg-accent text-background font-semibold text-base hover:bg-accent-hover transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/20"
               >
-                Book a Concert
+                Ask About This Artist
               </Link>
               <a
                 href="tel:719-260-1151"

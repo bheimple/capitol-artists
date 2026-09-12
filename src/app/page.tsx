@@ -37,11 +37,11 @@ export default function Home() {
         <div className="shrink-0 border-y border-[#d8c9a6] px-6 py-5">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
             <p className="max-w-md text-center md:text-left text-sm md:text-base text-[#062653] leading-relaxed">
-              Bringing Southern Gospel and Bluegrass Gospel music to your church, community, and next special occasion.
+              Bring Southern Gospel and Bluegrass Gospel music to your church as we share the Gospel and glorify God together.
             </p>
             <div className="flex flex-col min-[380px]:flex-row w-full md:w-auto gap-3">
               <Link href="#roster" className="px-6 py-3 rounded-full border border-[#062653]/25 text-[#062653] font-semibold text-sm text-center hover:bg-[#062653]/5 transition-colors">Explore the Roster</Link>
-              <Link href="#contact" className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm text-center hover:bg-[#123d70] transition-colors">Book a Concert</Link>
+              <Link href="#contact" className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm text-center hover:bg-[#123d70] transition-colors">Ask About a Concert</Link>
             </div>
           </div>
         </div>
@@ -64,9 +64,9 @@ export default function Home() {
               </h2>
             </div>
             <p className="text-muted max-w-md text-sm leading-relaxed">
-              A carefully curated selection of the finest Southern Gospel and
-              Bluegrass Gospel artists, each bringing their own unique sound
-              and ministry to the stage.
+              Meet the Gospel ministries who travel to share Christ through song.
+              Mike can help connect your church with a group whose route and
+              availability fit.
             </p>
           </div>
         </ScrollReveal>
@@ -103,8 +103,8 @@ export default function Home() {
                 <p>
                   Capitol Artists has been scheduling Gospel concerts and
                   appearances since 1992, dedicated to providing churches
-                  and organizations with top talent in the Southern Gospel and
-                  Bluegrass Gospel music world.
+                  and organizations with traveling Southern Gospel and
+                  Bluegrass Gospel ministries.
                 </p>
                 <p>
                   Our ministry mission is building relationships with pastors,
@@ -175,11 +175,12 @@ export default function Home() {
             <span className="w-8 h-px bg-accent" />
           </div>
           <h2 className="font-serif text-4xl md:text-5xl font-bold tracking-tight mb-4">
-            Book a Concert
+            Host a Gospel Concert
           </h2>
           <p className="text-muted max-w-xl mx-auto">
-            Let us know if one or more of these fine artists are of interest to
-            you. We would love to answer any questions you may have.
+            Tell Mike about your church and where you are located. Share a
+            favorite group or date, or let him help you find a ministry that
+            fits your church and the artists’ touring plans.
           </p>
         </ScrollReveal>
 

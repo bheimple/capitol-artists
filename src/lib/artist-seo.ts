@@ -2,35 +2,35 @@ import { artists, type Artist } from "@/data/artists";
 
 const artistPageDetails: Record<string, { description: string; relatedSlugs: string[] }> = {
   "adoration-quartet": {
-    description: "Book Adoration Quartet for a Southern Gospel church concert. Read the artist profile and contact Capitol Artists about dates and booking for your church.",
+    description: "Ask about booking Adoration Quartet's Southern Gospel ministry for your church. Share your location and dates with Mike at Capitol Artists.",
     relatedSlugs: ["common-bond-quartet", "southern-plainsmen", "gloryway-music", "daryl-mosley"],
   },
   "adams-voice": {
-    description: "Bring Adam's Voice to your church for Southern Gospel and Christian Country music. Explore the artist profile and ask Capitol Artists about concert booking.",
+    description: "Explore Adam's Voice and their Southern Gospel and Christian Country music. Ask Mike at Capitol Artists about booking a visit to your church.",
     relatedSlugs: ["westward-road", "sacred-harmony", "gloryway-music", "daryl-mosley"],
   },
   "common-bond-quartet": {
-    description: "Plan a Southern Gospel church concert with Common Bond Quartet. Find artist information and send your concert booking inquiry to Capitol Artists.",
+    description: "Interested in hosting Common Bond Quartet? Ask Capitol Artists about booking their Southern Gospel ministry and share your church's location and dates.",
     relatedSlugs: ["adoration-quartet", "southern-plainsmen", "westward-road", "gloryway-music"],
   },
   "daryl-mosley": {
-    description: "Book Daryl Mosley for a Bluegrass Gospel concert at your church. Read his artist profile and contact Capitol Artists with your church concert details.",
+    description: "Ask about booking Daryl Mosley for a Bluegrass Gospel concert at your church. Mike at Capitol Artists can check travel routes and availability.",
     relatedSlugs: ["adams-voice", "southern-plainsmen", "westward-road", "adoration-quartet"],
   },
   "gloryway-music": {
-    description: "Explore Gloryway's Southern Gospel music for your next church concert. Read the artist profile and ask Capitol Artists about booking Gloryway for your church.",
+    description: "Explore Gloryway's Southern Gospel ministry and ask Mike at Capitol Artists about booking a visit. Share your church location and any dates you have in mind.",
     relatedSlugs: ["sacred-harmony", "westward-road", "common-bond-quartet", "adoration-quartet"],
   },
   "sacred-harmony": {
-    description: "Bring Sacred Harmony's Progressive Southern Gospel music to your church. View the artist profile and contact Capitol Artists to discuss a concert booking.",
+    description: "Ask about booking Sacred Harmony's Progressive Southern Gospel ministry for your church. Talk with Mike at Capitol Artists about dates and travel.",
     relatedSlugs: ["gloryway-music", "westward-road", "adams-voice", "southern-plainsmen"],
   },
   "southern-plainsmen": {
-    description: "Book Southern Plainsmen for a Southern Gospel concert at your church. Explore the artist profile and share your dates with Capitol Artists to discuss booking.",
+    description: "Ask about booking Southern Plainsmen's Southern Gospel ministry for your church. Share your location and dates so Mike can look at routes and availability.",
     relatedSlugs: ["adoration-quartet", "common-bond-quartet", "adams-voice", "daryl-mosley"],
   },
   "westward-road": {
-    description: "Explore Westward Road's Southern Gospel and Modern Worship music for your church. Contact Capitol Artists with dates and details for a church concert booking.",
+    description: "Explore Westward Road's Southern Gospel and Modern Worship music. Ask Mike at Capitol Artists about booking a visit to your church and share your preferred dates.",
     relatedSlugs: ["adams-voice", "sacred-harmony", "gloryway-music", "daryl-mosley"],
   },
 };

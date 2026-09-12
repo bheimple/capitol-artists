@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     template: "%s | Capitol Artists",
   },
   description:
-    "Since 1992, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music. Book your next concert with us.",
+    "Connecting churches with Southern Gospel and Bluegrass Gospel ministries since 1992. Ask Mike about concert booking, travel routes, and dates.",
   keywords: [
     "Southern Gospel",
     "Bluegrass Gospel",
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Capitol Artists | Gospel Concert Booking Agency",
     description:
-      "Since 1992, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music.",
+      "Connecting churches with Southern Gospel and Bluegrass Gospel ministries since 1992. Ask Mike about concert booking, travel routes, and dates.",
     type: "website",
     url: `${SITE_URL}/`,
     siteName: "Capitol Artists",
@@ -61,7 +61,7 @@ export const metadata: Metadata = {
     images: ["/brand/hero-small-logo.webp"],
     title: "Capitol Artists | Gospel Concert Booking Agency",
     description:
-      "Connecting churches with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
+      "Connecting churches with Southern Gospel and Bluegrass Gospel ministries since 1992. Ask Mike about concert booking, travel routes, and dates.",
   },
   icons: {
     icon: [
@@ -85,7 +85,7 @@ const structuredData = {
       logo: `${SITE_URL}/brand/capitol-cross.png`,
       foundingDate: "1992",
       description:
-        "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
+        "Connecting churches with Southern Gospel and Bluegrass Gospel ministries since 1992.",
       url: `${SITE_URL}/`,
       founder: {
         "@type": "Person",
@@ -93,7 +93,6 @@ const structuredData = {
       },
       telephone: "719-260-1151",
       email: "mike@capitol-artists.com",
-      areaServed: "United States",
     },
     {
       "@type": "WebSite",

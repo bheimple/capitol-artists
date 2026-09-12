@@ -88,6 +88,54 @@ html {
   z-index: 9999;
 }
 
+/* Gold identifies the main inquiry action against the navy and cream surfaces. */
+.cta-gold {
+  display: inline-flex;
+  min-height: 52px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  border: 1px solid #936510;
+  border-radius: 9999px;
+  background: #e8bd68;
+  padding: 14px 28px;
+  color: #062653;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+  transition: background-color 160ms ease;
+}
+
+.cta-gold:hover:not(:disabled) {
+  background: #f3cf89;
+}
+
+.cta-gold:focus-visible {
+  outline: 3px solid #062653;
+  outline-offset: 4px;
+}
+
+.landing-hero .cta-gold:focus-visible {
+  outline-color: #f5f1e8;
+}
+
+.cta-gold:disabled {
+  cursor: wait;
+  background: #d5c6a8;
+  color: #364761;
+}
+
+.cta-gold svg {
+  flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-gold {
+    transition: none;
+  }
+}
+
 /* Ambient gradient glow for section backgrounds */
 .section-glow {
   position: relative;
