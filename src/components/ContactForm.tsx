@@ -23,25 +23,29 @@ export default function ContactForm() {
       email: formData.get("email"),
       phone: formData.get("phone"),
       message: formData.get("message"),
+      _subject: "Capitol Artists — Church Booking Inquiry",
+      _template: "table",
+      _url: "https://capitol-artists.com/",
     };
 
     try {
-      const res = await fetch("https://koda-5f718eba.base44.app/functions/submitInquiry", {
+      const res = await fetch("https://formsubmit.co/ajax/mike@capitol-artists.com", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify(data),
+        signal: AbortSignal.timeout(20_000),
       });
 
-      if (!res.ok) {
-        const errorData = await res.json().catch(() => ({}));
-        throw new Error(errorData.error || "Submission failed");
+      const result = await res.json();
+      if (!res.ok || (result.success !== true && result.success !== "true")) {
+        throw new Error("Submission failed");
       }
 
       setStatus("success");
       (e.target as HTMLFormElement).reset();
-    } catch (err) {
+    } catch {
       setStatus("error");
-      setErrorMessage(err instanceof Error ? err.message : "Something went wrong. Please call 719-260-1151.");
+      setErrorMessage("We could not confirm your inquiry was sent. Your details are still here. Please email mike@capitol-artists.com or call 719-260-1151 before trying again.");
     } finally {
       submittingRef.current = false;
     }
