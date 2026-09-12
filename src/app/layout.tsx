@@ -30,6 +30,9 @@ export const viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
+  verification: {
+    google: "YDHOWGTdRTkfynTYAruOV42nKh0pNcvu9sx0biZOsRQ",
+  },
   title: {
     default: "Capitol Artists | Gospel Concert Booking Agency",
     template: "%s | Capitol Artists",
