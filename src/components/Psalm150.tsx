@@ -65,9 +65,14 @@ export default function Psalm150() {
               <span aria-hidden="true">×</span>
             </button>
           </div>
-          <ol className="list-decimal space-y-3 pl-5 text-sm leading-relaxed marker:font-semibold">
-            {verses.map((verse) => <li key={verse} className="pl-1">{verse}</li>)}
-          </ol>
+          <p className="text-base font-normal leading-7" style={{ fontFamily: 'Georgia, "Times New Roman", serif' }}>
+            {verses.map((verse, index) => (
+              <span key={verse}>
+                <sup className="mr-1 text-[0.65em] font-semibold" aria-label={`Verse ${index + 1}`}>{index + 1}</sup>
+                {verse}{" "}
+              </span>
+            ))}
+          </p>
         </section>
       </div>
     </div>
