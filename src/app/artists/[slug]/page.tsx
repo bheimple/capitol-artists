@@ -74,12 +74,12 @@ export default async function ArtistPage({
             Back to Roster
           </Link>
           <div className="max-w-4xl mx-auto text-center pt-7 md:pt-8">
-            <p className="text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] leading-relaxed text-[#e7bd69] mb-4">
-              {artist.genre}
-            </p>
             <h1 id="artist-heading" className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-white [text-wrap:balance]">
               {artist.name}
             </h1>
+            <p className="mt-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] leading-relaxed text-[#e7bd69]">
+              {artist.genre}
+            </p>
             <p className="max-w-2xl mx-auto mt-5 text-base sm:text-lg leading-relaxed text-[#e2e8f0] [text-wrap:pretty]">
               {artist.shortBio}
             </p>
