@@ -43,6 +43,12 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/church-concert-booking" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                  <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
+                  <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>For Churches</span>
+                </Link>
+              </li>
+              <li>
                 <Link href="/#about" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Our Story</span>
@@ -52,6 +58,12 @@ export default function Footer() {
                 <Link href="/#faq" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>FAQ</span>
+                </Link>
+              </li>
+              <li>
+                <Link href="/artist-representation" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                  <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
+                  <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>For Artists</span>
                 </Link>
               </li>
               <li>
@@ -77,7 +89,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-sm text-foreground/80">Mike Heimple</p>
-                  <a href="tel:719-260-1151" className="text-sm text-accent hover:text-accent-hover transition-colors">
+                  <a href="tel:719-260-1151" className="text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
                     719-260-1151
                   </a>
                 </div>
@@ -91,7 +103,7 @@ export default function Footer() {
                 </div>
                 <div>
                   <p className="text-sm text-foreground/80">Email</p>
-                  <a href="mailto:mike@capitol-artists.com" className="text-sm text-accent hover:text-accent-hover transition-colors">
+                  <a href="mailto:mike@capitol-artists.com" className="text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
                     mike@capitol-artists.com
                   </a>
                 </div>

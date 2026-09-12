@@ -7,9 +7,10 @@ import BrandLogo from "@/components/BrandLogo";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/#roster", label: "Roster" },
+  { href: "/church-concert-booking", label: "For Churches" },
   { href: "/#about", label: "About" },
-  { href: "/calendar", label: "Calendar" },
   { href: "/#faq", label: "FAQ" },
+  { href: "/artist-representation", label: "For Artists" },
 ];
 
 export default function Navbar() {
@@ -38,12 +39,12 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden md:flex items-center gap-1">
+        <div className="hidden lg:flex items-center gap-1">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
+              className="px-2.5 lg:px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
             >
               {link.label}
             </Link>
@@ -58,7 +59,7 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 relative z-50 text-[#062653]"
+          className="lg:hidden p-2 relative z-50 text-[#062653]"
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label="Toggle menu"
           aria-expanded={mobileOpen}
@@ -73,7 +74,7 @@ export default function Navbar() {
 
       {/* Mobile menu overlay */}
       <div
-        className={`md:hidden fixed inset-0 top-20 bg-background transition-all duration-300 ${
+        className={`lg:hidden fixed inset-0 top-20 bg-background transition-all duration-300 ${
           mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
       >
@@ -107,7 +108,7 @@ export default function Navbar() {
             <p className="text-sm text-muted mb-2">Questions? Give Mike a call.</p>
             <a
               href="tel:719-260-1151"
-              className="text-lg text-accent font-medium"
+              className="text-lg text-[color:var(--accent-dark)] font-medium"
             >
               719-260-1151
             </a>

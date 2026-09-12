@@ -64,7 +64,7 @@ export default function FAQ() {
         <div className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="w-8 h-px bg-accent" />
-            <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+            <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
               Questions & Answers
             </span>
             <span className="w-8 h-px bg-accent" />
@@ -126,7 +126,7 @@ export default function FAQ() {
           <p className="text-sm text-muted mb-4">Still have questions?</p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-hover transition-colors"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors"
           >
             Get in touch
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

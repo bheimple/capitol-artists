@@ -1,6 +1,7 @@
 "use client";
 
 import ScrollReveal from "@/components/ScrollReveal";
+import Link from "next/link";
 
 const steps = [
   {
@@ -64,6 +65,7 @@ export default function BookingProcess() {
             We make it simple to bring world-class Gospel music to your church
             or venue.
           </p>
+          <Link href="/church-concert-booking" className="mt-5 inline-block text-sm font-semibold text-[#062653] underline underline-offset-4">Read the Church Concert Planning Guide</Link>
         </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">

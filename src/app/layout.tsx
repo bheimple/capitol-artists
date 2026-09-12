@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { SITE_URL } from "@/lib/site";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,10 +27,8 @@ export const viewport = {
   maximumScale: 5,
 };
 
-const siteUrl = "https://www.capitol-artists.com";
-
 export const metadata: Metadata = {
-  metadataBase: new URL(siteUrl),
+  metadataBase: new URL(SITE_URL),
   title: {
     default: "Capitol Artists | Gospel Concert Booking Agency",
     template: "%s | Capitol Artists",
@@ -54,7 +53,7 @@ export const metadata: Metadata = {
     description:
       "Since 1992, Capitol Artists has connected churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music.",
     type: "website",
-    url: siteUrl,
+    url: `${SITE_URL}/`,
     siteName: "Capitol Artists",
     images: [{ url: "/brand/hero-small-logo.webp", width: 1774, height: 887, alt: "Capitol Artists: Gospel concert booking since 1992" }],
   },
@@ -75,21 +74,17 @@ export const metadata: Metadata = {
       { url: '/apple-icon.png?v=3', sizes: '180x180', type: 'image/png' },
     ],
   },
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: "Capitol Artists",
-  logo: `${siteUrl}/brand/capitol-cross.png`,
+  logo: `${SITE_URL}/brand/capitol-cross.png`,
   foundingDate: "1992",
   description:
     "Connecting churches and organizations with top talent in Southern Gospel and Bluegrass Gospel music since 1992.",
-  url: siteUrl,
+  url: `${SITE_URL}/`,
   founder: {
     "@type": "Person",
     name: "Mike Heimple",

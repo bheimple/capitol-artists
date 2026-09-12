@@ -2,7 +2,10 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { artists, getArtistBySlug } from "@/data/artists";
+import { SITE_URL } from "@/lib/site";
 import ScrollReveal from "@/components/ScrollReveal";
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return artists.map((artist) => ({ slug: artist.slug }));
@@ -12,15 +15,17 @@ export function generateMetadata({ params }: { params: Promise<{ slug: string }>
   return params.then((resolvedParams) => {
     const artist = getArtistBySlug(resolvedParams.slug);
     if (!artist) return { title: "Artist Not Found" };
+    const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
     return {
       title: artist.name,
       description: artist.shortBio,
+      alternates: { canonical: artistUrl },
       keywords: [artist.name, artist.genre, "gospel music", "concert booking", "Capitol Artists", ...(artist.highlights || [])],
       openGraph: {
         title: `${artist.name} | Capitol Artists`,
         description: artist.shortBio,
         type: "profile",
-        url: `https://www.capitol-artists.com/artists/${artist.slug}`,
+        url: artistUrl,
       },
       twitter: {
         card: "summary_large_image",
@@ -52,9 +57,9 @@ export default async function ArtistPage({
     name: artist.name,
     genre: artist.genre,
     description: artist.shortBio,
-    url: `https://www.capitol-artists.com/artists/${artist.slug}`,
+    url: `${SITE_URL}/artists/${artist.slug}`,
     ...(artist.basedIn && { location: artist.basedIn }),
-    ...(artist.founded && { foundingDate: artist.founded }),
+    ...(artist.founded && /^\d{4}$/.test(artist.founded) && { foundingDate: artist.founded }),
     ...(artist.website && { sameAs: [artist.website, ...(artist.social ? Object.values(artist.social).filter(Boolean) : [])] }),
   };
 
@@ -84,7 +89,7 @@ export default async function ArtistPage({
               {artist.shortBio}
             </p>
             <div className="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
-              <Link href="/#contact" className="inline-flex items-center justify-center gap-2 rounded-full bg-[#e7bd69] px-7 py-3.5 text-sm font-bold text-[#062653] hover:bg-[#f0cd87] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+              <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#e7bd69] px-7 py-3.5 text-sm font-bold text-[#062653] hover:bg-[#f0cd87] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
                 Book This Artist
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </Link>
@@ -230,7 +235,7 @@ export default async function ArtistPage({
                     Want to bring {artist.name} to your church?
                   </p>
                   <Link
-                    href="/#contact"
+                    href={`/?artist=${artist.slug}#contact`}
                     className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-accent text-background font-semibold text-sm hover:bg-accent-hover transition-all"
                   >
                     Book a Concert
@@ -302,7 +307,7 @@ export default async function ArtistPage({
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
-                href="/#contact"
+                href={`/?artist=${artist.slug}#contact`}
                 className="px-8 py-4 rounded-full bg-accent text-background font-semibold text-base hover:bg-accent-hover transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/20"
               >
                 Book a Concert

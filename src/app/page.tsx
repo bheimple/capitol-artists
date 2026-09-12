@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { artists } from "@/data/artists";
@@ -9,6 +10,11 @@ import ContactForm from "@/components/ContactForm";
 import Testimonials from "@/components/Testimonials";
 import { CapitolIcon } from "@/components/BrandLogo";
 import Psalm150 from "@/components/Psalm150";
+import { SITE_URL } from "@/lib/site";
+
+export const metadata: Metadata = {
+  alternates: { canonical: `${SITE_URL}/` },
+};
 
 export default function Home() {
   return (
@@ -48,7 +54,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-8 h-px bg-accent" />
-                <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+                <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
                   The Lineup
                 </span>
               </div>
@@ -85,7 +91,7 @@ export default function Home() {
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-8 h-px bg-accent" />
-                <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+                <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
                   Our Story
                 </span>
               </div>
@@ -119,7 +125,7 @@ export default function Home() {
                 <div className="w-px h-10 bg-border" />
                 <a
                   href="tel:719-260-1151"
-                  className="text-sm text-accent hover:text-accent-hover transition-colors"
+                  className="text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors"
                 >
                   719-260-1151
                 </a>
@@ -162,7 +168,7 @@ export default function Home() {
         <ScrollReveal direction="up" className="text-center mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="w-8 h-px bg-accent" />
-            <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+            <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
               Get in Touch
             </span>
             <span className="w-8 h-px bg-accent" />
@@ -186,7 +192,7 @@ export default function Home() {
               <CapitolIcon size={20} className="text-accent" />
               <span>Capitol Artists</span>
             </div>
-            <a href="tel:719-260-1151" className="text-accent hover:text-accent-hover transition-colors">
+            <a href="tel:719-260-1151" className="text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
               719-260-1151
             </a>
           </div>

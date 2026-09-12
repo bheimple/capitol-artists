@@ -1,8 +1,26 @@
+import type { Metadata } from "next";
 import Link from "next/link";
+import { SITE_URL } from "@/lib/site";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Concert Calendar",
-  description: "Upcoming Southern Gospel and Bluegrass Gospel concerts booked through Capitol Artists.",
+  description: "Our concert calendar is in development. Explore the artist roster or contact Capitol Artists about booking a Gospel concert.",
+  alternates: { canonical: `${SITE_URL}/calendar` },
+  robots: { index: false, follow: true },
+  openGraph: {
+    title: "Concert Calendar | Capitol Artists",
+    description: "Our concert calendar is in development. Explore the artist roster or contact Capitol Artists about booking a Gospel concert.",
+    type: "website",
+    url: `${SITE_URL}/calendar`,
+    siteName: "Capitol Artists",
+    images: [{ url: "/brand/hero-small-logo.webp", width: 1774, height: 887, alt: "Capitol Artists: Gospel concert booking since 1992" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Concert Calendar | Capitol Artists",
+    description: "Our concert calendar is in development. Explore the artist roster or contact Capitol Artists about booking a Gospel concert.",
+    images: ["/brand/hero-small-logo.webp"],
+  },
 };
 
 export default function CalendarPage() {
