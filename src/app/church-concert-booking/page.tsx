@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import { artists } from "@/data/artists";
 import { SITE_URL } from "@/lib/site";
 
 const title = "Southern Gospel Concert Booking for Churches";
@@ -119,7 +120,7 @@ export default function ChurchConcertBookingPage() {
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#062653] underline underline-offset-4">719-260-1151</a>.</p>
           <p className="mt-8 max-w-sm text-sm leading-relaxed text-muted">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#062653] underline underline-offset-4">Introduce your ministry here.</Link></p>
         </div>
-        <ContactForm />
+        <ContactForm artistOptions={artists.map(({ slug, name }) => ({ slug, name }))} />
       </section>
 
       <section aria-labelledby="questions-heading" className="border-t border-border">

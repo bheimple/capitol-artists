@@ -170,7 +170,8 @@ export default async function ArtistPage({
               width={artist.imageWidth}
               height={artist.imageHeight}
               sizes={`(max-width: ${photoWidth + 48}px) calc(100vw - 48px), ${photoWidth}px`}
-              preload
+              loading="eager"
+              fetchPriority="high"
               className="block mx-auto h-auto max-w-full"
               style={{ width: photoWidth }}
             />

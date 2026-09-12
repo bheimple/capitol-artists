@@ -3,17 +3,20 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
-import { artists } from "@/data/artists";
+import type { Artist } from "@/data/artists";
 import { trackInquirySuccess } from "@/lib/analytics";
 
 const fieldClass = "w-full rounded-lg border border-[#8e948f] bg-[#f9f6ef] px-4 py-3 text-[#062653] placeholder:text-[#60685f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653] disabled:cursor-wait";
 const labelClass = "mb-2 block text-sm font-semibold text-[#062653]";
 
-function ArtistQuerySelection({ onSelect }: { onSelect: (slug: string) => void }) {
-  const artistSlug = useSearchParams().get("artist");
+type ContactFormProps = { artistOptions: readonly Pick<Artist, "slug" | "name">[] };
+
+function ArtistQuerySelection({ artistOptions, onSelect }: ContactFormProps & { onSelect: (slug: string) => void }) {
+  const requestedSlug = useSearchParams().get("artist");
+  const artistSlug = artistOptions.some((artist) => artist.slug === requestedSlug) ? requestedSlug : null;
 
   useEffect(() => {
-    if (artistSlug && artists.some((artist) => artist.slug === artistSlug)) {
+    if (artistSlug) {
       onSelect(artistSlug);
     }
   }, [artistSlug, onSelect]);
@@ -21,7 +24,7 @@ function ArtistQuerySelection({ onSelect }: { onSelect: (slug: string) => void }
   return null;
 }
 
-export default function ContactForm() {
+export default function ContactForm({ artistOptions }: ContactFormProps) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
   const [selectedArtist, setSelectedArtist] = useState("");
@@ -59,7 +62,7 @@ export default function ContactForm() {
       return;
     }
 
-    const artist = artists.find((entry) => entry.slug === value("artistInterest"));
+    const artist = artistOptions.find((entry) => entry.slug === value("artistInterest"));
     const name = `${value("firstName")} ${value("lastName")}`;
     const data = {
       name,
@@ -120,7 +123,7 @@ export default function ContactForm() {
   return (
     <div>
       <Suspense fallback={null}>
-        <ArtistQuerySelection onSelect={setSelectedArtist} />
+        <ArtistQuerySelection artistOptions={artistOptions} onSelect={setSelectedArtist} />
       </Suspense>
       <p role="status" aria-live="polite" aria-atomic="true" className="sr-only">
         {status === "submitting" ? "Sending your church concert inquiry." : ""}
@@ -173,7 +176,7 @@ export default function ContactForm() {
               <label htmlFor="contact-artist" className={labelClass}>Artist interest <span className="font-normal">(optional)</span></label>
               <select id="contact-artist" name="artistInterest" value={selectedArtist} onChange={(event) => setSelectedArtist(event.target.value)} className={fieldClass}>
                 <option value="">Help us choose</option>
-                {artists.map((artist) => <option key={artist.slug} value={artist.slug}>{artist.name}</option>)}
+                {artistOptions.map((artist) => <option key={artist.slug} value={artist.slug}>{artist.name}</option>)}
               </select>
             </div>
             <div className="sm:col-span-2">

@@ -18,12 +18,12 @@ const compiled = compile("../src/components/ContactForm.tsx");
 const analyticsCompiled = compile("../src/lib/analytics.ts");
 const artistContext = { exports: {} };
 vm.runInNewContext(compile("../src/data/artists.ts"), artistContext);
-const { artists } = artistContext.exports;
+const artistOptions = artistContext.exports.artists.map(({ slug, name }) => ({ slug, name }));
 
 const fixture = {
   firstName: " Test ", lastName: " Contact ", email: "test@example.invalid", phone: "555-0100",
   organization: " Test Church ", eventLocation: "Test City, CO", preferredDates: "this fall / flexible",
-  artistInterest: artists[0].slug, message: "A Sunday evening church concert.",
+  artistInterest: artistOptions[0].slug, message: "A Sunday evening church concert.",
 };
 
 function find(node, match) {
@@ -37,8 +37,9 @@ function find(node, match) {
   return null;
 }
 
-function harness(fetchImpl, initialQuery = "", analyticsBlocked = false) {
+function harness(fetchImpl, initialQuery = "", analyticsBlocked = false, options = artistOptions) {
   let stateIndex = 0, refIndex = 0, effectIndex = 0, component = "form", changed = false, query = initialQuery;
+  let currentOptions = options;
   const states = [], setters = [], refs = [], timers = [], requests = [], pendingEffects = [];
   const analyticsCalls = [];
   const effectDependencies = new Map();
@@ -67,7 +68,6 @@ function harness(fetchImpl, initialQuery = "", analyticsBlocked = false) {
       if (name === "react") return react;
       if (name === "react/jsx-runtime") return { jsx, jsxs: jsx };
       if (name === "next/navigation") return { useSearchParams: () => new URLSearchParams(query) };
-      if (name === "@/data/artists") return artistContext.exports;
       if (name === "@/lib/analytics") return analyticsContext.exports;
       throw new Error(`Unexpected module: ${name}`);
     },
@@ -95,13 +95,14 @@ function harness(fetchImpl, initialQuery = "", analyticsBlocked = false) {
     states, timers, requests,
     leads: () => JSON.parse(JSON.stringify(analyticsCalls.filter(args => args[0] === "event" && args[1] === "generate_lead"))),
     setQuery(value) { query = value; },
+    setArtistOptions(value) { currentOptions = value; },
     render() {
       let tree;
       for (let pass = 0; pass < 5; pass++) {
         stateIndex = refIndex = effectIndex = 0;
         component = "form";
         changed = false;
-        tree = context.exports.default();
+        tree = context.exports.default({ artistOptions: currentOptions });
         const queryReader = find(tree, node => typeof node.type === "function" && node.type.name === "ArtistQuerySelection");
         assert.ok(queryReader, "query handling remains inside its small component");
         component = "query";
@@ -137,7 +138,7 @@ assert.equal(payload._subject, "Capitol Artists — Church Booking Inquiry");
 assert.equal(payload._template, "table");
 assert.equal(payload._url, "https://capitol-artists.com/church-concert-booking");
 assert.ok(payload.message.startsWith("CHURCH CONCERT INQUIRY\n"));
-for (const detail of ["Church / organization: Test Church", "Event city / state: Test City, CO", "Preferred dates / flexibility: this fall / flexible", `Artist interest: ${artists[0].name}`, fixture.message]) {
+for (const detail of ["Church / organization: Test Church", "Event city / state: Test City, CO", "Preferred dates / flexibility: this fall / flexible", `Artist interest: ${artistOptions[0].name}`, fixture.message]) {
   assert.ok(payload.message.includes(detail), detail);
 }
 resolveRequest({ ok: true, json: async () => ({ success: "true" }) });
@@ -212,19 +213,29 @@ assert.equal(blockedAnalytics.states[0], "success", "an analytics exception cann
 assert.equal(blockedAnalytics.requests.length, 1);
 assert.ok(JSON.stringify(blockedAnalytics.render()).includes("Your concert inquiry has been received."));
 
-const preselected = harness(accepted, `artist=${artists[0].slug}`);
-assert.equal(find(preselected.render(), "select").props.value, artists[0].slug);
-find(preselected.render(), "select").props.onChange({ target: { value: artists[1].slug } });
-assert.equal(find(preselected.render(), "select").props.value, artists[1].slug, "manual choice survives rerender");
-preselected.setQuery(`artist=${artists[0].slug}&utm_source=test`);
-assert.equal(find(preselected.render(), "select").props.value, artists[1].slug, "unrelated query change must not override choice");
-preselected.setQuery(`artist=${artists[2].slug}`);
-assert.equal(find(preselected.render(), "select").props.value, artists[2].slug, "a new valid artist query is applied");
+const preselected = harness(accepted, `artist=${artistOptions[0].slug}`);
+assert.equal(find(preselected.render(), "select").props.value, artistOptions[0].slug);
+find(preselected.render(), "select").props.onChange({ target: { value: artistOptions[1].slug } });
+assert.equal(find(preselected.render(), "select").props.value, artistOptions[1].slug, "manual choice survives rerender");
+preselected.setArtistOptions(artistOptions.map((artist) => ({ ...artist })));
+assert.equal(find(preselected.render(), "select").props.value, artistOptions[1].slug, "equivalent reserialized options must not override manual choice");
+preselected.setQuery(`artist=${artistOptions[0].slug}&utm_source=test`);
+assert.equal(find(preselected.render(), "select").props.value, artistOptions[1].slug, "unrelated query change must not override choice");
+preselected.setQuery(`artist=${artistOptions[2].slug}`);
+assert.equal(find(preselected.render(), "select").props.value, artistOptions[2].slug, "a new valid artist query is applied");
 preselected.setQuery("artist=unknown-artist");
-assert.equal(find(preselected.render(), "select").props.value, artists[2].slug, "unknown artist query is ignored");
+assert.equal(find(preselected.render(), "select").props.value, artistOptions[2].slug, "unknown artist query is ignored");
 const unknown = harness(accepted, "artist=unknown-artist");
 assert.equal(find(unknown.render(), "select").props.value, "");
 await find(unknown.render(), "form").props.onSubmit(event({ ...fixture, artistInterest: "unknown-artist" }));
 assert.ok(JSON.parse(unknown.requests[0].options.body).message.includes("Artist interest: Help us choose"));
 
-console.log("PASS: actual church inquiry handler and query effect — FormSubmit routing, details, optional fields, confirmed-success analytics only, blocked analytics, duplicate guard, errors, timeout, whitespace, artist preselection and manual-selection persistence. All requests mocked.");
+const limited = harness(accepted, `artist=${artistOptions[0].slug}`, false, [artistOptions[1]]);
+const limitedSelect = find(limited.render(), "select");
+assert.equal(limitedSelect.props.value, "", "prefill only accepts artists supplied by the server");
+assert.ok(find(limitedSelect, node => node.type === "option" && node.props.value === artistOptions[1].slug));
+assert.equal(find(limitedSelect, node => node.type === "option" && node.props.value === artistOptions[0].slug), null);
+await find(limited.render(), "form").props.onSubmit(event());
+assert.ok(JSON.parse(limited.requests[0].options.body).message.includes("Artist interest: Help us choose"), "submission lookup uses the supplied options");
+
+console.log("PASS: actual church inquiry handler and query effect — FormSubmit routing, details, optional fields, confirmed-success analytics only, blocked analytics, duplicate guard, errors, timeout, whitespace, minimal artist props, artist preselection and manual-selection persistence. All requests mocked.");
