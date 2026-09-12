@@ -29,7 +29,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
           <h3 className="text-lg font-serif font-bold text-white leading-tight mb-2">
             {artist.name}
           </h3>
-          <span className="inline-block max-w-full rounded-md bg-[#062653] px-2 py-1 text-[11px] font-semibold leading-relaxed tracking-[0.06em] uppercase text-white mb-1">
+          <span className="hidden md:inline-block max-w-full rounded-md bg-[#062653] px-2 py-1 text-[11px] font-semibold leading-relaxed tracking-[0.06em] uppercase text-white mb-1">
             {artist.genre}
           </span>
           <p className="text-xs text-white/70 leading-relaxed line-clamp-2 mb-3 max-h-0 group-hover:max-h-20 opacity-70 group-hover:opacity-100 overflow-hidden transition-all duration-500">
