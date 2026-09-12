@@ -15,6 +15,7 @@ function compile(relativePath) {
   return result.outputText;
 }
 const compiled = compile("../src/components/ContactForm.tsx");
+const analyticsCompiled = compile("../src/lib/analytics.ts");
 const artistContext = { exports: {} };
 vm.runInNewContext(compile("../src/data/artists.ts"), artistContext);
 const { artists } = artistContext.exports;
@@ -36,9 +37,10 @@ function find(node, match) {
   return null;
 }
 
-function harness(fetchImpl, initialQuery = "") {
+function harness(fetchImpl, initialQuery = "", analyticsBlocked = false) {
   let stateIndex = 0, refIndex = 0, effectIndex = 0, component = "form", changed = false, query = initialQuery;
   const states = [], setters = [], refs = [], timers = [], requests = [], pendingEffects = [];
+  const analyticsCalls = [];
   const effectDependencies = new Map();
   const jsx = (type, props) => ({ type, props });
   const react = {
@@ -66,6 +68,7 @@ function harness(fetchImpl, initialQuery = "") {
       if (name === "react/jsx-runtime") return { jsx, jsxs: jsx };
       if (name === "next/navigation") return { useSearchParams: () => new URLSearchParams(query) };
       if (name === "@/data/artists") return artistContext.exports;
+      if (name === "@/lib/analytics") return analyticsContext.exports;
       throw new Error(`Unexpected module: ${name}`);
     },
     FormData: class {
@@ -74,15 +77,23 @@ function harness(fetchImpl, initialQuery = "") {
     },
     AbortController,
     window: {
-      location: { origin: "https://capitol-artists.com", pathname: "/church-concert-booking", search: "?artist=test", hash: "#contact" },
+      location: { protocol: "https:", host: "capitol-artists.com", origin: "https://capitol-artists.com", pathname: "/church-concert-booking", search: "?email=test@example.invalid", hash: "#contact" },
+      gtag(...args) { if (analyticsBlocked) throw new Error("Analytics blocked"); analyticsCalls.push(args); },
       setTimeout(callback, delay) { timers.push({ callback, delay, cleared: false }); return timers.length - 1; },
       clearTimeout(id) { timers[id].cleared = true; },
     },
     fetch(url, options) { requests.push({ url, options }); return fetchImpl(url, options); },
   };
+  const analyticsContext = {
+    exports: {}, window: context.window, URL,
+    document: { referrer: "https://example.invalid/prior?email=test@example.invalid#private" },
+    process: { env: { NODE_ENV: "production", NEXT_PUBLIC_GA_MEASUREMENT_ID: "G-TEST123456" } },
+  };
+  vm.runInNewContext(analyticsCompiled, analyticsContext);
   vm.runInNewContext(compiled, context);
   return {
     states, timers, requests,
+    leads: () => JSON.parse(JSON.stringify(analyticsCalls.filter(args => args[0] === "event" && args[1] === "generate_lead"))),
     setQuery(value) { query = value; },
     render() {
       let tree;
@@ -112,6 +123,7 @@ const handler = find(successful.render(), "form").props.onSubmit;
 const pending = handler(event());
 await handler(event());
 assert.equal(successful.requests.length, 1, "duplicate submissions must not send twice");
+assert.equal(successful.leads().length, 0, "attempts are not leads before confirmed receipt");
 const request = successful.requests[0];
 assert.equal(request.url, "https://formsubmit.co/ajax/mike@capitol-artists.com");
 assert.equal(request.options.method, "POST");
@@ -131,6 +143,9 @@ for (const detail of ["Church / organization: Test Church", "Event city / state:
 resolveRequest({ ok: true, json: async () => ({ success: "true" }) });
 await pending;
 assert.equal(successful.states[0], "success");
+assert.deepEqual(successful.leads(), [["event", "generate_lead", {
+  inquiry_type: "church_booking", page_location: "https://capitol-artists.com/church-concert-booking", page_referrer: "https://example.invalid/prior",
+}]], "one confirmed inquiry emits one lead with no form values or raw query/hash");
 assert.ok(JSON.stringify(successful.render()).includes("Your concert inquiry has been received."));
 assert.equal(successful.timers[0].cleared, true);
 
@@ -141,6 +156,7 @@ for (const name of ["phone", "preferredDates", "artistInterest", "message"]) {
 }
 await find(minimalTree, "form").props.onSubmit(event({ ...fixture, phone: "", preferredDates: "", artistInterest: "", message: "" }));
 assert.equal(minimal.states[0], "success");
+assert.equal(minimal.leads().length, 1);
 const minimalMessage = JSON.parse(minimal.requests[0].options.body).message;
 for (const detail of ["Phone: Not provided", "Preferred dates / flexibility: Not specified", "Artist interest: Help us choose", "None provided"]) assert.ok(minimalMessage.includes(detail));
 
@@ -157,6 +173,7 @@ for (const response of [
   const values = { ...fixture };
   await find(failed.render(), "form").props.onSubmit(event(values));
   assert.equal(failed.states[0], "error");
+  assert.equal(failed.leads().length, 0, "unconfirmed inquiries must not count as leads");
   assert.deepEqual(values, fixture, "failure must not reset or mutate details");
   const tree = failed.render();
   assert.ok(find(tree, "form"));
@@ -173,6 +190,7 @@ assert.equal(timedOut.timers[0].delay, 20_000);
 timedOut.timers[0].callback();
 await timedSubmit;
 assert.equal(timedOut.states[0], "error");
+assert.equal(timedOut.leads().length, 0);
 assert.ok(timedOut.states[1].includes("timed out"));
 assert.equal(timedOut.timers[0].cleared, true);
 
@@ -180,11 +198,19 @@ for (const field of ["firstName", "lastName", "email", "organization", "eventLoc
   const invalid = harness(accepted);
   await find(invalid.render(), "form").props.onSubmit(event({ ...fixture, [field]: " \n\t " }));
   assert.equal(invalid.requests.length, 0, `${field}: whitespace must not reach the endpoint`);
+  assert.equal(invalid.leads().length, 0);
   assert.equal(invalid.states[0], "error");
   assert.ok(invalid.states[1].startsWith("Please complete the "));
   await find(invalid.render(), "form").props.onSubmit(event());
   assert.equal(invalid.states[0], "success", "a corrected inquiry can submit");
+  assert.equal(invalid.leads().length, 1);
 }
+
+const blockedAnalytics = harness(accepted, "", true);
+await find(blockedAnalytics.render(), "form").props.onSubmit(event());
+assert.equal(blockedAnalytics.states[0], "success", "an analytics exception cannot turn a confirmed inquiry into an error");
+assert.equal(blockedAnalytics.requests.length, 1);
+assert.ok(JSON.stringify(blockedAnalytics.render()).includes("Your concert inquiry has been received."));
 
 const preselected = harness(accepted, `artist=${artists[0].slug}`);
 assert.equal(find(preselected.render(), "select").props.value, artists[0].slug);
@@ -201,4 +227,4 @@ assert.equal(find(unknown.render(), "select").props.value, "");
 await find(unknown.render(), "form").props.onSubmit(event({ ...fixture, artistInterest: "unknown-artist" }));
 assert.ok(JSON.parse(unknown.requests[0].options.body).message.includes("Artist interest: Help us choose"));
 
-console.log("PASS: actual church inquiry handler and query effect — FormSubmit routing, enriched details, optional date/artist/message, JSON acceptance, duplicate guard, errors, timeout, whitespace, artist preselection and manual-selection persistence. All requests mocked.");
+console.log("PASS: actual church inquiry handler and query effect — FormSubmit routing, details, optional fields, confirmed-success analytics only, blocked analytics, duplicate guard, errors, timeout, whitespace, artist preselection and manual-selection persistence. All requests mocked.");

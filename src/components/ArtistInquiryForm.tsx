@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
+import { trackInquirySuccess } from "@/lib/analytics";
 
 const fieldClass = "w-full rounded-lg border border-[#8e948f] bg-[#f9f6ef] px-4 py-3 text-[#062653] placeholder:text-[#60685f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653] disabled:cursor-wait";
 const labelClass = "mb-2 block text-sm font-semibold text-[#062653]";
@@ -85,6 +86,7 @@ export default function ArtistInquiryForm() {
       }
 
       setStatus("success");
+      trackInquirySuccess("artist_representation");
     } catch {
       setErrorMessage(controller.signal.aborted
         ? "The connection timed out, so we could not confirm receipt. Your details are still here. Please call Mike before trying again."

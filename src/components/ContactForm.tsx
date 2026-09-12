@@ -4,6 +4,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import { artists } from "@/data/artists";
+import { trackInquirySuccess } from "@/lib/analytics";
 
 const fieldClass = "w-full rounded-lg border border-[#8e948f] bg-[#f9f6ef] px-4 py-3 text-[#062653] placeholder:text-[#60685f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653] disabled:cursor-wait";
 const labelClass = "mb-2 block text-sm font-semibold text-[#062653]";
@@ -104,6 +105,7 @@ export default function ContactForm() {
       }
 
       setStatus("success");
+      trackInquirySuccess("church_booking");
     } catch {
       setErrorMessage(controller.signal.aborted
         ? "The connection timed out, so we could not confirm receipt. Your details are still here. Please email or call Mike before trying again."
