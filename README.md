@@ -76,6 +76,10 @@ src/
 7. Southern Plainsmen — Southern Gospel
 8. Westward Road — Southern Gospel / Modern Worship
 
+### Artist information updates
+
+Capitol Artists maintains the artist profiles in `src/data/artists.ts`. Check each artist's official sources when changing a biography, lineup, award, or location, and keep the profile's source links current. The artist page displays the September 14, 2026 review date, when all eight profiles were checked. Its static date also supplies the page's `dateModified` structured data; do not advance it merely because the site was rebuilt or deployed. If profiles are reviewed separately in the future, keep each profile's date tied to its own substantive review.
+
 ## Custom Domain Setup
 
 After deploying, point `www.capitol-artists.com` to Vercel:

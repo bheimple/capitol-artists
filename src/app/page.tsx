@@ -44,8 +44,8 @@ export default function Home() {
               </p>
             </div>
             <div className="flex flex-col min-[380px]:flex-row w-full md:w-auto gap-3">
-              <Link href="#roster" className="px-6 py-3 rounded-full border border-[#062653]/25 text-[#062653] font-semibold text-sm text-center hover:bg-[#062653]/5 transition-colors">Explore the Roster</Link>
-              <Link href="#contact" className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm text-center hover:bg-[#123d70] transition-colors">Ask About a Concert</Link>
+              <Link href="#roster" prefetch={false} className="px-6 py-3 rounded-full border border-[#062653]/25 text-[#062653] font-semibold text-sm text-center hover:bg-[#062653]/5 transition-colors">Explore the Roster</Link>
+              <Link href="#contact" prefetch={false} className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm text-center hover:bg-[#123d70] transition-colors">Ask About a Concert</Link>
             </div>
           </div>
         </div>

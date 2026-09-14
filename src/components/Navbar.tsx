@@ -34,7 +34,7 @@ export default function Navbar() {
     >
       <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 group" onClick={() => setMobileOpen(false)}>
+        <Link href="/" prefetch={false} className="flex items-center gap-3 group" onClick={() => setMobileOpen(false)}>
           <BrandLogo />
         </Link>
 
@@ -84,6 +84,7 @@ export default function Navbar() {
               key={link.href}
               href={link.href}
               onClick={() => setMobileOpen(false)}
+              prefetch={mobileOpen ? null : false}
               className={`py-4 text-2xl font-serif font-bold text-foreground hover:text-accent transition-all duration-300 border-b border-border ${
                 mobileOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
               }`}
@@ -95,6 +96,7 @@ export default function Navbar() {
           <Link
             href="/#contact"
             onClick={() => setMobileOpen(false)}
+            prefetch={mobileOpen ? null : false}
             className={`mt-6 px-6 py-4 rounded-full bg-accent text-background text-base font-semibold text-center transition-all duration-300 ${
               mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             }`}

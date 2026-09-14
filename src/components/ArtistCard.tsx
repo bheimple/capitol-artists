@@ -4,7 +4,7 @@ import type { Artist } from "@/data/artists";
 
 export default function ArtistCard({ artist }: { artist: Artist }) {
   return (
-    <Link href={`/artists/${artist.slug}`} className="group block">
+    <Link href={`/artists/${artist.slug}`} prefetch={false} className="group block">
       <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:shadow-2xl group-hover:shadow-accent/10 group-hover:-translate-y-1">
         {/* Sizes follow the roster's 2/3/4 columns, container padding, gaps, and card borders. */}
         <Image

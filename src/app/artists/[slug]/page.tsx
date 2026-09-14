@@ -12,6 +12,10 @@ import ScrollReveal from "@/components/ScrollReveal";
 
 export const dynamicParams = false;
 
+// All eight artist biographies were checked against their official sources on this date.
+// Change this only after a substantive source review, never automatically at build time.
+const artistInformationUpdatedAt = "2026-09-14";
+
 export function generateStaticParams() {
   return artists.map((artist) => ({ slug: artist.slug }));
 }
@@ -107,6 +111,7 @@ export default async function ArtistPage({
         name: `${title} | Capitol Artists`,
         description,
         inLanguage: "en-US",
+        dateModified: artistInformationUpdatedAt,
         isPartOf: { "@id": `${SITE_URL}/#website` },
         publisher: { "@id": `${SITE_URL}/#organization` },
         mainEntity: { "@id": artistId },
@@ -164,7 +169,7 @@ export default async function ArtistPage({
                 alt={artist.name}
                 width={artist.imageWidth}
                 height={artist.imageHeight}
-                sizes={`(min-width: 1152px) ${photoWidth}px, (min-width: 768px) 48vw, (max-width: ${mobilePhotoWidth + 48}px) calc(100vw - 48px), ${mobilePhotoWidth}px`}
+                sizes={`(min-width: 1152px) ${photoWidth}px, (min-width: 768px) min(${photoWidth}px, 48vw), (max-width: ${mobilePhotoWidth + 48}px) calc(100vw - 48px), ${mobilePhotoWidth}px`}
                 loading="eager"
                 fetchPriority="high"
                 className="block h-auto max-w-full w-[var(--artist-photo-mobile-width)] md:w-[var(--artist-photo-width)]"
@@ -248,6 +253,10 @@ export default async function ArtistPage({
                       </li>
                     ))}
                   </ul>
+                  <p className="mt-2">
+                    Maintained by Capitol Artists. Artist information checked{" "}
+                    <time dateTime={artistInformationUpdatedAt}>September 14, 2026</time>.
+                  </p>
                 </div>
               )}
 
