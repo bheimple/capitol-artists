@@ -48,7 +48,7 @@ export default function Testimonials() {
     if (!rotating) return;
     const timer = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % testimonials.length);
-    }, 25000);
+    }, 7000);
     return () => window.clearInterval(timer);
   }, [rotating]);
 

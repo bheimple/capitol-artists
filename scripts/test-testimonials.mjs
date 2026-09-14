@@ -27,7 +27,7 @@ function harness({ reduced = false, visible = true, observerAvailable = true } =
   const document = { visibilityState: visible ? "visible" : "hidden", addEventListener: (_, fn) => visibilityListeners.add(fn), removeEventListener: (_, fn) => visibilityListeners.delete(fn) };
   const window = {
     matchMedia: () => preference,
-    setInterval(fn, delay) { assert.equal(delay, 25000, "rotation interval allows 25 seconds to read the complete shorter reviews"); const id = ++nextTimer; timers.set(id, { fn, delay, at: now + delay }); return id; },
+    setInterval(fn, delay) { assert.equal(delay, 7000, "rotation interval is 7 seconds"); const id = ++nextTimer; timers.set(id, { fn, delay, at: now + delay }); return id; },
     clearInterval: (id) => timers.delete(id),
   };
   class IntersectionObserver {
@@ -126,14 +126,14 @@ assert.equal(loop.nodes.find(node => node.type === "button").props["aria-label"]
 loop.intersect(0.24); assertState(loop, 0, false);
 loop.intersect(0.25); assertState(loop, 0, true);
 for (let i = 1; i <= testimonials.length; i++) {
-  loop.advance(24999); assertState(loop, (i - 1) % testimonials.length, true);
+  loop.advance(6999); assertState(loop, (i - 1) % testimonials.length, true);
   loop.advance(1); assertState(loop, i % testimonials.length, true);
 }
 loop.unmount();
 
 for (const condition of ["hover", "offscreen", "hidden document", "reduced motion"]) {
   const carousel = activeCarousel();
-  carousel.advance(24000);
+  carousel.advance(6000);
   if (condition === "hover") carousel.event(carousel.tree, "onMouseEnter");
   if (condition === "offscreen") carousel.intersect(0);
   if (condition === "hidden document") carousel.visibility("hidden");
@@ -145,7 +145,7 @@ for (const condition of ["hover", "offscreen", "hidden document", "reduced motio
   if (condition === "hidden document") carousel.visibility("visible");
   if (condition === "reduced motion") carousel.motion(false);
   assertState(carousel, 0, true);
-  carousel.advance(24999); assertState(carousel, 0, true);
+  carousel.advance(6999); assertState(carousel, 0, true);
   carousel.advance(1); assertState(carousel, 1, true);
   carousel.unmount();
 }
@@ -231,4 +231,4 @@ const unsupported = harness({ observerAvailable: false });
 unsupported.advance(60000); assertState(unsupported, 0, false);
 unsupported.click("Next review"); assertState(unsupported, 1, false); unsupported.unmount();
 
-console.log("PASS: actual Testimonials component/data — 25-second loop/wrap, timer/subscription cleanup, hover/focus/pause/offscreen/visibility/motion gates, arrows/dots, long-review disclosure, complete short reviews, inactive slides removed from layout, inert/ARIA state, first rotation control, and pointer/focus/click pause intent. No network requests.");
+console.log("PASS: actual Testimonials component/data — 7-second loop/wrap, timer/subscription cleanup, hover/focus/pause/offscreen/visibility/motion gates, arrows/dots, long-review disclosure, complete short reviews, inactive slides removed from layout, inert/ARIA state, first rotation control, and pointer/focus/click pause intent. No network requests.");
