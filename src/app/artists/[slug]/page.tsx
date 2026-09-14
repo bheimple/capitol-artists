@@ -385,7 +385,7 @@ export default async function ArtistPage({
               {relatedArtists.map((a) => (
                 <Link key={a.slug} href={`/artists/${a.slug}`} className="group block">
                   <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:-translate-y-1">
-                    <Image src={a.image} alt={a.name} style={{ objectFit: a.imageFit, objectPosition: a.imageFit ? "top" : undefined }} fill sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc(25vw - 1.875rem - 2px), calc(50vw - 2rem - 2px)" className="object-cover transition-transform duration-700 group-hover:scale-110" />
+                    <Image src={a.image} alt={a.name} style={{ objectFit: a.imageFit, objectPosition: a.imageFit ? "top" : undefined }} fill sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc(25vw - 1.875rem - 2px), calc(50vw - 2rem - 2px)" className={`object-cover transition-transform duration-700 ${a.imageFit ? "" : "group-hover:scale-110"}`} />
                     <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
                     <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
                       <h3 className="text-base font-serif font-bold leading-tight text-white md:mb-2">{a.name}</h3>

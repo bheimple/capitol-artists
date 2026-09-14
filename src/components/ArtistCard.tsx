@@ -13,7 +13,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
           style={{ objectFit: artist.imageFit, objectPosition: artist.imageFit ? "top" : undefined }}
           fill
           sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc((100vw - 6rem) / 3 - 2px), calc(50vw - 2rem - 2px)"
-          className="object-cover transition-transform duration-700 group-hover:scale-110"
+          className={`object-cover transition-transform duration-700 ${artist.imageFit ? "" : "group-hover:scale-110"}`}
         />
 
         {/* Dark gradient only at bottom for text legibility */}
