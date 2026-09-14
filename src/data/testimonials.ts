@@ -36,4 +36,15 @@ export const testimonials: Testimonial[] = [
     church: "Walker Baptist Church",
     location: "Franklin, TN",
   },
+  {
+    id: "keith-brown",
+    quote:
+      "I want to take a minute and tell you of the relationship that I have developed with Michael Heimple of Capitol Artists. I have used Michael multiple times and I could not be more pleased with his service and dedication to detail. We had the bad luck of having an 8 inch snowfall on the weekend we had an artist booked and I realized that we would have to cancel the concert. I contacted Michael and he immediately got on the phone and worked out a solution for my church. I would not hesitate to call on him for any of my concert needs and I trust his judgement both musically and personally.",
+    excerpt:
+      "We had the bad luck of having an 8 inch snowfall on the weekend we had an artist booked and I realized that we would have to cancel the concert. I contacted Michael and he immediately got on the phone and worked out a solution for my church.",
+    author: "Rev. V. Keith Brown",
+    role: "Senior Pastor",
+    church: "First Methodist Church Henderson",
+    location: "Henderson, TN",
+  },
 ];

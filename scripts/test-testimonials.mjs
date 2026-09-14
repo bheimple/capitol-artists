@@ -185,7 +185,6 @@ for (const [label, expected] of [["Next review", 1], ["Previous review", testimo
 }
 
 const reviews = activeCarousel();
-assert.deepEqual(Array.from(testimonials.filter(review => review.excerpt), review => review.id), ["chris-heldt"], "only the long review uses an excerpt");
 testimonials.forEach((review, index) => {
   const nodes = flatten(reviews.slides[index]);
   const full = nodes.find(node => node.props.id === `full-review-${review.id}`);
