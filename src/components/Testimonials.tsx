@@ -1,84 +1,180 @@
 "use client";
 
-import ScrollReveal from "@/components/ScrollReveal";
+import { useEffect, useRef, useState, useSyncExternalStore } from "react";
+import { testimonials } from "@/data/testimonials";
 
-const testimonials = [
-  {
-    quote: "Capitol Artists brought the Adoration Quartet to our church and it was one of the most spirit-filled evenings we have had in years. Mike handled every detail and the congregation is still talking about it.",
-    author: "Pastor David Walton",
-    church: "First Baptist Church",
-    location: "Pueblo, Colorado",
-  },
-  {
-    quote: "Booking through Capitol Artists was effortless. Mike understood our vision, matched us with the right artist, and the love offering exceeded our expectations. A truly blessed evening.",
-    author: "Rev. Sarah Mitchell",
-    church: "Grace Community Church",
-    location: "Fort Worth, Texas",
-  },
-  {
-    quote: "We hosted a multi-artist gospel concert and Mike coordinated everything from travel to sound. The event drew our largest crowd of the year and the ministry impact was felt throughout our community.",
-    author: "Pastor James Rutledge",
-    church: "Calvary Chapel",
-    location: "Knoxville, Tennessee",
-  },
-];
+function subscribeToMotion(callback: () => void) {
+  const preference = window.matchMedia("(prefers-reduced-motion: reduce)");
+  preference.addEventListener("change", callback);
+  return () => preference.removeEventListener("change", callback);
+}
+
+function subscribeToVisibility(callback: () => void) {
+  document.addEventListener("visibilitychange", callback);
+  return () => document.removeEventListener("visibilitychange", callback);
+}
 
 export default function Testimonials() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const [hovered, setHovered] = useState(false);
+  const [inView, setInView] = useState(false);
+  const [expandedId, setExpandedId] = useState<string | null>(null);
+  const section = useRef<HTMLElement>(null);
+  const rotationIntent = useRef<boolean | null>(null);
+  const reducedMotion = useSyncExternalStore(
+    subscribeToMotion,
+    () => window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    () => true,
+  );
+  const pageVisible = useSyncExternalStore(
+    subscribeToVisibility,
+    () => document.visibilityState === "visible",
+    () => false,
+  );
+  const rotating = !paused && !hovered && !reducedMotion && inView && pageVisible && expandedId === null;
+
+  useEffect(() => {
+    if (!section.current || !("IntersectionObserver" in window)) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting && entry.intersectionRatio >= 0.25),
+      { threshold: 0.25 },
+    );
+    observer.observe(section.current);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!rotating) return;
+    const timer = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % testimonials.length);
+    }, 15000);
+    return () => window.clearInterval(timer);
+  }, [rotating]);
+
+  function showReview(index: number) {
+    setPaused(true);
+    setExpandedId(null);
+    setActiveIndex((index + testimonials.length) % testimonials.length);
+  }
+
+  const controlClass = "inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-[#062653]/30 text-[#062653] transition-colors hover:bg-[#062653] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]";
+
   return (
-    <section className="py-24 md:py-32 border-t border-border section-glow relative">
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <ScrollReveal direction="up" className="text-center mb-16">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <span className="w-8 h-px bg-accent" />
-            <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
-              Voices from the Pews
-            </span>
-            <span className="w-8 h-px bg-accent" />
-          </div>
-          <h2 className="font-serif text-4xl md:text-5xl font-bold tracking-tight">
-            What Hosts Are Saying
+    <section
+      ref={section}
+      id="testimonials"
+      aria-labelledby="testimonials-heading"
+      aria-roledescription="carousel"
+      onFocusCapture={() => setPaused(true)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      className="scroll-mt-20 border-y border-[#d3bb87] bg-[#efe0bd] px-6 py-14 text-[#062653] md:py-20 lg:px-8"
+    >
+      <div className="mx-auto max-w-6xl">
+        <div className="flex flex-wrap items-center justify-between gap-4">
+          <h2 id="testimonials-heading" className="font-serif text-3xl font-bold tracking-tight sm:text-4xl">
+            What Pastors Are Saying
           </h2>
-        </ScrollReveal>
-
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8">
-          {testimonials.map((t, i) => (
-            <ScrollReveal key={i} delay={i * 120} direction="up">
-              <div className="relative h-full group">
-                <div className="bg-surface border border-border rounded-2xl p-8 h-full transition-all duration-500 hover:border-accent/30 hover:-translate-y-1 hover:shadow-xl hover:shadow-accent/5 relative overflow-hidden">
-                  {/* Quote mark accent */}
-                  <div className="absolute top-6 right-6 text-6xl font-serif font-black text-accent/10 leading-none select-none">
-                    &ldquo;
-                  </div>
-
-                  {/* Top glow on hover */}
-                  <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/0 to-transparent group-hover:via-accent/40 transition-all duration-500" />
-
-                  <p className="text-sm md:text-base text-muted leading-relaxed mb-8 relative z-10">
-                    {t.quote}
-                  </p>
-
-                  <div className="pt-6 border-t border-border">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent font-serif font-bold text-sm flex-shrink-0">
-                        {t.author.charAt(0)}
-                      </div>
-                      <div>
-                        <p className="text-sm font-semibold text-foreground">{t.author}</p>
-                        <p className="text-xs text-muted">{t.church}, {t.location}</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </ScrollReveal>
-          ))}
+          {!reducedMotion && (
+            <button
+              type="button"
+              onPointerDown={() => { rotationIntent.current = !paused; }}
+              onPointerCancel={() => { rotationIntent.current = null; }}
+              onClick={() => {
+                const shouldPause = rotationIntent.current ?? !paused;
+                setPaused(shouldPause);
+                if (!shouldPause) setExpandedId(null);
+                rotationIntent.current = null;
+              }}
+              className={`${controlClass} gap-2 px-4 text-sm font-semibold`}
+              aria-label={paused ? "Resume rotation" : "Pause rotation"}
+            >
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                {paused ? <path d="M8 5v14l11-7z" /> : <path d="M6 5h4v14H6zm8 0h4v14h-4z" />}
+              </svg>
+              {paused ? "Resume rotation" : "Pause rotation"}
+            </button>
+          )}
         </div>
 
-        <ScrollReveal direction="up" delay={400} className="mt-12 text-center">
-          <p className="text-xs text-muted tracking-wide">
-            These are representative testimonials. We would love to add yours.
-          </p>
-        </ScrollReveal>
+        <div
+          className="mx-auto mt-9 grid max-w-4xl md:mt-12"
+          aria-live={rotating ? "off" : "polite"}
+          aria-atomic="false"
+          onPointerDown={() => setPaused(true)}
+        >
+          {testimonials.map((review, index) => {
+            const active = index === activeIndex;
+            const expanded = active && expandedId === review.id;
+            return (
+              <div
+                key={review.id}
+                role="group"
+                aria-roledescription="slide"
+                aria-label={`${review.author}, ${index + 1} of ${testimonials.length}`}
+                aria-hidden={!active}
+                inert={!active}
+                className={`col-start-1 row-start-1 min-w-0 text-center transition-[opacity,visibility] duration-300 ease-out motion-reduce:transition-none ${active ? "visible opacity-100" : "invisible pointer-events-none opacity-0"}`}
+              >
+                <figure>
+                  <blockquote className="font-serif text-xl leading-relaxed sm:text-2xl md:text-[1.75rem] md:leading-relaxed [text-wrap:pretty]">
+                    <p>&ldquo;{review.excerpt}&rdquo;</p>
+                  </blockquote>
+                  <figcaption className="mt-6 leading-relaxed">
+                    <p className="font-semibold">{review.author}{review.role ? ` · ${review.role}` : ""}</p>
+                    <p className="mt-1 text-sm text-[#364761]">{review.church}</p>
+                    <p className="text-sm text-[#364761]">{review.location}</p>
+                  </figcaption>
+                </figure>
+                <button
+                  type="button"
+                  aria-expanded={expanded}
+                  aria-controls={`full-review-${review.id}`}
+                  onClick={() => {
+                    setPaused(true);
+                    setExpandedId(expanded ? null : review.id);
+                  }}
+                  className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]"
+                >
+                  {expanded ? "Close full review" : "Read full review"}
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                    <path d={expanded ? "m6 15 6-6 6 6" : "m6 9 6 6 6-6"} strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+                <div id={`full-review-${review.id}`} hidden={!expanded} className="mx-auto mt-4 max-w-3xl border-t border-[#bba16f] pt-6 text-left">
+                  <blockquote className="text-base leading-relaxed text-[#364761] sm:text-lg">
+                    <p>{review.quote}</p>
+                  </blockquote>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-5 gap-y-2">
+          <button type="button" aria-label="Previous review" onClick={() => showReview(activeIndex - 1)} className={controlClass}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m14 6-6 6 6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+          <div role="group" aria-label="Choose a pastor review" className="flex items-center">
+            {testimonials.map((review, index) => (
+              <button
+                key={review.id}
+                type="button"
+                aria-label={`Show review from ${review.author}`}
+                aria-disabled={index === activeIndex}
+                onClick={() => { if (index !== activeIndex) showReview(index); }}
+                className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
+              >
+                <span aria-hidden="true" style={{ borderColor: "#062653" }} className={`h-3 w-3 rounded-full border ${index === activeIndex ? "bg-[#062653]" : "bg-transparent"}`} />
+              </button>
+            ))}
+          </div>
+          <button type="button" aria-label="Next review" onClick={() => showReview(activeIndex + 1)} className={controlClass}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="m10 6 6 6-6 6" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          </button>
+          <span className="w-full text-center text-sm text-[#364761]">{activeIndex + 1} of {testimonials.length}</span>
+        </div>
       </div>
     </section>
   );

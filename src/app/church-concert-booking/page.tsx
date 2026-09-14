@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import ContactForm from "@/components/ContactForm";
+import ChurchTestimonial from "@/components/ChurchTestimonial";
 import { artists } from "@/data/artists";
 import { SITE_URL } from "@/lib/site";
 
@@ -111,11 +112,14 @@ export default function ChurchConcertBookingPage() {
       </section>
 
       <section id="contact" aria-labelledby="booking-heading" className="mx-auto grid max-w-7xl scroll-mt-24 gap-10 px-6 py-14 sm:py-20 lg:grid-cols-[0.85fr_1.4fr] lg:gap-20 lg:px-8">
-        <div className="self-start bg-[#062653] p-7 text-[#f5f1e8] sm:p-9">
-          <h2 id="booking-heading" className="font-serif text-4xl font-semibold leading-tight">Tell us about<br className="hidden lg:block" /> your church.</h2>
-          <p className="mt-5 max-w-sm leading-relaxed text-[#e2d9c8]">A church location and a little about your plans are a good place to start. Mike will help you explore which ministries may be traveling your way.</p>
-          <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#e8bd68] underline underline-offset-4">719-260-1151</a>.</p>
-          <p className="mt-8 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#e8bd68] underline underline-offset-4">Introduce your ministry here.</Link></p>
+        <div className="self-start">
+          <div className="bg-[#062653] p-7 text-[#f5f1e8] sm:p-9">
+            <h2 id="booking-heading" className="font-serif text-4xl font-semibold leading-tight">Tell us about<br className="hidden lg:block" /> your church.</h2>
+            <p className="mt-5 max-w-sm leading-relaxed text-[#e2d9c8]">A church location and a little about your plans are a good place to start. Mike will help you explore which ministries may be traveling your way.</p>
+            <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#e8bd68] underline underline-offset-4">719-260-1151</a>.</p>
+            <p className="mt-8 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#e8bd68] underline underline-offset-4">Introduce your ministry here.</Link></p>
+          </div>
+          <ChurchTestimonial />
         </div>
         <ContactForm artistOptions={artists.map(({ slug, name }) => ({ slug, name }))} />
       </section>

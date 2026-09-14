@@ -84,6 +84,8 @@ export default function Home() {
     {/* Booking Process Section */}
     <BookingProcess />
 
+    <Testimonials />
+
     {/* About Section */}
     <section id="about" className="py-24 md:py-32 relative scroll-mt-20 border-t border-border section-glow">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
@@ -156,9 +158,6 @@ export default function Home() {
         </div>
       </div>
     </section>
-
-    {/* Testimonials Section */}
-    <Testimonials />
 
     {/* FAQ Section */}
     <FAQ />
