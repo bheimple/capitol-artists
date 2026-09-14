@@ -1,7 +1,7 @@
 export type Testimonial = {
   id: string;
   quote: string;
-  excerpt: string;
+  excerpt?: string;
   author: string;
   role?: string;
   church: string;
@@ -23,8 +23,6 @@ export const testimonials: Testimonial[] = [
     id: "wayne-darty",
     quote:
       "Michael and I have worked together to get Christian artist to come to County Line Baptist Church and it has been such a blessing. He understands what I want and need for our community. He always works out the details! When you work with him, you’ll understand what I mean.",
-    excerpt:
-      "He understands what I want and need for our community. He always works out the details! When you work with him, you’ll understand what I mean.",
     author: "Pastor Wayne Darty",
     church: "County Line Baptist Church",
     location: "Cumby, TX",
@@ -33,8 +31,6 @@ export const testimonials: Testimonial[] = [
     id: "troy-guttormson",
     quote:
       "I have worked with Capitol Artists through Michael Heimple for several years now. Through his booking recommendations, we have had several high-quality gospel artists perform at our church, and our congregation has been greatly blessed by their music. I highly recommend Michael Heimple, Capitol Artists, and their amazing roster of talented musicians.",
-    excerpt:
-      "Through his booking recommendations, we have had several high-quality gospel artists perform at our church, and our congregation has been greatly blessed by their music.",
     author: "Troy Guttormson",
     role: "Worship Pastor",
     church: "Walker Baptist Church",

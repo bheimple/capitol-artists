@@ -27,7 +27,7 @@ function harness({ reduced = false, visible = true, observerAvailable = true } =
   const document = { visibilityState: visible ? "visible" : "hidden", addEventListener: (_, fn) => visibilityListeners.add(fn), removeEventListener: (_, fn) => visibilityListeners.delete(fn) };
   const window = {
     matchMedia: () => preference,
-    setInterval(fn, delay) { assert.equal(delay, 15000, "rotation interval is 15 seconds"); const id = ++nextTimer; timers.set(id, { fn, delay, at: now + delay }); return id; },
+    setInterval(fn, delay) { assert.equal(delay, 25000, "rotation interval allows 25 seconds to read the complete shorter reviews"); const id = ++nextTimer; timers.set(id, { fn, delay, at: now + delay }); return id; },
     clearInterval: (id) => timers.delete(id),
   };
   class IntersectionObserver {
@@ -113,6 +113,7 @@ function assertState(carousel, index, rotating) {
   carousel.slides.forEach((slide, i) => {
     assert.equal(slide.props.inert, i !== index, "inactive slides cannot receive focus or interaction");
     assert.equal(slide.props["aria-hidden"], i !== index, "inactive slides are hidden from assistive technology");
+    assert.equal(slide.props.hidden, i !== index, "inactive reviews do not reserve space beneath the current review");
     assert.ok(slide.props["aria-label"].includes(testimonials[i].author));
     assert.equal(carousel.button(`Show review from ${testimonials[i].author}`).props["aria-disabled"], i === index);
   });
@@ -125,14 +126,14 @@ assert.equal(loop.nodes.find(node => node.type === "button").props["aria-label"]
 loop.intersect(0.24); assertState(loop, 0, false);
 loop.intersect(0.25); assertState(loop, 0, true);
 for (let i = 1; i <= testimonials.length; i++) {
-  loop.advance(14999); assertState(loop, (i - 1) % testimonials.length, true);
+  loop.advance(24999); assertState(loop, (i - 1) % testimonials.length, true);
   loop.advance(1); assertState(loop, i % testimonials.length, true);
 }
 loop.unmount();
 
 for (const condition of ["hover", "offscreen", "hidden document", "reduced motion"]) {
   const carousel = activeCarousel();
-  carousel.advance(14000);
+  carousel.advance(24000);
   if (condition === "hover") carousel.event(carousel.tree, "onMouseEnter");
   if (condition === "offscreen") carousel.intersect(0);
   if (condition === "hidden document") carousel.visibility("hidden");
@@ -144,7 +145,7 @@ for (const condition of ["hover", "offscreen", "hidden document", "reduced motio
   if (condition === "hidden document") carousel.visibility("visible");
   if (condition === "reduced motion") carousel.motion(false);
   assertState(carousel, 0, true);
-  carousel.advance(14999); assertState(carousel, 0, true);
+  carousel.advance(24999); assertState(carousel, 0, true);
   carousel.advance(1); assertState(carousel, 1, true);
   carousel.unmount();
 }
@@ -184,18 +185,30 @@ for (const [label, expected] of [["Next review", 1], ["Previous review", testimo
 }
 
 const reviews = activeCarousel();
+assert.deepEqual(Array.from(testimonials.filter(review => review.excerpt), review => review.id), ["chris-heldt"], "only the long review uses an excerpt");
 testimonials.forEach((review, index) => {
-  assert.ok(review.quote.includes(review.excerpt), "published excerpt is a verbatim portion of the real full quote");
-  assert.ok(flatten(reviews.slides[index]).some(node => node.type === "p" && textContent(node) === `“${review.excerpt}”`));
-  const full = reviews.nodes.find(node => node.props.id === `full-review-${review.id}`);
-  assert.equal(textContent(full), review.quote, "full review retains the complete real quote without truncation or rewriting");
-  assert.equal(full.props.hidden, true);
+  const nodes = flatten(reviews.slides[index]);
+  const full = nodes.find(node => node.props.id === `full-review-${review.id}`);
+  assert.ok(nodes.some(node => node.type === "p" && textContent(node) === `“${review.excerpt ?? review.quote}”`), "each slide shows its excerpt or complete shorter review");
+  if (review.excerpt) {
+    assert.ok(review.quote.includes(review.excerpt), "published excerpt is a verbatim portion of the real full quote");
+    assert.equal(textContent(full), review.quote, "full review retains the complete real quote without truncation or rewriting");
+    assert.equal(full.props.hidden, true);
+    assert.ok(nodes.some(node => node.type === "button" && node.props["aria-controls"] === full.props.id), "long review has a disclosure linked to the full text");
+  } else {
+    assert.equal(full, undefined, "short reviews have no separate duplicate full-review container");
+    assert.ok(!nodes.some(node => node.type === "button"), "short reviews need no Read or Close full review control");
+    assert.equal(nodes.filter(node => node.type === "blockquote").length, 1, "short reviews display the full quotation only once");
+  }
 });
 reviews.event(flatten(reviews.slides[0]).find(node => node.type === "button"), "onClick");
 assertState(reviews, 0, false);
 assert.equal(reviews.button("Close full review").props["aria-expanded"], true);
 assert.equal(reviews.nodes.find(node => node.props.id === `full-review-${testimonials[0].id}`).props.hidden, false);
 reviews.advance(60000); assertState(reviews, 0, false);
+reviews.click("Close full review"); assertState(reviews, 0, false);
+assert.equal(reviews.nodes.find(node => node.props.id === `full-review-${testimonials[0].id}`).props.hidden, true);
+reviews.click("Read full review"); assertState(reviews, 0, false);
 reviews.click(resumeLabel); assertState(reviews, 0, true);
 assert.ok(reviews.nodes.filter(node => node.props.id?.startsWith("full-review-")).every(node => node.props.hidden), "explicit Resume closes the full review before rotating");
 reviews.event(flatten(reviews.slides[0]).find(node => node.type === "button"), "onClick");
@@ -218,4 +231,4 @@ const unsupported = harness({ observerAvailable: false });
 unsupported.advance(60000); assertState(unsupported, 0, false);
 unsupported.click("Next review"); assertState(unsupported, 1, false); unsupported.unmount();
 
-console.log("PASS: actual Testimonials component/data — 15-second loop/wrap, timer/subscription cleanup, hover/focus/pause/offscreen/visibility/motion gates, arrows/dots, expanded reviews, preserved quotes, inert/ARIA state, first rotation control, and pointer/focus/click pause intent. No network requests.");
+console.log("PASS: actual Testimonials component/data — 25-second loop/wrap, timer/subscription cleanup, hover/focus/pause/offscreen/visibility/motion gates, arrows/dots, long-review disclosure, complete short reviews, inactive slides removed from layout, inert/ARIA state, first rotation control, and pointer/focus/click pause intent. No network requests.");

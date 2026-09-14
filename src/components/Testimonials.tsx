@@ -48,7 +48,7 @@ export default function Testimonials() {
     if (!rotating) return;
     const timer = window.setInterval(() => {
       setActiveIndex((index) => (index + 1) % testimonials.length);
-    }, 15000);
+    }, 25000);
     return () => window.clearInterval(timer);
   }, [rotating]);
 
@@ -69,20 +69,13 @@ export default function Testimonials() {
       onFocusCapture={() => setPaused(true)}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
-      className="scroll-mt-20 bg-[#062653] px-5 py-14 text-[#f8f6f0] sm:px-6 md:py-20 lg:px-8"
+      className="scroll-mt-20 bg-[#062653] px-5 py-10 text-[#f8f6f0] sm:px-6 md:py-12 lg:px-8"
     >
-      <div className="mx-auto grid max-w-7xl items-start gap-8 lg:grid-cols-[0.85fr_1.65fr] lg:gap-16">
-        <header className="flex items-start justify-between gap-4 lg:block lg:pt-10">
-          <div>
-            <span aria-hidden="true" className="mb-5 block h-1 w-10 rounded-full bg-[#e8bd68]" />
-            <h2 id="testimonials-heading" className="text-[2rem] font-semibold leading-[1.12] tracking-tight sm:text-4xl lg:text-5xl">
-              What pastors{" "}<br />
-              <span className="text-[#e8bd68]">are saying.</span>
-            </h2>
-            <p className="mt-5 max-w-xs text-base leading-relaxed text-[#cbd6e4]">
-              Stories from the churches we serve.
-            </p>
-          </div>
+      <div className="mx-auto max-w-6xl">
+        <header className="mb-5 flex items-center justify-between gap-4">
+          <h2 id="testimonials-heading" className="text-2xl font-semibold leading-tight tracking-tight sm:text-3xl">
+            What pastors <span className="text-[#e8bd68]">are saying.</span>
+          </h2>
           {!reducedMotion && (
             <button
               type="button"
@@ -94,7 +87,7 @@ export default function Testimonials() {
                 if (!shouldPause) setExpandedId(null);
                 rotationIntent.current = null;
               }}
-              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-full bg-white/10 px-3 text-sm font-medium text-[#f8f6f0] transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e8bd68] sm:px-4 lg:mt-8"
+              className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-full bg-white/10 px-3 text-sm font-medium text-[#f8f6f0] transition-colors hover:bg-white/20 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#e8bd68] sm:px-4"
               aria-label={paused ? "Resume rotation" : "Pause rotation"}
             >
               <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -105,12 +98,8 @@ export default function Testimonials() {
           )}
         </header>
 
-        <div className="min-w-0 rounded-3xl bg-[#fbfaf7] p-5 text-[#062653] sm:p-10 lg:p-12">
-          <svg width="32" height="25" viewBox="0 0 32 25" fill="currentColor" aria-hidden="true" className="mb-6 text-[#a97c30]">
-            <path d="M0 25V14C0 6.5 4.5 1.5 12 0v5c-4.2 1.1-6.5 3.7-6.5 7H13v13H0Zm19 0V14c0-7.5 4.5-12.5 12-14v5c-4.2 1.1-6.5 3.7-6.5 7H32v13H19Z" />
-          </svg>
+        <div className="min-w-0 rounded-2xl bg-[#fbfaf7] p-5 text-[#062653] sm:p-8">
           <div
-            className="grid"
             aria-live={rotating ? "off" : "polite"}
             aria-atomic="false"
             onPointerDown={() => setPaused(true)}
@@ -126,45 +115,54 @@ export default function Testimonials() {
                   aria-label={`${review.author}, ${index + 1} of ${testimonials.length}`}
                   aria-hidden={!active}
                   inert={!active}
-                  className={`col-start-1 row-start-1 flex min-w-0 flex-col items-start text-left transition-[opacity,visibility] duration-300 ease-out motion-reduce:transition-none ${active ? "visible opacity-100" : "invisible pointer-events-none opacity-0"}`}
+                  hidden={!active}
+                  className={active ? "min-w-0 text-left" : "hidden"}
                 >
-                  <figure className="flex w-full flex-1 flex-col">
-                    <blockquote className="pb-8 text-xl font-medium leading-relaxed tracking-[-0.015em] sm:text-2xl lg:text-[1.75rem] [text-wrap:pretty]">
-                      <p>&ldquo;{review.excerpt}&rdquo;</p>
+                  <figure>
+                    <blockquote className="text-lg leading-relaxed sm:text-xl [text-wrap:pretty]">
+                      <p>&ldquo;{review.excerpt ?? review.quote}&rdquo;</p>
                     </blockquote>
-                    <figcaption style={{ borderColor: "#dce1e6" }} className="mt-auto border-t pt-6 leading-relaxed">
-                      <p className="font-semibold">{review.author}</p>
-                      {review.role && <p className="text-sm text-[#506077]">{review.role}</p>}
-                      <p className="mt-1 text-sm text-[#506077]">{review.church}</p>
-                      <p className="text-sm text-[#506077]">{review.location}</p>
+                    <figcaption className="mt-5 flex flex-wrap items-end justify-between gap-x-6 gap-y-1 text-sm leading-relaxed">
+                      <div>
+                        <p className="font-semibold">{review.author}</p>
+                        {review.role && <p className="text-[#506077]">{review.role}</p>}
+                      </div>
+                      <div className="text-[#506077] sm:text-right">
+                        <p>{review.church}</p>
+                        <p>{review.location}</p>
+                      </div>
                     </figcaption>
                   </figure>
-                  <button
-                    type="button"
-                    aria-expanded={expanded}
-                    aria-controls={`full-review-${review.id}`}
-                    onClick={() => {
-                      setPaused(true);
-                      setExpandedId(expanded ? null : review.id);
-                    }}
-                    className="mt-3 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline decoration-[#a97c30] decoration-2 underline-offset-4 hover:text-[#254c7b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]"
-                  >
-                    {expanded ? "Close full review" : "Read full review"}
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                      <path d={expanded ? "m6 15 6-6 6 6" : "m6 9 6 6 6-6"} strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </button>
-                  <div id={`full-review-${review.id}`} hidden={!expanded} style={{ borderColor: "#dce1e6" }} className="mt-4 w-full border-t pt-6">
-                    <blockquote className="text-base leading-relaxed text-[#364761]">
-                      <p>{review.quote}</p>
-                    </blockquote>
-                  </div>
+                  {review.excerpt && (
+                    <>
+                      <button
+                        type="button"
+                        aria-expanded={expanded}
+                        aria-controls={`full-review-${review.id}`}
+                        onClick={() => {
+                          setPaused(true);
+                          setExpandedId(expanded ? null : review.id);
+                        }}
+                        className="mt-2 inline-flex min-h-11 items-center gap-2 text-sm font-semibold underline decoration-[#a97c30] decoration-2 underline-offset-4 hover:text-[#254c7b] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]"
+                      >
+                        {expanded ? "Close full review" : "Read full review"}
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+                          <path d={expanded ? "m6 15 6-6 6 6" : "m6 9 6 6 6-6"} strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                      <div id={`full-review-${review.id}`} hidden={!expanded} style={{ borderColor: "#dce1e6" }} className="mt-4 w-full border-t pt-6">
+                        <blockquote className="text-base leading-relaxed text-[#364761]">
+                          <p>{review.quote}</p>
+                        </blockquote>
+                      </div>
+                    </>
+                  )}
                 </div>
               );
             })}
           </div>
 
-          <div style={{ borderColor: "#dce1e6" }} className="mt-6 flex flex-wrap items-center justify-between gap-x-1 gap-y-2 border-t pt-5">
+          <div style={{ borderColor: "#dce1e6" }} className="mt-3 flex flex-wrap items-center justify-between gap-x-1 gap-y-2 border-t pt-3">
             <div role="group" aria-label="Choose a pastor review" className="flex items-center">
               {testimonials.map((review, index) => (
                 <button
