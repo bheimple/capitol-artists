@@ -21,11 +21,10 @@ export default function Home() {
     <div className="relative">
       {/* Limit the sky crop so the cross and logo remain visible on wide, short screens. */}
       <section aria-labelledby="hero-heading" className="flex flex-col pt-20 md:min-h-[min(100svh,calc(50vw+10rem))] bg-[#f9f6ef]">
-        <h1 id="hero-heading" className="sr-only">Capitol Artists: Exceptional Gospel groups and artists for any occasion. Established 1992.</h1>
         <div className="relative w-full aspect-[2/1] md:aspect-auto md:flex-1 md:min-h-[44vw] md:max-h-[50vw]">
         <Image
           src="/brand/hero-small-logo.webp"
-          alt="A Capitol Artists tour bus on a mountain highway at sunset beneath the navy and gold Capitol Artists wordmark, crowned by a Capitol dome and cross. Exceptional Gospel groups and artists for any occasion. Established 1992."
+          alt="Capitol Artists tour bus at sunset beneath the Capitol dome and cross logo."
           fill
           sizes="100vw"
           loading="eager"
@@ -36,9 +35,14 @@ export default function Home() {
         </div>
         <div className="shrink-0 border-y border-[#d8c9a6] px-6 py-5">
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
-            <p className="max-w-md text-center md:text-left text-sm md:text-base text-[#062653] leading-relaxed">
-              Bring Southern Gospel and Bluegrass Gospel music to your church as we share the Gospel and glorify God together.
-            </p>
+            <div className="max-w-xl text-center md:text-left text-[#062653]">
+              <h1 id="hero-heading" className="font-serif text-xl sm:text-2xl font-bold leading-tight">
+                Southern Gospel concert booking for churches
+              </h1>
+              <p className="mt-2 text-sm leading-relaxed">
+                Since 1992, Mike has helped churches welcome traveling Southern Gospel and Bluegrass Gospel ministries.
+              </p>
+            </div>
             <div className="flex flex-col min-[380px]:flex-row w-full md:w-auto gap-3">
               <Link href="#roster" className="px-6 py-3 rounded-full border border-[#062653]/25 text-[#062653] font-semibold text-sm text-center hover:bg-[#062653]/5 transition-colors">Explore the Roster</Link>
               <Link href="#contact" className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm text-center hover:bg-[#123d70] transition-colors">Ask About a Concert</Link>
@@ -145,7 +149,7 @@ export default function Home() {
                     src="/images/mike-heimple-family-v2.jpg"
                     alt="Mike Heimple, Founder and Booking Agent"
                     fill
-                    sizes="(max-width: 768px) 100vw, 480px"
+                    sizes="(min-width: 1280px) 480px, (min-width: 768px) calc(50vw - 5rem), (min-width: 528px) 480px, calc(100vw - 3rem)"
                     className="object-cover"
                   />
                 </div>

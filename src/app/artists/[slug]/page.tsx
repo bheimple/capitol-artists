@@ -66,6 +66,8 @@ export default async function ArtistPage({
 
   const { title, description, relatedArtists } = getArtistPageDetails(artist);
   const media = artistMedia[artist.slug];
+  const foundedYear = /^\d{4}$/.test(artist.founded ?? "") ? artist.founded : undefined;
+  const musicStyle = artist.genre.replaceAll(" · ", " and ");
   const photoWidth = Math.min(552, artist.imageWidth, Math.floor(480 * artist.imageWidth / artist.imageHeight));
   const mobilePhotoWidth = Math.min(artist.imageWidth, Math.floor(320 * artist.imageWidth / artist.imageHeight));
   const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
@@ -95,7 +97,7 @@ export default async function ArtistPage({
           height: artist.imageHeight,
         },
         ...(artist.basedIn && { location: artist.basedIn }),
-        ...(artist.founded && /^\d{4}$/.test(artist.founded) && { foundingDate: artist.founded }),
+        ...(foundedYear && { foundingDate: foundedYear }),
         sameAs: [artist.website, ...Object.values(artist.social ?? {})].filter(Boolean),
       },
       {
@@ -215,25 +217,79 @@ export default async function ArtistPage({
       )}
 
       {/* Bio + Stats Layout */}
-      <section className="py-20 md:py-28 border-t border-border section-glow">
+      <section aria-labelledby="artist-about-heading" className="py-20 md:py-28 border-t border-border section-glow">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-3 gap-12 md:gap-16">
             {/* Bio - 2/3 width */}
             <ScrollReveal direction="right" className="md:col-span-2">
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-8 h-px bg-accent" />
-                <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+                <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
                   About
                 </span>
               </div>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold mb-8">
-                The Story
+              <h2 id="artist-about-heading" className="scroll-mt-28 font-serif text-3xl md:text-4xl font-bold mb-8">
+                About {artist.name}
               </h2>
               <div className="space-y-6 text-lg text-muted leading-relaxed">
                 {artist.fullBio.map((paragraph, i) => (
                   <p key={i}>{paragraph}</p>
                 ))}
               </div>
+              {artist.sources && artist.sources.length > 0 && (
+                <div className="mt-7 text-sm leading-relaxed text-muted">
+                  <p className="font-medium">Artist information:</p>
+                  <ul className="mt-1 flex flex-wrap gap-x-5 gap-y-1">
+                    {artist.sources.map((source) => (
+                      <li key={source.url}>
+                        <a href={source.url} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-foreground underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                          {source.label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              <section aria-labelledby="artist-hosting-heading" className="mt-12 border-t border-border pt-10">
+                <h2 id="artist-hosting-heading" className="scroll-mt-28 font-serif text-2xl md:text-3xl font-bold leading-tight">
+                  Planning a Church Concert with {artist.name}
+                </h2>
+                <div className="mt-7 space-y-7">
+                  <div>
+                    <h3 className="text-lg font-semibold leading-snug">What music will we hear?</h3>
+                    <p className="mt-2 text-muted leading-relaxed">
+                      Hear {musicStyle} music from {artist.name}.
+                      {media ? (
+                        <> <a href="#listen" className="font-medium text-foreground underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">Listen to the featured song</a> to get a feel for the music, then tell Mike what you hope a concert will mean for your congregation and community.</>
+                      ) : (
+                        <> Tell Mike what you hope a concert will mean for your congregation and community, and he can help you consider a good fit.</>
+                      )}
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold leading-snug">Can {artist.name} visit our area?</h3>
+                    <p className="mt-2 text-muted leading-relaxed">
+                      {artist.basedIn && <>This ministry is based in {artist.basedIn}. </>}
+                      Visits depend on travel routes and available dates. Share your church&apos;s city and state, any dates you have in mind, and whether you have some flexibility. Mike can check what may work for your church and the artist.
+                    </p>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold leading-snug">What should our church plan to provide?</h3>
+                    <p className="mt-2 text-muted leading-relaxed">
+                      Churches usually welcome visiting artists with a love offering and a meal. Mike will talk through the arrangements with you before a visit is confirmed. Small churches are welcome to inquire.
+                    </p>
+                  </div>
+                </div>
+                <div className="mt-7 flex flex-col items-start gap-2 text-sm font-semibold">
+                  <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex min-h-11 items-center text-[color:var(--accent-dark)] underline underline-offset-4 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                    Ask Mike about hosting {artist.name}
+                  </Link>
+                  <Link href="/church-concert-booking" className="inline-flex min-h-11 items-center text-foreground underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                    Read the church concert planning guide
+                  </Link>
+                </div>
+              </section>
             </ScrollReveal>
 
             {/* Stats sidebar - 1/3 width */}
@@ -256,14 +312,14 @@ export default async function ArtistPage({
                         </div>
                       </div>
                     )}
-                    {artist.founded && (
+                    {foundedYear && (
                       <div className="flex items-start gap-3">
                         <div className="w-9 h-9 rounded-lg bg-accent/5 border border-accent/10 flex items-center justify-center flex-shrink-0">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-accent"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6" strokeLinecap="round"/><line x1="8" y1="2" x2="8" y2="6" strokeLinecap="round"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                         </div>
                         <div>
                           <p className="text-xs text-muted">Established</p>
-                          <p className="text-sm font-medium text-foreground">{artist.founded}</p>
+                          <p className="text-sm font-medium text-foreground">{foundedYear}</p>
                         </div>
                       </div>
                     )}
@@ -343,7 +399,7 @@ export default async function ArtistPage({
                   </Link>
                   <Link
                     href="/church-concert-booking"
-                    className="mt-4 block text-center text-sm text-accent underline underline-offset-4 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
+                    className="mt-4 block text-center text-sm text-[color:var(--accent-dark)] underline underline-offset-4 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent"
                   >
                     Read the church concert planning guide
                   </Link>
@@ -362,7 +418,7 @@ export default async function ArtistPage({
               <div>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="w-8 h-px bg-accent" />
-                  <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
+                  <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
                     More from Capitol Artists
                   </span>
                 </div>
@@ -372,7 +428,7 @@ export default async function ArtistPage({
               </div>
               <Link
                 href="/#roster"
-                className="hidden sm:inline-flex items-center gap-1 text-sm text-accent hover:text-accent-hover transition-colors"
+                className="hidden sm:inline-flex items-center gap-1 text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors"
               >
                 View All
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>

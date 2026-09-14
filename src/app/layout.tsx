@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     google: "YDHOWGTdRTkfynTYAruOV42nKh0pNcvu9sx0biZOsRQ",
   },
   title: {
-    default: "Capitol Artists | Gospel Concert Booking Agency",
+    default: "Southern Gospel Concert Booking | Capitol Artists",
     template: "%s | Capitol Artists",
   },
   description:
@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   authors: [{ name: "Capitol Artists" }],
   creator: "Capitol Artists",
   openGraph: {
-    title: "Capitol Artists | Gospel Concert Booking Agency",
+    title: "Southern Gospel Concert Booking | Capitol Artists",
     description:
       "Connecting churches with Southern Gospel and Bluegrass Gospel ministries since 1992. Ask Mike about concert booking, travel routes, and dates.",
     type: "website",
@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     images: ["/brand/hero-small-logo.webp"],
-    title: "Capitol Artists | Gospel Concert Booking Agency",
+    title: "Southern Gospel Concert Booking | Capitol Artists",
     description:
       "Connecting churches with Southern Gospel and Bluegrass Gospel ministries since 1992. Ask Mike about concert booking, travel routes, and dates.",
   },
@@ -91,7 +91,7 @@ const structuredData = {
         "@type": "Person",
         name: "Mike Heimple",
       },
-      telephone: "719-260-1151",
+      telephone: "+1-719-260-1151",
       email: "mike@capitol-artists.com",
     },
     {

@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 
 type ScrollRevealProps = {
   children: ReactNode;
@@ -19,21 +19,40 @@ export default function ScrollReveal({
   direction = "up",
   once = true,
 }: ScrollRevealProps) {
-  const [isVisible, setIsVisible] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
-    if (!el) return;
+    if (
+      !el ||
+      typeof window.IntersectionObserver !== "function" ||
+      typeof window.matchMedia !== "function" ||
+      typeof el.animate !== "function"
+    ) return;
 
-    const observer = new IntersectionObserver(
+    const motionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    if (motionPreference.matches) return;
+
+    const startingTransform = {
+      up: "translateY(24px)",
+      left: "translateX(-24px)",
+      right: "translateX(24px)",
+      none: "none",
+    }[direction];
+    let animation: Animation | undefined;
+    const observer = new window.IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          if (once) observer.disconnect();
-        } else if (!once) {
-          setIsVisible(false);
-        }
+        if (!entry.isIntersecting || motionPreference.matches) return;
+
+        animation?.cancel();
+        animation = el.animate(
+          [
+            { opacity: 0.5, transform: startingTransform },
+            { opacity: 1, transform: "none" },
+          ],
+          { duration: 700, delay, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "backwards" }
+        );
+        if (once) observer.disconnect();
       },
       {
         threshold: 0.12,
@@ -41,29 +60,24 @@ export default function ScrollReveal({
       }
     );
 
+    const stopForReducedMotion = () => {
+      if (motionPreference.matches) {
+        animation?.cancel();
+        observer.disconnect();
+      }
+    };
+    motionPreference.addEventListener("change", stopForReducedMotion);
     observer.observe(el);
-    return () => observer.disconnect();
-  }, [once]);
+    return () => {
+      observer.disconnect();
+      animation?.cancel();
+      motionPreference.removeEventListener("change", stopForReducedMotion);
+    };
+  }, [delay, direction, once]);
 
-  const hiddenTransform = {
-    up: "translateY(40px)",
-    left: "translateX(-40px)",
-    right: "translateX(40px)",
-    none: "none",
-  }[direction];
-
+  // Content is visible before hydration, without JavaScript, and if animation is unsupported.
   return (
-    <div
-      ref={ref}
-      className={className}
-      style={{
-        opacity: isVisible ? 1 : 0,
-        transform: isVisible ? "none" : hiddenTransform,
-        transition: "opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1)",
-        transitionDelay: `${delay}ms`,
-        willChange: "opacity, transform",
-      }}
-    >
+    <div ref={ref} className={className}>
       {children}
     </div>
   );

@@ -35,7 +35,7 @@ export default function ArtistMusicPlayer({
           <button
             type="button"
             onClick={() => setIsLoaded(true)}
-            aria-label={`Play ${title} by ${artistName}`}
+            aria-label={`Play music: ${title} by ${artistName}`}
             className="group absolute inset-0 flex h-full w-full flex-col items-center justify-center gap-4 p-6 text-white hover:bg-[#103b70] transition-colors focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#e8bd68]"
           >
             <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#e8bd68] text-[#062653] group-hover:bg-[#f3cf89] transition-colors">
