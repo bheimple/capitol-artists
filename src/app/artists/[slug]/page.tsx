@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import type { CSSProperties } from "react";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
@@ -65,7 +66,8 @@ export default async function ArtistPage({
 
   const { title, description, relatedArtists } = getArtistPageDetails(artist);
   const media = artistMedia[artist.slug];
-  const photoWidth = Math.min(1024, Math.round(640 * artist.imageWidth / artist.imageHeight));
+  const photoWidth = Math.min(552, artist.imageWidth, Math.floor(480 * artist.imageWidth / artist.imageHeight));
+  const mobilePhotoWidth = Math.min(artist.imageWidth, Math.floor(320 * artist.imageWidth / artist.imageHeight));
   const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
   const artistId = `${artistUrl}#artist`;
   const pageId = `${artistUrl}#webpage`;
@@ -128,8 +130,8 @@ export default async function ArtistPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
       />
 
-      <section aria-labelledby="artist-heading" className="bg-[#062653] text-white pt-28 md:pt-32 pb-10 md:pb-16">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section aria-labelledby="artist-heading" className="bg-[#062653] text-white pt-24 md:pt-28 pb-10 md:pb-12">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="py-2 text-xs sm:text-sm text-white/85">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
               <li>
@@ -145,44 +147,48 @@ export default async function ArtistPage({
               </li>
             </ol>
           </nav>
-          <div className="max-w-4xl mx-auto text-center pt-7 md:pt-8">
-            <h1 id="artist-heading" className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.08] tracking-tight text-white [text-wrap:balance]">
-              {artist.name}
-            </h1>
-            <p className="mt-4 text-xs sm:text-sm font-semibold uppercase tracking-[0.16em] leading-relaxed text-[#e7bd69]">
-              {artist.genre}
-            </p>
-            <p className="max-w-2xl mx-auto mt-5 text-base sm:text-lg leading-relaxed text-[#e2e8f0] [text-wrap:pretty]">
-              {artist.shortBio}
-            </p>
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-x-7 gap-y-4">
-              <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex items-center justify-center gap-2 rounded-full bg-[#e7bd69] px-7 py-3.5 text-sm font-bold text-[#062653] hover:bg-[#f0cd87] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-                Ask About This Artist
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </Link>
-              <a href={artist.website} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 py-3 text-sm font-medium text-white underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-                Visit Website
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </a>
-              {media && (
-                <a href="#listen" className="inline-flex min-h-11 items-center py-3 text-sm font-medium text-white underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
-                  Listen to Their Music
-                </a>
-              )}
+          <div className="mt-5 grid gap-y-6 text-center md:mt-7 md:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] md:grid-rows-[1fr_1fr] md:gap-x-12 md:text-left lg:gap-x-14">
+            <div className="min-w-0 md:col-start-1 md:row-start-1 md:self-end">
+              <h1 id="artist-heading" className="font-serif text-4xl sm:text-5xl lg:text-[3.5rem] font-bold leading-[1.08] tracking-tight text-white [text-wrap:balance]">
+                {artist.name}
+              </h1>
+              <p className="hidden md:block mt-4 text-sm font-semibold leading-relaxed text-[#e7bd69]">
+                {artist.genre}
+              </p>
             </div>
-          </div>
-          <div className="mt-10 md:mt-12">
-            <Image
-              src={artist.image}
-              alt={artist.name}
-              width={artist.imageWidth}
-              height={artist.imageHeight}
-              sizes={`(max-width: ${photoWidth + 48}px) calc(100vw - 48px), ${photoWidth}px`}
-              loading="eager"
-              fetchPriority="high"
-              className="block mx-auto h-auto max-w-full"
-              style={{ width: photoWidth }}
-            />
+            <div className="flex min-w-0 items-center justify-center md:col-start-2 md:row-start-1 md:row-span-2">
+              <Image
+                src={artist.image}
+                alt={artist.name}
+                width={artist.imageWidth}
+                height={artist.imageHeight}
+                sizes={`(min-width: 1152px) ${photoWidth}px, (min-width: 768px) 48vw, (max-width: ${mobilePhotoWidth + 48}px) calc(100vw - 48px), ${mobilePhotoWidth}px`}
+                loading="eager"
+                fetchPriority="high"
+                className="block h-auto max-w-full w-[var(--artist-photo-mobile-width)] md:w-[var(--artist-photo-width)]"
+                style={{
+                  "--artist-photo-mobile-width": `${mobilePhotoWidth}px`,
+                  "--artist-photo-width": `${photoWidth}px`,
+                } as CSSProperties}
+              />
+            </div>
+            <div className="min-w-0 md:col-start-1 md:row-start-2 md:self-start">
+              <p className="max-w-lg mx-auto text-base sm:text-lg leading-relaxed text-[#e2e8f0] [text-wrap:pretty] md:mx-0">
+                {artist.shortBio}
+              </p>
+              <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-start">
+                <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#e7bd69] px-6 py-3.5 text-sm font-bold text-[#062653] hover:bg-[#f0cd87] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                  Ask About a Concert
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
+                </Link>
+                {media && (
+                  <a href="#listen" className="inline-flex min-h-12 items-center gap-2 py-3 text-sm font-medium text-white underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5v14l11-7z" /></svg>
+                    Listen to Their Music
+                  </a>
+                )}
+              </div>
+            </div>
           </div>
         </div>
       </section>
