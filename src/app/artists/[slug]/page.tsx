@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import { artists, getArtistBySlug } from "@/data/artists";
+import { artistMedia } from "@/data/artist-media";
+import ArtistMusicPlayer from "@/components/ArtistMusicPlayer";
 import { SITE_URL } from "@/lib/site";
 import { getArtistPageDetails } from "@/lib/artist-seo";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -62,6 +64,7 @@ export default async function ArtistPage({
   }
 
   const { title, description, relatedArtists } = getArtistPageDetails(artist);
+  const media = artistMedia[artist.slug];
   const photoWidth = Math.min(1024, Math.round(640 * artist.imageWidth / artist.imageHeight));
   const artistUrl = `${SITE_URL}/artists/${artist.slug}`;
   const artistId = `${artistUrl}#artist`;
@@ -161,6 +164,11 @@ export default async function ArtistPage({
                 Visit Website
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M7 17L17 7M7 7h10v10" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </a>
+              {media && (
+                <a href="#listen" className="inline-flex min-h-11 items-center py-3 text-sm font-medium text-white underline decoration-white/50 underline-offset-4 hover:decoration-white focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                  Listen to Their Music
+                </a>
+              )}
             </div>
           </div>
           <div className="mt-10 md:mt-12">
@@ -178,6 +186,27 @@ export default async function ArtistPage({
           </div>
         </div>
       </section>
+
+      {media && (
+        <section id="listen" aria-labelledby="listen-heading" className="scroll-mt-24 border-t border-border bg-[#efe0bd] py-14 md:py-20">
+          <div className="mx-auto grid max-w-7xl items-center gap-8 px-6 md:grid-cols-[1fr_1.5fr] md:gap-14 lg:px-8">
+            <div>
+              <h2 id="listen-heading" className="font-serif text-3xl font-bold leading-tight text-[#062653] md:text-4xl [text-wrap:balance]">
+                Listen to Their Music
+              </h2>
+              <p className="mt-4 max-w-lg text-lg leading-relaxed text-[#364761]">
+                Hear {artist.name} before you ask about a concert for your church.
+              </p>
+              <h3 className="mt-7 font-serif text-2xl font-bold leading-snug text-[#062653]">{media.title}</h3>
+              <p className="mt-2 text-sm text-[#364761]">{media.format}</p>
+              <a href={media.sourceUrl} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex min-h-11 items-center text-sm font-medium text-[#062653] underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">
+                More from {artist.name}
+              </a>
+            </div>
+            <ArtistMusicPlayer key={artist.slug} videoId={media.videoId} title={media.title} artistName={artist.name} />
+          </div>
+        </section>
+      )}
 
       {/* Bio + Stats Layout */}
       <section className="py-20 md:py-28 border-t border-border section-glow">
