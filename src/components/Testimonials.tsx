@@ -128,7 +128,7 @@ export default function Testimonials() {
                         {review.role && <p className="text-[#506077]">{review.role}</p>}
                       </div>
                       <div className="text-[#506077] sm:text-right">
-                        <p>{review.church}</p>
+                        <p className="whitespace-pre-line">{review.church}</p>
                         <p>{review.location}</p>
                       </div>
                     </figcaption>

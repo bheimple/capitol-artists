@@ -47,4 +47,12 @@ export const testimonials: Testimonial[] = [
     church: "First Methodist Church Henderson",
     location: "Henderson, TN",
   },
+  {
+    id: "jason-sinagra",
+    quote:
+      "As a pastor of two congregations, we work with Capitol Artists a couple times a year, and the audiences are often amazed at the level of talent we are able to bring into our church, thanks to Michael and Capitol Artists.",
+    author: "Pastor Jason Sinagra",
+    church: "Mt. Nebo Presbyterian Church\nThe Presbyterian Church of Prospect",
+    location: "Prospect, PA",
+  },
 ];
