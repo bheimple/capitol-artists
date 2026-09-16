@@ -48,9 +48,9 @@ const steps = [
 
 export default function BookingProcess() {
   return (
-    <section className="py-24 md:py-32 border-t border-border section-glow relative">
+    <section className="py-14 md:py-24 border-t border-border section-glow relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        <ScrollReveal direction="up" className="text-center mb-16">
+        <ScrollReveal direction="up" className="text-center mb-8 md:mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="w-8 h-px bg-accent" />
             <span className="text-xs font-semibold tracking-[0.15em] text-accent uppercase">
@@ -65,7 +65,7 @@ export default function BookingProcess() {
             Our artists travel by bus to share the Gospel in song. Mike helps
             churches connect with these ministries so we can glorify God together.
           </p>
-          <Link href="/church-concert-booking" className="mt-5 inline-block text-sm font-semibold text-[#062653] underline underline-offset-4">Read the Church Concert Planning Guide</Link>
+          <Link href="/church-concert-booking" className="mt-5 inline-block text-base font-semibold text-[#062653] underline underline-offset-4">Read the Church Concert Planning Guide</Link>
         </ScrollReveal>
 
         <div className="grid md:grid-cols-3 gap-6 md:gap-8">
@@ -95,7 +95,7 @@ export default function BookingProcess() {
                   <h3 className="text-xl font-serif font-bold mb-3">
                     {step.title}
                   </h3>
-                  <p className="text-sm text-muted leading-relaxed">
+                  <p className="text-base text-muted leading-relaxed">
                     {step.description}
                   </p>
                 </div>

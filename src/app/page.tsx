@@ -34,28 +34,34 @@ export default function Home() {
         <Psalm150 />
         </div>
         <div className="shrink-0 border-y border-[#d8c9a6] px-6 py-5">
-          <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-5">
+          <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center justify-between gap-5">
             <div className="max-w-xl text-center md:text-left text-[#062653]">
               <h1 id="hero-heading" className="font-serif text-xl sm:text-2xl font-bold leading-tight">
                 Southern Gospel concert booking for churches
               </h1>
-              <p className="mt-2 text-sm leading-relaxed">
-                Since 1992, Mike has helped churches welcome traveling Southern Gospel and Bluegrass Gospel ministries.
+              <p className="mt-2 text-base leading-relaxed">
+                Churches generally welcome our ministries with a love offering and a meal.
+                Mike helps find a group and date that fit.
               </p>
             </div>
-            <div className="flex flex-col min-[380px]:flex-row w-full md:w-auto gap-3">
-              <Link href="#roster" prefetch={false} className="px-6 py-3 rounded-full border border-[#062653]/25 text-[#062653] font-semibold text-sm text-center hover:bg-[#062653]/5 transition-colors">Explore the Roster</Link>
-              <Link href="#contact" prefetch={false} className="px-6 py-3 rounded-full bg-[#062653] text-white font-semibold text-sm text-center hover:bg-[#123d70] transition-colors">Ask About a Concert</Link>
+            <div className="w-full lg:w-auto lg:shrink-0">
+              <div className="grid grid-cols-2 gap-3">
+                <Link href="#roster" prefetch={false} className="cta-navy cta-compact">Explore the Roster</Link>
+                <Link href="#contact" prefetch={false} className="cta-gold cta-compact">Ask About a Concert</Link>
+              </div>
+              <a href="tel:719-260-1151" className="mt-2 flex min-h-11 items-center justify-center text-base font-semibold text-[#062653] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]">
+                Call Mike: 719-260-1151
+              </a>
             </div>
           </div>
         </div>
       </section>
 
     {/* Roster Section */}
-    <section id="roster" className="py-24 md:py-32 relative scroll-mt-20 section-glow">
+    <section id="roster" className="py-14 md:py-24 relative scroll-mt-20 section-glow">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <ScrollReveal direction="up">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4 md:gap-6 mb-8 md:mb-10">
             <div>
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-8 h-px bg-accent" />
@@ -67,7 +73,7 @@ export default function Home() {
                 Our Artist Roster
               </h2>
             </div>
-            <p className="text-muted max-w-md text-sm leading-relaxed">
+            <p className="text-muted max-w-md text-base leading-relaxed">
               Meet the Gospel ministries who travel to share Christ through song.
               Mike can help connect your church with a group whose route and
               availability fit.
@@ -91,7 +97,7 @@ export default function Home() {
     <Testimonials />
 
     {/* About Section */}
-    <section id="about" className="py-24 md:py-32 relative scroll-mt-20 border-t border-border section-glow">
+    <section id="about" className="py-14 md:py-24 relative scroll-mt-20 border-t border-border section-glow">
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 gap-12 md:gap-20 items-center">
           <ScrollReveal direction="right">
@@ -124,15 +130,15 @@ export default function Home() {
                   or at Disneyland!
                 </p>
               </div>
-              <div className="mt-8 flex items-center gap-4">
+              <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:gap-4">
                 <div className="flex flex-col">
-                  <span className="text-sm font-semibold text-foreground">Mike Heimple</span>
-                  <span className="text-xs text-muted">Founder & Booking Agent</span>
+                  <span className="text-base font-semibold text-foreground">Mike Heimple</span>
+                  <span className="text-sm text-muted">Founder & Booking Agent</span>
                 </div>
-                <div className="w-px h-10 bg-border" />
+                <div className="hidden sm:block w-px h-10 bg-border" />
                 <a
                   href="tel:719-260-1151"
-                  className="text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors"
+                  className="text-base text-[#062653] underline underline-offset-4 hover:text-[#123d70] transition-colors"
                 >
                   719-260-1151
                 </a>
@@ -167,9 +173,9 @@ export default function Home() {
     <FAQ />
 
     {/* Contact Section */}
-    <section id="contact" className="py-24 md:py-32 relative scroll-mt-20 border-t border-border section-glow">
+    <section id="contact" className="py-14 md:py-24 relative scroll-mt-20 border-t border-border section-glow">
       <div className="max-w-3xl mx-auto px-6 lg:px-8 relative z-10">
-        <ScrollReveal direction="up" className="text-center mb-12">
+        <ScrollReveal direction="up" className="text-center mb-8 md:mb-10">
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="w-8 h-px bg-accent" />
             <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">

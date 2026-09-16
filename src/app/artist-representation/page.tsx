@@ -91,7 +91,7 @@ export default function ArtistRepresentationPage() {
                 <a href="#representation-inquiry" className="cta-gold">
                   Introduce Your Ministry <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </a>
-                <Link href="/#roster" className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#b5c4d8] px-6 py-3 text-sm font-semibold text-[#f5f1e8] transition-colors hover:bg-[#123d70] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                <Link href="/#roster" className="cta-navy">
                   Meet Our Artists
                 </Link>
               </div>
@@ -134,11 +134,11 @@ export default function ArtistRepresentationPage() {
             <h2 id="inquiry-heading" className="font-serif text-4xl font-semibold leading-tight">Tell us about<br className="hidden lg:block" /> your ministry.</h2>
             <p className="mt-5 max-w-sm leading-relaxed text-[#e2d9c8]">Introduce your music and the area you travel. Mike can get to know your ministry and talk with you about a booking relationship.</p>
             <div className="mt-8 border-t border-[#b5c4d8] pt-6">
-              <p className="text-sm text-[#e2d9c8]">Prefer a conversation?</p>
+              <p className="text-base text-[#e2d9c8]">Prefer a conversation?</p>
               <p className="mt-2 font-semibold">Mike Heimple</p>
               <a href="tel:719-260-1151" className="mt-2 inline-block text-lg font-semibold text-[#e8bd68] underline underline-offset-4">719-260-1151</a>
             </div>
-            <p className="mt-8 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">
+            <p className="mt-8 max-w-sm text-base leading-relaxed text-[#e2d9c8]">
               Planning a concert for your church? <Link href="/church-concert-booking#contact" className="font-semibold text-[#e8bd68] underline underline-offset-4">Ask about hosting a Gospel ministry.</Link>
             </p>
           </div>

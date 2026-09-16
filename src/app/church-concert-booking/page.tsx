@@ -67,7 +67,7 @@ export default function ChurchConcertBookingPage() {
               <p className="mt-7 max-w-xl text-lg leading-relaxed text-[#e2d9c8]">Welcome a traveling Gospel ministry to encourage your congregation and share the hope of Christ. Tell Mike where your church is and what you have in mind, and explore the artists and dates that could fit.</p>
               <div className="mt-9 flex flex-wrap items-center gap-4">
                 <a href="#contact" className="cta-gold">Ask About a Concert <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg></a>
-                <Link href="/#roster" className="inline-flex min-h-12 items-center justify-center rounded-full border border-[#b5c4d8] px-6 py-3 text-sm font-semibold text-[#f5f1e8] transition-colors hover:bg-[#123d70] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">Meet the Ministries</Link>
+                <Link href="/#roster" className="cta-navy">Meet the Ministries</Link>
               </div>
             </div>
             <aside className="bg-[#efe0bd] px-7 py-9 text-[#062653] sm:p-10">
@@ -116,8 +116,8 @@ export default function ChurchConcertBookingPage() {
           <div className="bg-[#062653] p-7 text-[#f5f1e8] sm:p-9">
             <h2 id="booking-heading" className="font-serif text-4xl font-semibold leading-tight">Tell us about<br className="hidden lg:block" /> your church.</h2>
             <p className="mt-5 max-w-sm leading-relaxed text-[#e2d9c8]">A church location and a little about your plans are a good place to start. Mike will help you explore which ministries may be traveling your way.</p>
-            <p className="mt-6 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#e8bd68] underline underline-offset-4">719-260-1151</a>.</p>
-            <p className="mt-8 max-w-sm text-sm leading-relaxed text-[#e2d9c8]">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#e8bd68] underline underline-offset-4">Introduce your ministry here.</Link></p>
+            <p className="mt-6 max-w-sm text-base leading-relaxed text-[#e2d9c8]">Prefer to talk? Call <a href="tel:719-260-1151" className="font-semibold text-[#e8bd68] underline underline-offset-4">719-260-1151</a>.</p>
+            <p className="mt-8 max-w-sm text-base leading-relaxed text-[#e2d9c8]">Are you an artist seeking representation? <Link href="/artist-representation" className="font-semibold text-[#e8bd68] underline underline-offset-4">Introduce your ministry here.</Link></p>
           </div>
           <ChurchTestimonial />
         </div>

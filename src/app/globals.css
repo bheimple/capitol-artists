@@ -92,7 +92,8 @@ html {
 }
 
 /* Gold identifies the main inquiry action against the navy and cream surfaces. */
-.cta-gold {
+.cta-gold,
+.cta-navy {
   display: inline-flex;
   min-height: 52px;
   align-items: center;
@@ -114,12 +115,16 @@ html {
   background: #f3cf89;
 }
 
-.cta-gold:focus-visible {
+.cta-gold:focus-visible,
+.cta-navy:focus-visible {
   outline: 3px solid #062653;
   outline-offset: 4px;
 }
 
-.landing-hero .cta-gold:focus-visible {
+.landing-hero .cta-gold:focus-visible,
+.landing-hero .cta-navy:focus-visible,
+.artist-hero .cta-gold:focus-visible,
+.artist-hero .cta-navy:focus-visible {
   outline-color: #f5f1e8;
 }
 
@@ -131,6 +136,22 @@ html {
 
 .cta-gold svg {
   flex-shrink: 0;
+}
+
+.cta-navy {
+  border-color: #b5c4d8;
+  background: #062653;
+  color: #fff;
+}
+
+.cta-navy:hover {
+  background: #123d70;
+}
+
+.cta-compact {
+  min-height: 44px;
+  padding: 10px 20px;
+  font-size: 0.875rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

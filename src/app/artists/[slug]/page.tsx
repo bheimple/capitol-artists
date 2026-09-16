@@ -6,7 +6,7 @@ import Link from "next/link";
 import { artists, getArtistBySlug } from "@/data/artists";
 import { artistMedia } from "@/data/artist-media";
 import ArtistMusicPlayer from "@/components/ArtistMusicPlayer";
-import ArtistCardImage from "@/components/ArtistCardImage";
+import ArtistCard from "@/components/ArtistCard";
 import { SITE_URL } from "@/lib/site";
 import { getArtistPageDetails } from "@/lib/artist-seo";
 import ScrollReveal from "@/components/ScrollReveal";
@@ -138,7 +138,7 @@ export default async function ArtistPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData).replace(/</g, "\\u003c") }}
       />
 
-      <section aria-labelledby="artist-heading" className="bg-[#062653] text-white pt-24 md:pt-28 pb-10 md:pb-12">
+      <section aria-labelledby="artist-heading" className="artist-hero bg-[#062653] text-white pt-24 md:pt-28 pb-10 md:pb-12">
         <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <nav aria-label="Breadcrumb" className="py-2 text-xs sm:text-sm text-white/85">
             <ol className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -185,7 +185,7 @@ export default async function ArtistPage({
                 {artist.shortBio}
               </p>
               <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-start">
-                <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#e7bd69] px-6 py-3.5 text-sm font-bold text-[#062653] hover:bg-[#f0cd87] transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white">
+                <Link href={`/?artist=${artist.slug}#contact`} className="cta-gold">
                   Ask About a Concert
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" /></svg>
                 </Link>
@@ -223,7 +223,7 @@ export default async function ArtistPage({
       )}
 
       {/* Bio + Stats Layout */}
-      <section aria-labelledby="artist-about-heading" className="py-20 md:py-28 border-t border-border section-glow">
+      <section aria-labelledby="artist-about-heading" className="py-14 md:py-24 border-t border-border section-glow">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
           <div className="grid md:grid-cols-3 gap-12 md:gap-16">
             {/* Bio - 2/3 width */}
@@ -292,7 +292,7 @@ export default async function ArtistPage({
                   </div>
                 </div>
                 <div className="mt-7 flex flex-col items-start gap-2 text-sm font-semibold">
-                  <Link href={`/?artist=${artist.slug}#contact`} className="inline-flex min-h-11 items-center text-[color:var(--accent-dark)] underline underline-offset-4 hover:text-accent-hover focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
+                  <Link href={`/?artist=${artist.slug}#contact`} className="cta-gold cta-compact">
                     Ask Mike about hosting {artist.name}
                   </Link>
                   <Link href="/church-concert-booking" className="inline-flex min-h-11 items-center text-foreground underline underline-offset-4 hover:decoration-2 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-accent">
@@ -351,7 +351,7 @@ export default async function ArtistPage({
                     href={artist.website}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="mt-6 flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border hover:border-accent/30 transition-all group"
+                    className="mt-6 flex items-center justify-between p-3 rounded-lg bg-background/50 border border-border hover:border-accent/30 transition-all group focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]"
                   >
                     <span className="text-sm text-muted group-hover:text-foreground transition-colors">Official Website</span>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-muted group-hover:text-accent transition-colors"><path d="M7 17L17 7M7 7h10v10" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -360,17 +360,17 @@ export default async function ArtistPage({
                   {artist.social && (artist.social.facebook || artist.social.youtube || artist.social.instagram) && (
                     <div className="mt-6 flex items-center gap-3">
                       {artist.social.facebook && (
-                        <a href={artist.social.facebook} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all" aria-label="Facebook">
+                        <a href={artist.social.facebook} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]" aria-label="Facebook">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
                         </a>
                       )}
                       {artist.social.youtube && (
-                        <a href={artist.social.youtube} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all" aria-label="YouTube">
+                        <a href={artist.social.youtube} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]" aria-label="YouTube">
                           <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
                         </a>
                       )}
                       {artist.social.instagram && (
-                        <a href={artist.social.instagram} target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all" aria-label="Instagram">
+                        <a href={artist.social.instagram} target="_blank" rel="noopener noreferrer" className="w-11 h-11 rounded-full bg-surface/50 border border-border backdrop-blur-sm flex items-center justify-center text-muted hover:text-accent hover:border-accent/30 transition-all focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]" aria-label="Instagram">
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
                         </a>
                       )}
@@ -388,7 +388,7 @@ export default async function ArtistPage({
                       {artist.highlights.map((highlight, i) => (
                         <div key={i} className="flex items-center gap-3">
                           <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0" />
-                          <span className="text-sm text-foreground/90">{highlight}</span>
+                          <span className="text-base leading-relaxed text-foreground/90">{highlight}</span>
                         </div>
                       ))}
                     </div>
@@ -397,12 +397,12 @@ export default async function ArtistPage({
 
                 {/* Booking CTA Card */}
                 <div className="rounded-2xl bg-gradient-to-br from-accent/5 to-transparent border border-accent/20 p-6">
-                  <p className="text-sm text-muted leading-relaxed mb-4">
+                  <p className="text-base text-muted leading-relaxed mb-4">
                     Want to bring {artist.name} to your church?
                   </p>
                   <Link
                     href={`/?artist=${artist.slug}#contact`}
-                    className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-accent text-background font-semibold text-sm hover:bg-accent-hover transition-all"
+                    className="cta-gold cta-compact w-full"
                   >
                     Ask About This Artist
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -421,10 +421,10 @@ export default async function ArtistPage({
       </section>
 
       {/* More Artists */}
-      <section className="py-20 md:py-28 border-t border-border">
+      <section className="py-14 md:py-24 border-t border-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <ScrollReveal direction="up">
-            <div className="flex items-end justify-between mb-12">
+            <div className="flex items-end justify-between mb-8 md:mb-12">
               <div>
                 <div className="flex items-center gap-3 mb-3">
                   <span className="w-8 h-px bg-accent" />
@@ -438,7 +438,7 @@ export default async function ArtistPage({
               </div>
               <Link
                 href="/#roster"
-                className="hidden sm:inline-flex items-center gap-1 text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors"
+                className="hidden sm:inline-flex min-h-11 items-center gap-1 text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]"
               >
                 View All
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round"/></svg>
@@ -447,18 +447,9 @@ export default async function ArtistPage({
           </ScrollReveal>
 
           <ScrollReveal direction="up" delay={150}>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
               {relatedArtists.map((a) => (
-                <Link key={a.slug} href={`/artists/${a.slug}`} className="group block">
-                  <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:-translate-y-1">
-                    <ArtistCardImage artist={a} sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc(25vw - 1.875rem - 2px), calc(50vw - 2rem - 2px)" />
-                    <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-                      <h3 className="text-base font-serif font-bold leading-tight text-white md:mb-2">{a.name}</h3>
-                      <span className="hidden md:inline-block max-w-full rounded-md bg-[#062653] px-2 py-1 text-[11px] font-semibold leading-relaxed tracking-[0.06em] uppercase text-white">{a.genre}</span>
-                    </div>
-                    <div className="absolute inset-0 rounded-xl ring-1 ring-inset ring-accent/0 group-hover:ring-accent/25 transition-all duration-500" />
-                  </div>
-                </Link>
+                <ArtistCard key={a.slug} artist={a} sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc(50vw - 2.25rem - 2px), calc(50vw - 2rem - 2px)" />
               ))}
             </div>
           </ScrollReveal>
@@ -466,7 +457,7 @@ export default async function ArtistPage({
       </section>
 
       {/* CTA */}
-      <section className="py-20 border-t border-border section-glow">
+      <section className="py-14 md:py-20 border-t border-border section-glow">
         <div className="max-w-3xl mx-auto px-6 text-center relative z-10">
           <ScrollReveal direction="up">
             <h2 className="font-serif text-3xl md:text-4xl font-bold mb-4">
@@ -481,13 +472,13 @@ export default async function ArtistPage({
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
               <Link
                 href={`/?artist=${artist.slug}#contact`}
-                className="px-8 py-4 rounded-full bg-accent text-background font-semibold text-base hover:bg-accent-hover transition-all hover:scale-[1.02] hover:shadow-xl hover:shadow-accent/20"
+                className="cta-gold"
               >
                 Ask About This Artist
               </Link>
               <a
                 href="tel:719-260-1151"
-                className="px-8 py-4 rounded-full border border-border bg-surface/50 backdrop-blur-sm text-foreground font-semibold text-base hover:bg-surface hover:border-accent/30 transition-all"
+                className="cta-navy"
               >
                 Call 719-260-1151
               </a>

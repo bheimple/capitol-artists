@@ -59,9 +59,9 @@ export default function FAQ() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <section id="faq" className="py-24 md:py-32 border-t border-border scroll-mt-20">
+    <section id="faq" className="py-14 md:py-24 border-t border-border scroll-mt-20">
       <div className="max-w-3xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-12">
+        <div className="text-center mb-8 md:mb-12">
           <div className="flex items-center justify-center gap-3 mb-3">
             <span className="w-8 h-px bg-accent" />
             <span className="text-xs font-semibold tracking-[0.15em] text-[color:var(--accent-dark)] uppercase">
@@ -70,7 +70,7 @@ export default function FAQ() {
             <span className="w-8 h-px bg-accent" />
           </div>
           <h2 className="font-serif text-4xl md:text-5xl font-bold tracking-tight">
-            Frequently Asked
+            Frequently Asked Questions
           </h2>
         </div>
 
@@ -80,56 +80,59 @@ export default function FAQ() {
               key={i}
               className="rounded-xl bg-surface border border-border overflow-hidden transition-all duration-300 hover:border-accent/20"
             >
-              <button
-                onClick={() => setOpenIndex(openIndex === i ? null : i)}
-                className="w-full flex items-center justify-between gap-4 px-5 py-5 text-left"
-              >
-                <span className="text-base font-semibold text-foreground">
-                  {faq.question}
-                </span>
-                <span
-                  className={`flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center transition-transform duration-300 ${
-                    openIndex === i ? "rotate-45" : ""
-                  }`}
+              <h3>
+                <button
+                  type="button"
+                  id={`faq-question-${i}`}
+                  aria-expanded={openIndex === i}
+                  aria-controls={`faq-answer-${i}`}
+                  onClick={() => setOpenIndex(openIndex === i ? null : i)}
+                  className="w-full flex items-center justify-between gap-4 px-5 py-5 text-left rounded-xl focus-visible:outline-2 focus-visible:-outline-offset-4 focus-visible:outline-[#062653]"
                 >
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2.5"
-                    className="text-accent"
+                  <span className="text-base font-semibold text-foreground">
+                    {faq.question}
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className={`flex-shrink-0 w-6 h-6 rounded-full bg-accent/10 flex items-center justify-center transition-transform duration-300 ${
+                      openIndex === i ? "rotate-45" : ""
+                    }`}
                   >
-                    <path d="M12 5v14M5 12h14" strokeLinecap="round" />
-                  </svg>
-                </span>
-              </button>
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.5"
+                      className="text-accent"
+                    >
+                      <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+                    </svg>
+                  </span>
+                </button>
+              </h3>
               <div
-                className={`grid transition-all duration-300 ease-in-out ${
-                  openIndex === i
-                    ? "grid-rows-[1fr] opacity-100"
-                    : "grid-rows-[0fr] opacity-0"
-                }`}
+                id={`faq-answer-${i}`}
+                aria-labelledby={`faq-question-${i}`}
+                hidden={openIndex !== i}
               >
-                <div className="overflow-hidden">
-                  <p className="px-5 pb-5 text-muted leading-relaxed">
-                    {faq.answer}
-                  </p>
-                </div>
+                <p className="px-5 pb-5 text-base text-muted leading-relaxed">
+                  {faq.answer}
+                </p>
               </div>
             </div>
           ))}
         </div>
 
         <div className="mt-10 text-center">
-          <p className="text-sm text-muted mb-4">Still have questions?</p>
+          <p className="text-base text-muted mb-3">Still have questions?</p>
           <a
             href="#contact"
-            className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors"
+            className="cta-navy"
           >
             Get in touch
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
               <path d="M5 12h14M12 5l7 7-7 7" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </a>

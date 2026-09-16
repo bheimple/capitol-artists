@@ -7,13 +7,13 @@ export default function Footer() {
       {/* Ambient glow at top of footer */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[200px] bg-gradient-radial from-accent/[0.03] to-transparent pointer-events-none" />
 
-      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20">
+      <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-14 md:py-20">
         {/* Top section */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
           {/* Brand - wider */}
           <div className="md:col-span-5 space-y-5">
             <Link href="/" aria-label="Capitol Artists home"><BrandLogo /></Link>
-            <p className="text-sm text-muted max-w-sm leading-relaxed">
+            <p className="text-base text-muted max-w-sm leading-relaxed">
               Connecting churches with Southern Gospel and Bluegrass Gospel
               ministries since 1992.
             </p>
@@ -31,43 +31,43 @@ export default function Footer() {
             </h3>
             <ul className="space-y-3">
               <li>
-                <Link href="/" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Home</span>
                 </Link>
               </li>
               <li>
-                <Link href="/#roster" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/#roster" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Artist Roster</span>
                 </Link>
               </li>
               <li>
-                <Link href="/church-concert-booking" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/church-concert-booking" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>For Churches</span>
                 </Link>
               </li>
               <li>
-                <Link href="/#about" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/#about" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Our Story</span>
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/#faq" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>FAQ</span>
                 </Link>
               </li>
               <li>
-                <Link href="/artist-representation" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/artist-representation" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>For Artists</span>
                 </Link>
               </li>
               <li>
-                <Link href="/#contact" className="text-sm text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
+                <Link href="/#contact" className="text-base text-foreground/80 hover:text-accent transition-colors flex items-center gap-2 group">
                   <span className="w-0 group-hover:w-3 h-px bg-accent transition-all duration-300" />
                   <span className="group-hover:translate-x-0 transition-transform duration-300" style={{ transform: "translateX(-12px)" }}>Ask About a Concert</span>
                 </Link>
@@ -88,8 +88,8 @@ export default function Footer() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-foreground/80">Mike Heimple</p>
-                  <a href="tel:719-260-1151" className="text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
+                  <p className="text-base text-foreground/80">Mike Heimple</p>
+                  <a href="tel:719-260-1151" className="text-base text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
                     719-260-1151
                   </a>
                 </div>
@@ -102,8 +102,8 @@ export default function Footer() {
                   </svg>
                 </div>
                 <div>
-                  <p className="text-sm text-foreground/80">Email</p>
-                  <a href="mailto:mike@capitol-artists.com" className="text-sm text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
+                  <p className="text-base text-foreground/80">Email</p>
+                  <a href="mailto:mike@capitol-artists.com" className="text-base text-[color:var(--accent-dark)] hover:text-accent-hover transition-colors">
                     mike@capitol-artists.com
                   </a>
                 </div>

@@ -7,7 +7,7 @@ import type { Artist } from "@/data/artists";
 import { trackInquirySuccess } from "@/lib/analytics";
 
 const fieldClass = "w-full rounded-lg border border-[#8e948f] bg-[#f9f6ef] px-4 py-3 text-[#062653] placeholder:text-[#60685f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653] disabled:cursor-wait";
-const labelClass = "mb-2 block text-sm font-semibold text-[#062653]";
+const labelClass = "mb-2 block text-base font-semibold text-[#062653]";
 
 type ContactFormProps = { artistOptions: readonly Pick<Artist, "slug" | "name">[] };
 
@@ -139,7 +139,7 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
         </div>
       ) : (
         <form onSubmit={handleSubmit} aria-busy={status === "submitting"} aria-describedby="contact-required" className="space-y-6">
-          <p id="contact-required" className="text-sm leading-relaxed text-[#475248]">Fields marked optional can stay open. Share any artist or date preferences; Mike will check touring routes and availability with your church’s location in mind.</p>
+          <p id="contact-required" className="text-base leading-relaxed text-[#475248]">Fields marked optional can stay open. Share any artist or date preferences; Mike will check touring routes and availability with your church’s location in mind.</p>
 
           <fieldset disabled={status === "submitting"} className="grid min-w-0 gap-5 sm:grid-cols-2">
             <legend className="sr-only">Church concert inquiry details</legend>
@@ -170,7 +170,7 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
             <div>
               <label htmlFor="contact-dates" className={labelClass}>Preferred dates <span className="font-normal">(optional)</span></label>
               <input id="contact-dates" name="preferredDates" type="text" placeholder="For example, this fall or flexible" aria-describedby="contact-dates-help" className={fieldClass} />
-              <p id="contact-dates-help" className="mt-2 text-sm leading-relaxed text-[#475248]">Share a date, season, or flexible window for Mike to consider.</p>
+              <p id="contact-dates-help" className="mt-2 text-base leading-relaxed text-[#475248]">Share a date, season, or flexible window for Mike to consider.</p>
             </div>
             <div>
               <label htmlFor="contact-artist" className={labelClass}>Artist interest <span className="font-normal">(optional)</span></label>
@@ -195,7 +195,7 @@ export default function ContactForm({ artistOptions }: ContactFormProps) {
             </div>
           )}
 
-          <p className="text-sm leading-relaxed text-[#475248]">Your details are emailed to Mike so he can respond to your concert inquiry.</p>
+          <p className="text-base leading-relaxed text-[#475248]">Your details are emailed to Mike so he can respond to your concert inquiry.</p>
 
           <button type="submit" disabled={status === "submitting"} className="cta-gold w-full">
             {status === "submitting" ? "Sending inquiry…" : "Send Concert Inquiry"}

@@ -5,7 +5,7 @@ import type { FormEvent } from "react";
 import { trackInquirySuccess } from "@/lib/analytics";
 
 const fieldClass = "w-full rounded-lg border border-[#8e948f] bg-[#f9f6ef] px-4 py-3 text-[#062653] placeholder:text-[#60685f] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653] disabled:cursor-wait";
-const labelClass = "mb-2 block text-sm font-semibold text-[#062653]";
+const labelClass = "mb-2 block text-base font-semibold text-[#062653]";
 
 export default function ArtistInquiryForm() {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -111,7 +111,7 @@ export default function ArtistInquiryForm() {
         </div>
       ) : (
         <form onSubmit={handleSubmit} aria-busy={status === "submitting"} aria-describedby="artist-inquiry-required" className="space-y-6">
-          <p id="artist-inquiry-required" className="text-sm leading-relaxed text-[#475248]">
+          <p id="artist-inquiry-required" className="text-base leading-relaxed text-[#475248]">
             All fields are required unless marked optional. Share links to your music; no uploads are needed.
           </p>
 
@@ -148,7 +148,7 @@ export default function ArtistInquiryForm() {
             <div className="sm:col-span-2">
               <label htmlFor="artist-inquiry-video" className={labelClass}>Performance video link <span className="font-normal">(optional)</span></label>
               <input id="artist-inquiry-video" name="performanceVideo" type="url" inputMode="url" pattern="https?://.+" title="Enter a full link beginning with https:// or http://." placeholder="https://" aria-describedby="artist-inquiry-video-help" className={fieldClass} />
-              <p id="artist-inquiry-video-help" className="mt-2 text-sm leading-relaxed text-[#475248]">Share a link we can watch without a login or access request, such as a public or unlisted YouTube video of a live performance.</p>
+              <p id="artist-inquiry-video-help" className="mt-2 text-base leading-relaxed text-[#475248]">Share a link we can watch without a login or access request, such as a public or unlisted YouTube video of a live performance.</p>
             </div>
             <div className="sm:col-span-2">
               <label htmlFor="artist-inquiry-introduction" className={labelClass}>Tell us about your ministry</label>
@@ -156,7 +156,7 @@ export default function ArtistInquiryForm() {
             </div>
           </fieldset>
 
-          <p className="text-sm leading-relaxed text-[#475248]">Your introduction starts a conversation with Mike. You will discuss the fit, travel area, and representation arrangements together.</p>
+          <p className="text-base leading-relaxed text-[#475248]">Your introduction starts a conversation with Mike. You will discuss the fit, travel area, and representation arrangements together.</p>
 
           {status === "error" && (
             <div ref={feedbackRef} role="alert" tabIndex={-1} className="rounded-lg border border-[#9b3131] bg-[#fff4f0] p-4 text-[#742222] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#742222]">

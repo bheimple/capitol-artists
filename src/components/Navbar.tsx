@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import BrandLogo from "@/components/BrandLogo";
 
@@ -15,26 +15,50 @@ const navLinks = [
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const menuRef = useRef<HTMLDialogElement>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const desktopHomeRef = useRef<HTMLAnchorElement>(null);
 
-  // Lock body scroll when mobile menu is open
+  function openMenu() {
+    menuRef.current?.showModal();
+    setMobileOpen(true);
+    closeButtonRef.current?.focus();
+  }
+
+  function closeMenu() {
+    menuRef.current?.close();
+    setMobileOpen(false);
+  }
+
   useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
+    if (!mobileOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [mobileOpen]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia("(min-width: 1024px)");
+    function handleBreakpoint(event: MediaQueryListEvent) {
+      if (event.matches && menuRef.current?.open) {
+        menuRef.current.close();
+        setMobileOpen(false);
+        desktopHomeRef.current?.focus({ preventScroll: true });
+      }
+    }
+    desktop.addEventListener("change", handleBreakpoint);
+    return () => desktop.removeEventListener("change", handleBreakpoint);
+  }, []);
 
   return (
     <header
       className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border"
     >
-      <nav className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
+      <nav aria-label="Main navigation" className="max-w-7xl mx-auto px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Logo */}
-        <Link href="/" prefetch={false} className="flex items-center gap-3 group" onClick={() => setMobileOpen(false)}>
+        <Link href="/" prefetch={false} aria-label="Capitol Artists home" className="flex items-center gap-3 group rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">
           <BrandLogo />
         </Link>
 
@@ -44,14 +68,15 @@ export default function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="px-2.5 lg:px-4 py-2 text-sm font-medium text-muted hover:text-foreground transition-colors"
+              ref={link.href === "/" ? desktopHomeRef : undefined}
+              className="px-2.5 lg:px-4 py-3 text-sm font-medium text-muted hover:text-foreground transition-colors rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
             >
               {link.label}
             </Link>
           ))}
           <Link
             href="/#contact"
-            className="ml-2 px-5 py-2.5 rounded-full text-sm font-semibold bg-[#062653] text-white hover:bg-[#123d70] transition-colors"
+            className="cta-gold cta-compact ml-2"
           >
             Ask About a Concert
           </Link>
@@ -59,64 +84,73 @@ export default function Navbar() {
 
         {/* Mobile menu button */}
         <button
-          className="lg:hidden p-2 relative z-50 text-[#062653]"
-          onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle menu"
+          type="button"
+          className="lg:hidden flex h-11 w-11 items-center justify-center rounded-lg text-[#062653] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
+          onClick={openMenu}
+          aria-label="Open menu"
+          aria-haspopup="dialog"
+          aria-controls="mobile-navigation"
           aria-expanded={mobileOpen}
         >
-          <div className="w-6 h-6 relative flex items-center justify-center">
-            <span className={`absolute h-0.5 w-6 bg-current transition-all duration-300 ${mobileOpen ? "rotate-45" : "-translate-y-1.5"}`} />
-            <span className={`absolute h-0.5 w-6 bg-current transition-all duration-300 ${mobileOpen ? "opacity-0" : "opacity-100"}`} />
-            <span className={`absolute h-0.5 w-6 bg-current transition-all duration-300 ${mobileOpen ? "-rotate-45" : "translate-y-1.5"}`} />
+          <div aria-hidden="true" className="w-6 h-6 relative flex items-center justify-center">
+            <span className="absolute h-0.5 w-6 bg-current -translate-y-1.5" />
+            <span className="absolute h-0.5 w-6 bg-current" />
+            <span className="absolute h-0.5 w-6 bg-current translate-y-1.5" />
           </div>
         </button>
       </nav>
 
-      {/* Mobile menu overlay */}
-      <div
-        className={`lg:hidden fixed inset-0 top-20 bg-background transition-all duration-300 ${
-          mobileOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        }`}
+      {/* Native modality keeps keyboard focus inside the menu and restores it on close. */}
+      <dialog
+        ref={menuRef}
+        id="mobile-navigation"
+        aria-label="Navigation menu"
+        onClose={() => setMobileOpen(false)}
+        className="fixed inset-0 m-0 h-dvh max-h-none w-full max-w-none overflow-y-auto border-0 bg-background p-0 text-foreground backdrop:bg-[#062653]/30"
       >
-        <div className="px-6 py-8 flex flex-col gap-2 h-[calc(100vh-5rem)] overflow-y-auto">
-          {navLinks.map((link, i) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              onClick={() => setMobileOpen(false)}
-              prefetch={mobileOpen ? null : false}
-              className={`py-4 text-2xl font-serif font-bold text-foreground hover:text-accent transition-all duration-300 border-b border-border ${
-                mobileOpen ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4"
-              }`}
-              style={{ transitionDelay: mobileOpen ? `${i * 60 + 100}ms` : "0ms" }}
-            >
-              {link.label}
-            </Link>
-          ))}
+        <div className="h-20 px-6 flex items-center justify-between border-b border-border">
+          <Link href="/" prefetch={false} onClick={closeMenu} aria-label="Capitol Artists home" className="rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#062653]">
+            <BrandLogo />
+          </Link>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={closeMenu}
+            aria-label="Close menu"
+            className="flex h-11 w-11 items-center justify-center rounded-lg text-[#062653] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
+          >
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="m6 6 12 12M6 18 18 6" strokeLinecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div className="px-6 pt-5 pb-8">
+          <a href="tel:719-260-1151" onClick={closeMenu} className="cta-navy w-full">
+            Call Mike <span className="font-normal">719-260-1151</span>
+          </a>
+          <nav aria-label="Mobile navigation" className="mt-4 flex flex-col">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={closeMenu}
+                prefetch={mobileOpen ? null : false}
+                className="py-3 text-xl font-serif font-bold text-foreground hover:text-[#062653] border-b border-border focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
           <Link
             href="/#contact"
-            onClick={() => setMobileOpen(false)}
+            onClick={closeMenu}
             prefetch={mobileOpen ? null : false}
-            className={`mt-6 px-6 py-4 rounded-full bg-accent text-background text-base font-semibold text-center transition-all duration-300 ${
-              mobileOpen ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
-            }`}
-            style={{ transitionDelay: mobileOpen ? "400ms" : "0ms" }}
+            className="cta-gold w-full mt-6"
           >
             Ask About a Concert
           </Link>
-
-          {/* Contact info at bottom of mobile menu */}
-          <div className="mt-auto pt-8 pb-6 border-t border-border">
-            <p className="text-sm text-muted mb-2">Questions? Give Mike a call.</p>
-            <a
-              href="tel:719-260-1151"
-              className="text-lg text-[color:var(--accent-dark)] font-medium"
-            >
-              719-260-1151
-            </a>
-          </div>
         </div>
-      </div>
+      </dialog>
     </header>
   );
 }
