@@ -9,6 +9,8 @@ export type Artist = {
   imageWidth: number;
   imageHeight: number;
   imageFit?: "contain";
+  // Color sampled from the photo's lower edge, used only behind roster cards.
+  cardBackground?: string;
   highlights?: string[];
   basedIn?: string;
   founded?: string;
@@ -33,6 +35,7 @@ export const artists: Artist[] = [
     ],
     website: "https://adorationquartet.com",
     image: "/images/artists/adoration-quartet-2026.jpg",
+    cardBackground: "#555a5b",
     imageWidth: 3000,
     imageHeight: 2400,
     imageFit: "contain",
@@ -57,6 +60,7 @@ export const artists: Artist[] = [
     ],
     website: "https://adamsvoice.net",
     image: "/images/artists/adams-voice-2026.png",
+    cardBackground: "#e4e0db",
     imageWidth: 1111,
     imageHeight: 1415,
     imageFit: "contain",
@@ -84,6 +88,7 @@ export const artists: Artist[] = [
     ],
     website: "https://commonbondquartet.com",
     image: "/images/artists/common-bond-quartet-2025.jpg",
+    cardBackground: "#dadde5",
     imageWidth: 1440,
     imageHeight: 1440,
     imageFit: "contain",
@@ -136,6 +141,7 @@ export const artists: Artist[] = [
     ],
     website: "https://glorywaymusic.com",
     image: "/images/artists/gloryway-music-2025.jpg",
+    cardBackground: "#b3afab",
     imageWidth: 659,
     imageHeight: 425,
     imageFit: "contain",
@@ -163,6 +169,7 @@ export const artists: Artist[] = [
     ],
     website: "https://sacredharmony1.com",
     image: "/images/artists/sacred-harmony-2026.jpg",
+    cardBackground: "#bbaf95",
     imageWidth: 528,
     imageHeight: 682,
     imageFit: "contain",
@@ -190,6 +197,7 @@ export const artists: Artist[] = [
     ],
     website: "https://southernplainsmen.com",
     image: "/images/artists/southern-plainsmen-2026.jpg",
+    cardBackground: "#1d1816",
     imageWidth: 494,
     imageHeight: 377,
     imageFit: "contain",
@@ -214,6 +222,7 @@ export const artists: Artist[] = [
     ],
     website: "https://westwardroad.com",
     image: "/images/artists/westward-road-yellow.png",
+    cardBackground: "#664317",
     imageWidth: 1254,
     imageHeight: 1254,
     imageFit: "contain",

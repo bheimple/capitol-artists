@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from "next/image";
+import ArtistCardImage from "@/components/ArtistCardImage";
 import type { Artist } from "@/data/artists";
 
 export default function ArtistCard({ artist }: { artist: Artist }) {
@@ -7,17 +7,10 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
     <Link href={`/artists/${artist.slug}`} prefetch={false} className="group block">
       <div className="relative aspect-[3/4] rounded-xl overflow-hidden bg-surface border border-border transition-all duration-500 group-hover:border-accent/40 group-hover:shadow-2xl group-hover:shadow-accent/10 group-hover:-translate-y-1">
         {/* Sizes follow the roster's 2/3/4 columns, container padding, gaps, and card borders. */}
-        <Image
-          src={artist.image}
-          alt={artist.name}
-          style={{ objectFit: artist.imageFit, objectPosition: artist.imageFit ? "top" : undefined }}
-          fill
+        <ArtistCardImage
+          artist={artist}
           sizes="(min-width: 80rem) calc(17.875rem - 2px), (min-width: 64rem) calc(25vw - 2.125rem - 2px), (min-width: 48rem) calc((100vw - 6rem) / 3 - 2px), calc(50vw - 2rem - 2px)"
-          className={`object-cover transition-transform duration-700 ${artist.imageFit ? "" : "group-hover:scale-110"}`}
         />
-
-        {/* Dark gradient only at bottom for text legibility */}
-        <div className="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
 
         {/* Sage glow on hover */}
         <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-accent/10 to-transparent" />
