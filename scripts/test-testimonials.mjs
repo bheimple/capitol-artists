@@ -131,16 +131,14 @@ for (let i = 1; i <= testimonials.length; i++) {
 }
 loop.unmount();
 
-for (const condition of ["hover", "offscreen", "hidden document", "reduced motion"]) {
+for (const condition of ["offscreen", "hidden document", "reduced motion"]) {
   const carousel = activeCarousel();
   carousel.advance(6000);
-  if (condition === "hover") carousel.event(carousel.tree, "onMouseEnter");
   if (condition === "offscreen") carousel.intersect(0);
   if (condition === "hidden document") carousel.visibility("hidden");
   if (condition === "reduced motion") carousel.motion(true);
   assertState(carousel, 0, false);
   carousel.advance(60000); assertState(carousel, 0, false);
-  if (condition === "hover") carousel.event(carousel.tree, "onMouseLeave");
   if (condition === "offscreen") carousel.intersect(1);
   if (condition === "hidden document") carousel.visibility("visible");
   if (condition === "reduced motion") carousel.motion(false);
@@ -157,23 +155,29 @@ focus.intersect(0); focus.intersect(1); assertState(focus, 0, false);
 focus.click(resumeLabel); assertState(focus, 0, true);
 focus.click(pauseLabel); assertState(focus, 0, false);
 focus.unmount();
-const touch = activeCarousel();
-touch.event(touch.nodes.find(node => "aria-live" in node.props), "onPointerDown");
-touch.advance(60000); assertState(touch, 0, false); touch.unmount();
+const browsing = activeCarousel();
+assert.equal(browsing.tree.props.onMouseEnter, undefined, "resting the pointer over the section does not pause rotation");
+assert.equal(browsing.tree.props.onMouseLeave, undefined, "moving away does not reset the reading timer");
+assert.equal(browsing.nodes.find(node => "aria-live" in node.props).props.onPointerDown, undefined, "starting a touch scroll on review text does not permanently pause rotation");
+browsing.advance(6999); assertState(browsing, 0, true);
+browsing.advance(1); assertState(browsing, 1, true);
+browsing.unmount();
 
 const pointer = activeCarousel();
-pointer.event(pointer.tree, "onMouseEnter");
 pointer.event(pointer.button(pauseLabel), "onPointerDown");
 pointer.event(pointer.tree, "onFocusCapture");
 pointer.click(resumeLabel); // Focus changed the label; the original pointer intent must still pause.
-pointer.event(pointer.tree, "onMouseLeave"); assertState(pointer, 0, false);
+assertState(pointer, 0, false);
 pointer.event(pointer.button(resumeLabel), "onPointerDown");
 pointer.event(pointer.tree, "onFocusCapture");
 pointer.click(resumeLabel); assertState(pointer, 0, true);
+// The pointer stays over the Resume button; restarting must not require mouseleave.
+pointer.advance(6999); assertState(pointer, 0, true);
+pointer.advance(1); assertState(pointer, 1, true);
 pointer.event(pointer.button(pauseLabel), "onPointerDown");
 pointer.event(pointer.tree, "onFocusCapture");
 pointer.event(pointer.button(resumeLabel), "onPointerCancel");
-pointer.click(resumeLabel); assertState(pointer, 0, true);
+pointer.click(resumeLabel); assertState(pointer, 1, true);
 pointer.unmount();
 
 for (const [label, expected] of [["Next review", 1], ["Previous review", testimonials.length - 1], [`Show review from ${testimonials[2].author}`, 2]]) {
@@ -230,4 +234,4 @@ const unsupported = harness({ observerAvailable: false });
 unsupported.advance(60000); assertState(unsupported, 0, false);
 unsupported.click("Next review"); assertState(unsupported, 1, false); unsupported.unmount();
 
-console.log("PASS: actual Testimonials component/data — 7-second loop/wrap, timer/subscription cleanup, hover/focus/pause/offscreen/visibility/motion gates, arrows/dots, long-review disclosure, complete short reviews, inactive slides removed from layout, inert/ARIA state, first rotation control, and pointer/focus/click pause intent. No network requests.");
+console.log("PASS: actual Testimonials component/data — 7-second loop/wrap, no incidental hover/touch-scroll pause, Resume without moving the pointer, timer/subscription cleanup, focus/pause/offscreen/visibility/motion gates, arrows/dots, long-review disclosure, complete short reviews, inactive slides removed from layout, inert/ARIA state, first rotation control, and pointer/focus/click pause intent. No network requests.");

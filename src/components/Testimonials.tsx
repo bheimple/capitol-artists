@@ -17,7 +17,6 @@ function subscribeToVisibility(callback: () => void) {
 export default function Testimonials() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [hovered, setHovered] = useState(false);
   const [inView, setInView] = useState(false);
   const [expandedId, setExpandedId] = useState<string | null>(null);
   const section = useRef<HTMLElement>(null);
@@ -32,7 +31,7 @@ export default function Testimonials() {
     () => document.visibilityState === "visible",
     () => false,
   );
-  const rotating = !paused && !hovered && !reducedMotion && inView && pageVisible && expandedId === null;
+  const rotating = !paused && !reducedMotion && inView && pageVisible && expandedId === null;
 
   useEffect(() => {
     if (!section.current || !("IntersectionObserver" in window)) return;
@@ -67,8 +66,6 @@ export default function Testimonials() {
       aria-labelledby="testimonials-heading"
       aria-roledescription="carousel"
       onFocusCapture={() => setPaused(true)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
       className="scroll-mt-20 bg-[#062653] px-5 py-10 text-[#f8f6f0] sm:px-6 md:py-12 lg:px-8"
     >
       <div className="mx-auto max-w-6xl">
@@ -102,7 +99,6 @@ export default function Testimonials() {
           <div
             aria-live={rotating ? "off" : "polite"}
             aria-atomic="false"
-            onPointerDown={() => setPaused(true)}
           >
             {testimonials.map((review, index) => {
               const active = index === activeIndex;
