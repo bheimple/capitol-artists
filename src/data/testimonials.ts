@@ -55,4 +55,12 @@ export const testimonials: Testimonial[] = [
     church: "Mt. Nebo Presbyterian Church\nThe Presbyterian Church of Prospect",
     location: "Prospect, PA",
   },
+  {
+    id: "don-mcconnaughhay",
+    quote:
+      "I am Pastor of Pidcoke Baptist Church for the past 16 years and have had the privilege of working with Mike Heimple and the gospel artists of Capital Artists several times. I have found their musical gospel concerts professional and spiritual, presenting the Good News of Jesus Christ. I recommend them to you for a morning or evening of praise and enjoyment.",
+    author: "Pastor Don McConnaughhay",
+    church: "Pidcoke Baptist Church",
+    location: "Pidcoke, TX",
+  },
 ];
