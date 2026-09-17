@@ -105,4 +105,12 @@ export const testimonials: Testimonial[] = [
     church: "First Baptist Church of Boulougne",
     location: "Hillard, FL",
   },
+  {
+    id: "jim-kachelmeyer",
+    quote:
+      "Michael Heimple has been a pleasure to work with. He has recommended gospel groups that are always on time and entertaining, as well as focused on ministry. I would use him again when we schedule our group.",
+    author: "Jim Kachelmeyer",
+    church: "Praise at the Pavilion\nJamaica Beach RV Resort",
+    location: "Galveston, TX",
+  },
 ];
