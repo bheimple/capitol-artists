@@ -72,4 +72,37 @@ export const testimonials: Testimonial[] = [
     church: "Agape Fellowship",
     location: "Ingleside, TX",
   },
+  {
+    id: "joel-crippen",
+    quote:
+      "Michael Heimple and Capitol Artists has been a great help with reaching out to and connecting with our community, by setting up some great Gospel music talent for worship concerts.",
+    author: "Pastor Joel Crippen",
+    church: "First Southern Baptist Church",
+    location: "For Scott, KS",
+  },
+  {
+    id: "doug-walker",
+    quote:
+      "Micheal, Thank You for helping me connect with Gospel music groups like the Emmaus Road Quartet, Sacred Harmony and Westward Road. Every year you reach out and make me aware of these wonderful Groups that are available for my church and community. Thank you.",
+    author: "Pastor Doug Walker",
+    church: "Wilmington Island Global Methodist",
+    location: "Savannah, GA",
+  },
+  {
+    id: "ken-kemble",
+    quote:
+      "We had Glory Way and the Common Bond Quartet come sing and minister at our church, and both concerts were a truly blessed time. The music was inspiring and the testimonies were encouraging. We believe it is good for a local church to offer uplifting, Christ-centered music to their congregation, as well as their community, because many people may go to a concert who might not otherwise hear about Jesus. Thank you Michael",
+    author: "Pastor Ken Kemble",
+    church: "Capac Bible Church",
+    location: "Capac, MI",
+  },
+  {
+    id: "bob-howard",
+    quote:
+      "Michael, just a quick note to say thank you for your help in our music program. It is a joy to work with a fellow servant of the LORD.",
+    author: "Bob Howard",
+    role: "Music Coordinator",
+    church: "First Baptist Church of Boulougne",
+    location: "Hillard, FL",
+  },
 ];
