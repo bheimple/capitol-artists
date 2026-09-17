@@ -63,4 +63,13 @@ export const testimonials: Testimonial[] = [
     church: "Pidcoke Baptist Church",
     location: "Pidcoke, TX",
   },
+  {
+    id: "towanda-martin",
+    quote:
+      "A big shout out to Mike and Capitol Artists group. Mike is always a pleasure to work with and has brought us several great groups. Keep up the good work.",
+    author: "Towanda Martin",
+    role: "Pastor",
+    church: "Agape Fellowship",
+    location: "Ingleside, TX",
+  },
 ];

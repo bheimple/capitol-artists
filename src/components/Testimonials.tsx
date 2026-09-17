@@ -159,7 +159,7 @@ export default function Testimonials() {
           </div>
 
           <div style={{ borderColor: "#dce1e6" }} className="mt-3 flex flex-wrap items-center justify-between gap-x-1 gap-y-2 border-t pt-3">
-            <div role="group" aria-label="Choose a pastor review" className="flex items-center">
+            <div role="group" aria-label="Choose a pastor review" className="flex max-w-full flex-wrap items-center">
               {testimonials.map((review, index) => (
                 <button
                   key={review.id}
@@ -167,7 +167,7 @@ export default function Testimonials() {
                   aria-label={`Show review from ${review.author}`}
                   aria-disabled={index === activeIndex}
                   onClick={() => { if (index !== activeIndex) showReview(index); }}
-                  className="flex h-11 w-11 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
+                  className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#062653]"
                 >
                   <span aria-hidden="true" className={`h-1.5 rounded-full transition-[width,background-color] duration-300 motion-reduce:transition-none ${index === activeIndex ? "w-7 bg-[#062653]" : "w-3 bg-[#78869a]"}`} />
                 </button>
