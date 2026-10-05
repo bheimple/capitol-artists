@@ -113,4 +113,12 @@ export const testimonials: Testimonial[] = [
     church: "Praise at the Pavilion\nJamaica Beach RV Resort",
     location: "Galveston, TX",
   },
+  {
+    id: "michael-douthart",
+    quote:
+      "My name is Michael Douthart, Sr Pastor at Princeton First Assembly. We so appreciate Michael Heimple of Capitol Artists calling us and giving our church the opportunity to bring nationally recognized Gospel groups and artists to small town Northern Missouri. We have had the honor of meeting artists’ that without Michael Heimple, would not have been possible. Thank you Capitol Artists for providing quality Christian people to work with us.",
+    author: "Pastor Michael Douthart",
+    church: "First Assembly of God",
+    location: "Princeton, MO",
+  },
 ];
